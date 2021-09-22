@@ -21,6 +21,10 @@
 			<li><a href="index.php?page=payss">Liste des pays</a></li>
             <li><a href="index.php?page=specialites">Liste des sp&eacute;cialit&eacute;s</a></li>
             <li><a href="index.php?page=typemissions">Liste des types de missions</a></li>
+            <li><a href="index.php?page=administrateurs">Liste des administrateurs</a></li>
+            <li><a href="index.php?page=planques">Liste des planques</a></li>
+            <li><a href="index.php?page=personnes">Liste des personnes</a></li>
+            <li><a href="index.php?page=missions">Liste des missions</a></li>
         </ul>
     </nav>
     <?= $contenu ?>

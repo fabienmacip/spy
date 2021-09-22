@@ -23,9 +23,20 @@ class Planques
             $planques[] = $planque;
         }
 
-
-
         return $planques;
+    }
+
+    public function lister()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM planque');
+        }
+        $liste = [];
+        while ($element = $stmt->fetchObject('Planque')) {
+            $liste[] = $element;
+        }
+
+        return $liste;
     }
 }
 

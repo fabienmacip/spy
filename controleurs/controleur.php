@@ -30,6 +30,46 @@ class Controleur {
         require_once('vues/liste-types-missions.php');
     }
 
+    public function listerAdministrateurs()
+    {
+        $administrateurs = new Administrateurs();
+        $administrateurs = $administrateurs->lister();
+        require_once('vues/liste-administrateurs.php');
+    }
+    public function listerPlanques()
+    {
+        $planques = new Planques();
+        $planques = $planques->lister();
+        require_once('vues/liste-planques.php');
+    }
+    public function listerPersonnes()
+    {
+        $personnes = new Personnes();
+        $personnes = $personnes->lister();
+        require_once('vues/liste-personnes.php');
+    }
+    public function listerMissions()
+    {
+        $missions = new Missions();
+        $missions = $missions->lister();
+        require_once('vues/liste-missions.php');
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // METHODES EXEMPLES
 

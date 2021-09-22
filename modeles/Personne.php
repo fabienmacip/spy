@@ -90,4 +90,22 @@ class Personne
         return $this->specialites;
     }
 
+    public function getPaysNom()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT nom
+                    FROM pays
+                    WHERE id = '.$this->nationalite.'');
+
+            //$stmt = $this->pdo->query('SELECT c.nom AS nom
+            //FROM planque AS p, pays AS c
+            //WHERE c.id = '.$this->pays.' AND p.pays = c.id ');
+        }
+     
+        $paysNom = $stmt->fetch()[0];
+
+        return $paysNom;
+    }
+
+
 }

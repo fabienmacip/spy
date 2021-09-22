@@ -24,6 +24,19 @@ class Personnes
 
         return $cibles;
     }
+
+    public function lister()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM personne ORDER BY type, nom');
+        }
+        $liste = [];
+        while ($element = $stmt->fetchObject('Personne')) {
+            $liste[] = $element;
+        }
+
+        return $liste;
+    }
 }
 
 
