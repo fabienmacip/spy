@@ -5,7 +5,7 @@
         <?php 
         if (is_null($planques)):
         ?>
-        <div class="card w-25 border-info mx-auto">
+        <div class="card w-100 border-info mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title">
                         Planques
@@ -14,7 +14,7 @@
             </div>
         <div>
         <?php else: ?>
-            <div class="card w-25 border-info mx-auto">
+            <div class="card w-100 border-info mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title">
                         Planques
@@ -37,7 +37,7 @@
 
                 </div>    
             </div>
-        <div>
+          
 
         <?php 
         // FIN du IF PLANQUES

@@ -1,5 +1,5 @@
 <?php
-$titre = 'Liste des pays';
+$titre = 'Liste des spécialités';
 ob_start();
 ?>
 <div class="container">
@@ -9,11 +9,11 @@ ob_start();
     <div class="col-6">
 
       <table class="table table-striped table-bordered table-sm caption-top table-responsive-lg text-center">
-      <caption class="text-center fs-3 text-primary">Liste des pays</caption>
+      <caption class="text-center fs-3 text-primary">Liste des spécialités</caption>
           <thead class="table-dark">
               <tr>
                   <th width="10%">Id</th>
-                  <th width="50%">Nom</th>
+                  <th width="50%">Intutul&eacute;</th>
                   <th width="20%"></th>
                   <th width="20%"></th>
               </tr>
@@ -21,21 +21,21 @@ ob_start();
           
           <tbody>
     
-              <?php foreach ($payss as $pays): ?>
+              <?php foreach ($specialites as $specialite): ?>
                   <tr>
                       <td>
-                          <?= $pays->getId() ?>
+                          <?= $specialite->getId() ?>
                       </td>
                       <td>
-                          <?= $pays->getNom() ?>
+                          <?= $specialite->getIntitule() ?>
                       </td>
                       <td>
-                          <a href="pays.php?action=edit&id=<?= $pays->getId() ?>" class="link-secondary">
+                          <a href="specialite.php?action=edit&id=<?= $specialite->getId() ?>" class="link-secondary">
                             Modifier
                           </a>
                       </td>
                       <td>
-                      <a href="pays.php?action=delete&id=<?= $pays->getId() ?>" class="link-secondary">
+                      <a href="specialite.php?action=delete&id=<?= $specialite->getId() ?>" class="link-secondary">
                             Supprimer
                           </a>
                       </td>

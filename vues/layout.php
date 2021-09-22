@@ -16,9 +16,11 @@
 <section>
     <nav>
         <ul>
-            <li><a href="/">Accueil</a></li>
-            <li><a href="index.php?page=missions">Missions</a></li>
+            <!--<li><a href="index.php">Accueil</a></li>-->
+            <li><a href="index.php?page=missions">Accueil</a></li>
 			<li><a href="index.php?page=payss">Liste des pays</a></li>
+            <li><a href="index.php?page=specialites">Liste des sp&eacute;cialit&eacute;s</a></li>
+            <li><a href="index.php?page=typemissions">Liste des types de missions</a></li>
         </ul>
     </nav>
     <?= $contenu ?>

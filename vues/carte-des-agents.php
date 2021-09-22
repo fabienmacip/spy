@@ -2,16 +2,16 @@
 <?php 
         if (is_null($agents)):
         ?>
-        <div class="card w-25 border-info mx-auto">
-                <div class="card-body text-center">
-                    <h5 class="card-title">
-                        Agents
-                    </h5>
-                </div>    
-            </div>
-        <div>
+        <div class="card w-100 border-info mx-auto">
+          <div class="card-body text-center">
+            <h5 class="card-title">
+                Agents
+            </h5>
+          </div>    
+        </div>
+       
         <?php else: ?>
-            <div class="card w-25 border-info mx-auto">
+            <div class="card w-100 border-info mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title">
                         Agents
@@ -46,7 +46,6 @@
 
                 </div>    
             </div>
-        <div>
 
         <?php 
         // FIN du IF AGENTS

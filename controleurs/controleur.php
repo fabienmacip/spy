@@ -9,6 +9,30 @@ class Controleur {
         require_once('vues/liste-missions.php');
     }
 
+    public function listerPays()
+    {
+        $payss = new Payss();
+        $payss = $payss->listerPays();
+        require_once('vues/liste-pays.php');
+    }
+
+    public function listerSpecialites()
+    {
+        $specialites = new Specialites();
+        $specialites = $specialites->lister();
+        require_once('vues/liste-specialites.php');
+    }
+
+    public function listerTypesMissions()
+    {
+        $typeMissions = new TypeMissions();
+        $typeMissions = $typeMissions->lister();
+        require_once('vues/liste-types-missions.php');
+    }
+
+
+    // METHODES EXEMPLES
+
     public function afficherPhoto()
     {
         $photo = new Photo();

@@ -1,29 +1,26 @@
 <?php
 
-class Serie
+class Pays
 {
     use Modele;
 
     private $id;
+    private $nom;
 
-    private $titre;
-
-    private $description;
-
-    public function afficherSerie($id)
+    public function afficherPays($id)
     {
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->prepare('SELECT * FROM serie WHERE id = ?');
+            $stmt = $this->pdo->prepare('SELECT * FROM pays WHERE id = ?');
         }
-        $serie = null;
+        $pays = null;
         if ($stmt->execute([$id])) {
-            $serie = $stmt->fetchObject('Serie');
-            if (!is_object($serie)) {
-                $serie = null;
+            $pays = $stmt->fetchObject('Pays');
+            if (!is_object($pays)) {
+                $pays = null;
             }
         }
 
-        return $serie;
+        return $pays;
     }
 
     public function getId()
@@ -31,13 +28,9 @@ class Serie
         return $this->id;
     }
 
-    public function getTitre()
+    public function getNom()
     {
-        return $this->titre;
+        return $this->nom;
     }
-
-    public function getDescription()
-    {
-        return $this->description;
-    }
+    
 }

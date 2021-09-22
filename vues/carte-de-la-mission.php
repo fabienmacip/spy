@@ -1,16 +1,5 @@
-<div class="card w-75 mx-auto text-center border-0">
-        <div class="card-body">
-            <h5 class="card-title">
-                MISSION : <?= $mission->getTitre() ?>
-            </h5>
-            <p class="card-text text-start">
-            Description<br/><i><?= $mission->getDescription() ?></i>
-            </p>
-        </div>
 
-    </div>
-
-    <div class="card w-25 border-info mx-auto">
+    <div class="card w-100 border-info mx-auto">
         <div class="card-body text-center">
             <h5 class="card-title">
                 Donn&eacute;es g&eacute;n&eacute;rales

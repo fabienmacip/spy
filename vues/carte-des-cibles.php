@@ -2,16 +2,15 @@
         <?php 
         if (is_null($cibles)):
         ?>
-        <div class="card w-25 border-info mx-auto">
+        <div class="card w-100 border-info mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title">
                         Cibles
                     </h5>
                 </div>    
             </div>
-        <div>
         <?php else: ?>
-            <div class="card w-25 border-info mx-auto">
+            <div class="card w-100 border-info mx-auto">
                 <div class="card-body text-center">
                     <h5 class="card-title">
                         Cibles
@@ -34,7 +33,6 @@
 
                 </div>    
             </div>
-        <div>
 
         <?php 
         // FIN du IF CIBLES

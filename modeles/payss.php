@@ -1,19 +1,19 @@
 <?php
 
-class Series
+class Payss
 {
     use Modele;
 
-    public function listerSeries()
+    public function listerPays()
     {
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT * FROM serie');
+            $stmt = $this->pdo->query('SELECT * FROM pays');
         }
-        $series = [];
-        while ($serie = $stmt->fetchObject('Serie')) {
-            $series[] = $serie;
+        $payss = [];
+        while ($pays = $stmt->fetchObject('Pays')) {
+            $payss[] = $pays;
         }
 
-        return $series;
+        return $payss;
     }
 }
