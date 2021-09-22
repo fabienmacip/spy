@@ -1,12 +1,12 @@
 <?php
-
-class Cible
+// Agent
+class Personne
 {
     use Modele;
 
 // Ajouter les champs d'une planque
 
-    // Table PERSONNE (type = 'cible')
+    // Table PERSONNE (type = 'cible' ou 'contact')
     private $id;
     private $nom;
     private $prenom;
@@ -15,16 +15,17 @@ class Cible
     private $nationalite;
     private $type;
 
-    public function afficherCible($id)
+    // $typeDePersonne = cible, contact ou agent.
+    public function afficherPersonne($id, $typeDePersonne)
     {
         if (!is_null($this->pdo)) {
             $stmt = $this->pdo->prepare('SELECT *
             FROM personne
-            WHERE id = ?');
+            WHERE id = ? AND type="'. $typeDePersonne .'"');
         }
         $cible = null;
         if ($stmt->execute([$id])) {
-            $cible = $stmt->fetchObject('Cible');
+            $cible = $stmt->fetchObject('Personne');
             if(!is_object($cible)) {
                 $cible = null;
             }
