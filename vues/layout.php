@@ -17,8 +17,8 @@
     <nav>
         <ul>
             <li><a href="/">Accueil</a></li>
-            <li><a href="?page=missions">Missions</a></li>
-			<li><a href="?page=payss">Liste des pays</a></li>
+            <li><a href="index.php?page=missions">Missions</a></li>
+			<li><a href="index.php?page=payss">Liste des pays</a></li>
         </ul>
     </nav>
     <?= $contenu ?>
