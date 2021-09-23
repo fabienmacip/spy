@@ -8,6 +8,34 @@ ob_start();
     </div>
     <div class="col-6">
 
+    <?php
+        if(isset($paysToDelete)) {?>
+        <div class="pays-deleted"><?= $paysToDelete ?></div>
+        <?php
+        }
+    ?>
+
+    <?php
+        if(isset($paysToCreate)) {?>
+        <div class="pays-created"><?= $paysToCreate ?></div>
+        <?php
+        }
+    ?>
+
+<!-- ######################## DEBUT FORM #################### -->
+
+    <form method="post" action="index.php">
+        <label for="nom">Nom du pays</label>
+        <input type="text" name="nom" id="nom" placeholder="Saisissez le nom du pays">
+
+        <input type="hidden" name="action" id="action" value="createPays">
+        <input type="hidden" name="page" id="page" value="payss">
+        <button type="reset">Reset</button>
+        <button type="submit">Envoyer</button>
+    </form>
+
+<!-- ******************** FIN FORM ************************* -->
+
       <table class="table table-striped table-bordered table-sm caption-top table-responsive-lg text-center">
       <caption class="text-center fs-3 text-primary">Liste des pays</caption>
           <thead class="table-dark">
@@ -30,14 +58,15 @@ ob_start();
                           <?= $pays->getNom() ?>
                       </td>
                       <td>
-                          <a href="pays.php?action=edit&id=<?= $pays->getId() ?>" class="link-secondary">
+                          <!--<a href="pays.php?action=edit&id=--><?php //$pays->getId() ?><!--" class="link-secondary">-->
+                          <button type="button" id="updatePays<?= $pays->getId() ?>" class="btn-secondary">
                             Modifier
-                          </a>
+                          </button>
                       </td>
                       <td>
-                      <a href="pays.php?action=delete&id=<?= $pays->getId() ?>" class="link-secondary">
+                      <a href="index.php?page=payss&action=delete&id=<?= $pays->getId() ?>&nom=<?= $pays->getNom() ?>" class="link-secondary">
                             Supprimer
-                          </a>
+                      </a>
                       </td>
                   </tr>
               <?php endforeach; ?>

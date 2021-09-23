@@ -16,6 +16,24 @@ class Controleur {
         require_once('vues/liste-pays.php');
     }
 
+    // PAYS - CRUD
+
+    public function createPays($nom)
+    {
+        $payss = new Payss();
+        $paysToCreate = $payss->createPays($nom);
+        $payss = $payss->listerPays();
+        require_once('vues/liste-pays.php');
+    }
+
+    public function deletePays($id,$nom)
+    {
+        $payss = new Payss();
+        $paysToDelete = $payss->deletePays($id, $nom);
+        $payss = $payss->listerPays();
+        require_once('vues/liste-pays.php');
+    }
+
     public function listerSpecialites()
     {
         $specialites = new Specialites();

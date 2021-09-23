@@ -12,12 +12,13 @@ ob_start();
       <caption class="text-center fs-3 text-primary">Liste des personnes</caption>
           <thead class="table-dark">
               <tr>
-                  <th width="6%">Id</th>
+                  <th width="5%">Id</th>
                   <th width="15%">Nom</th>
                   <th width="15%">Pr&eacute;nom</th>
-                  <th width="15%">Date naissance</th>
+                  <th width="10%">Date naissance</th>
                   <th width="10%">Nom de code</th>
                   <th width="15%">Nationalit&eacute;</th>
+                  <th width="6%">Type</th>
                   <th width="12%"></th>
                   <th width="12%"></th>
               </tr>
@@ -25,12 +26,7 @@ ob_start();
           
           <tbody>
     
-              <?php foreach ($personnes as $personne):
-                //Faire 3 catégories de lignes : AGENT, CIBLE, CONTACT
-                //$typeEnCours = $personne->getType();
-                //if($personne->getType() === 'agent') ?>
-
-
+              <?php foreach ($personnes as $personne): ?>
                     <tr>
                       <td>
                           <?= $personne->getId() ?>
@@ -49,7 +45,10 @@ ob_start();
                       </td>
                       <td>
                           <?= $personne->getPaysNom() ?>
-                      </td>                                                                                        
+                      </td>                            
+                      <td>
+                          <?= $personne->getType() ?>
+                      </td>                                                            
                       <td>
                           <a href="personne.php?action=edit&id=<?= $personne->getId() ?>" class="link-secondary">
                             Modifier
