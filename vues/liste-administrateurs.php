@@ -8,6 +8,58 @@ ob_start();
     </div>
     <div class="col-10">
 
+    <?php
+        if(isset($administrateurToDelete)) {?>
+        <div class="administrateur-deleted"><?= $administrateurToDelete ?></div>
+        <?php
+        }
+    ?>
+
+    <?php
+        if(isset($administrateurToCreate)) {?>
+        <div class="administrateur-created"><?= $administrateurToCreate ?></div>
+        <?php
+        }
+    ?>
+
+    <?php
+        if(isset($administrateurToUpdate)) {?>
+        <div class="administrateur-updated"><?= $administrateurToUpdate ?></div>
+        <?php
+        }
+    ?>
+
+
+<!-- ######################## DEBUT FORM AJOUT ADMINISTRATEUR #################### -->
+
+    <form method="post" action="index.php" class="mt-3 bg-info">
+        <h4>Ajouter un administrateur</h4>    
+        <div class="form-group">
+            <label for="nom">Nom de famille</label>
+            <input type="text" name="nom" maxlength="40" id="nom" placeholder="Nom de famille" class="form-control">
+            <label for="prenom">Pr&eacute;nom</label>
+            <input type="text" name="prenom" maxlength="30" id="prenom" placeholder="Prénom" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="mail">Adresse mail</label>
+            <input type="mail" name="mail" maxlength="50" id="mail" placeholder="Mail" class="form-control">
+            <label for="mot_de_passe">Mot de passe</label>
+            <input type="text" name="mot_de_passe" maxlength="40" id="mot_de_passe" placeholder="Mot de passe" class="form-control">        
+        </div>
+
+        <input type="hidden" name="action" id="action" value="create">
+        <input type="hidden" name="page" id="page" value="administrateurs" >
+
+        <div class="form-group">
+            <button type="reset" class="btn btn-primary">Reset</button>
+            <button type="submit"class="btn btn-primary">Envoyer</button>
+        </div>
+    </form>
+
+<!-- ******************** FIN FORM AJOUT ADMINISTRATEUR ************************* -->
+
+
       <table class="table table-striped table-bordered table-sm caption-top table-responsive-lg text-center">
       <caption class="text-center fs-3 text-primary">Liste des administrateurs</caption>
           <thead class="table-dark">
@@ -26,7 +78,7 @@ ob_start();
           <tbody>
     
               <?php foreach ($administrateurs as $administrateur): ?>
-                  <tr>
+                <tr id="tr<?= $administrateur->getId() ?>">
                       <td>
                           <?= $administrateur->getId() ?>
                       </td>
@@ -46,15 +98,18 @@ ob_start();
                           <?= $administrateur->getMotDePasse() ?>
                       </td>                                                                                        
                       <td>
-                          <a href="administrateur.php?action=edit&id=<?= $administrateur->getId() ?>" class="link-secondary">
+                          <button type="button" id="updateAdministrateur<?= $administrateur->getId() ?>" class="updateAdministrateur btn-primary" 
+                          onclick=displayUpdateAdministrateur(<?php echo $administrateur->getId().",'".str_replace(" ","&nbsp;",$administrateur->getNom())."','".str_replace(" ","&nbsp;",$administrateur->getPrenom())."','".str_replace(" ","&nbsp;",$administrateur->getMail())."','".str_replace(" ","&nbsp;",$administrateur->getMotDePasse())."'" ?>)
+                          >
                             Modifier
-                          </a>
+                          </button>
                       </td>
                       <td>
-                      <a href="administrateur.php?action=delete&id=<?= $administrateur->getId() ?>" class="link-secondary">
-                            Supprimer
-                          </a>
-                      </td>
+                           <button type="button" class="btn-primary" 
+                                   onclick=confirmeSuppressionAdministrateur(<?php echo $administrateur->getId().",'".str_replace(" ","&nbsp;",$administrateur->getNom())."','".str_replace(" ","&nbsp;",$administrateur->getPrenom())."'" ?>)>
+                             Supprimer
+                           </button>
+                      </td>                      
                   </tr>
               <?php endforeach; ?>
     

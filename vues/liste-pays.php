@@ -22,11 +22,20 @@ ob_start();
         }
     ?>
 
+    <?php
+        if(isset($paysToUpdate)) {?>
+        <div class="pays-updated"><?= $paysToUpdate ?></div>
+        <?php
+        }
+    ?>
+
+
 <!-- ######################## DEBUT FORM AJOUT PAYS #################### -->
 
-    <form method="post" action="index.php">
-        <label for="nom">Nom du pays</label>
-        <input type="text" name="nom" id="nom" placeholder="Saisissez le nom du pays">
+    <form method="post" action="index.php" class="mt-3 bg-info">
+    <h4>Ajouter un pays</h4>    
+    <label for="nom">Nom du pays</label>
+        <input type="text" name="nom" maxlength="50" id="nom" placeholder="Saisissez le nom du pays">
 
         <input type="hidden" name="action" id="action" value="createPays">
         <input type="hidden" name="page" id="page" value="payss">
@@ -60,15 +69,15 @@ ob_start();
                       <td>
                           <!--<a href="pays.php?action=edit&id=--><?php //$pays->getId() ?><!--" class="link-secondary">-->
                           <button type="button" id="updatePays<?= $pays->getId() ?>" class="updatePays btn-primary" 
-                          onclick=displayUpdatePays(<?php echo $pays->getId().",'".$pays->getNom()."'" ?>)
+                          onclick=displayUpdatePays(<?php echo $pays->getId().",'".str_replace(" ","&nbsp;",$pays->getNom())."'" ?>)
                           >
                             Modifier
                           </button>
                       </td>
                       <td>
-                      <a href="index.php?page=payss&action=delete&id=<?= $pays->getId() ?>&nom=<?= $pays->getNom() ?>" class="link-secondary">
-                            Supprimer
-                      </a>
+                           <button type="button" class="btn-primary" onclick=confirmeSuppressionPays(<?php echo $pays->getId().',"'.str_replace(" ","&nbsp;",$pays->getNom()).'"' ?>)>
+                             Supprimer
+                           </button>
                       </td>
                   </tr>
               <?php endforeach; ?>
