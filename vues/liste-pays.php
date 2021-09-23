@@ -22,7 +22,7 @@ ob_start();
         }
     ?>
 
-<!-- ######################## DEBUT FORM #################### -->
+<!-- ######################## DEBUT FORM AJOUT PAYS #################### -->
 
     <form method="post" action="index.php">
         <label for="nom">Nom du pays</label>
@@ -34,7 +34,7 @@ ob_start();
         <button type="submit">Envoyer</button>
     </form>
 
-<!-- ******************** FIN FORM ************************* -->
+<!-- ******************** FIN FORM AJOUT PAYS************************* -->
 
       <table class="table table-striped table-bordered table-sm caption-top table-responsive-lg text-center">
       <caption class="text-center fs-3 text-primary">Liste des pays</caption>
@@ -50,7 +50,7 @@ ob_start();
           <tbody>
     
               <?php foreach ($payss as $pays): ?>
-                  <tr>
+                  <tr id="tr<?= $pays->getId() ?>">
                       <td>
                           <?= $pays->getId() ?>
                       </td>
@@ -59,7 +59,9 @@ ob_start();
                       </td>
                       <td>
                           <!--<a href="pays.php?action=edit&id=--><?php //$pays->getId() ?><!--" class="link-secondary">-->
-                          <button type="button" id="updatePays<?= $pays->getId() ?>" class="btn-secondary">
+                          <button type="button" id="updatePays<?= $pays->getId() ?>" class="updatePays btn-primary" 
+                          onclick=displayUpdatePays(<?php echo $pays->getId().",'".$pays->getNom()."'" ?>)
+                          >
                             Modifier
                           </button>
                       </td>
