@@ -22,8 +22,13 @@ $controleur = new Controleur();
 if (isset($_GET['page']) && 'missions' === $_GET['page']) {
     $controleur->afficherMissions();
 // PAYS - CRUD
+// PAYS - CREATE
 } elseif (isset($_POST['page']) && 'payss' === $_POST['page'] && isset($_POST['action']) && 'createPays' === $_POST['action'] && isset($_POST['nom'])) {
     $controleur->createPays($_POST['nom']);
+// PAYS - UPDATE
+} elseif (isset($_POST['page']) && 'payss' === $_POST['page'] && isset($_POST['action']) && 'updatePays' === $_POST['action'] && isset($_POST['nom'])) {
+    $controleur->updatePays($_POST['idPaysToUpdate'],$_POST['nom']);
+// PAYS - DELETE
 } elseif (isset($_GET['page']) && 'payss' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] && isset($_GET['id']) && isset($_GET['nom'])) {
     $controleur->deletePays($_GET['id'],$_GET['nom']);
 } elseif (isset($_GET['page']) && 'payss' === $_GET['page'] && !isset($_GET['action'])) {

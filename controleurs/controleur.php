@@ -26,6 +26,14 @@ class Controleur {
         require_once('vues/liste-pays.php');
     }
 
+    public function updatePays($id,$nom)
+    {
+        $payss = new Payss();
+        $paysToUpdate = $payss->updatePays($id,$nom);
+        $payss = $payss->listerPays();
+        require_once('vues/liste-pays.php');
+    }
+
     public function deletePays($id,$nom)
     {
         $payss = new Payss();
