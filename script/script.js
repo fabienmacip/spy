@@ -2,6 +2,9 @@
 $(document).ready(() => {
   // Notre code utilisant jQuery
 //  alert('page chargée, jQuery ok');
+/* console.log("coucou");
+let listePays = document.getElementById(listePays);
+console.log(listePays.value); */
 })
 
 // ##############  PAYS  ###################
@@ -167,11 +170,64 @@ function displayUpdateAdministrateur(id, nom, prenom, mail, mot_de_passe){
 
 // Confirme suppression d'un administrateur
 function confirmeSuppressionAdministrateur(id, nom, prenom){
-  console.log("FONCTION DELETE");
+  
   let lien = "index.php?page=administrateurs&action=delete&id=" + id + "&nom="+ nom + "&prenom="+ prenom;
 
   if(confirm("Supprimer " + nom + " " + prenom + " ?")){
     // Supprimer la ligne dans la BDD
     window.location.href = lien;
   }
+}
+
+// ####################  PLANQUE ####################
+
+// Affiche le formulaire de modification d'une planque
+function displayUpdatePlanque(id, code, adresse, ville, pays){
+
+  let updateForm = '<form method="post" action="index.php">' + 
+                '<div class="form-group">' +
+                '<label for="code"></label><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '">' +
+                '<label for="adresse"></label><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control"></div>' +
+                '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
+                '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
+                '<input type="hidden" name="action" id="action" value="update">' +
+                '<input type="hidden" name="page" id="page" value="planques">' +
+                '<button type="reset">Reset</button>' +
+                '<button type="button" id="annuler">Annuler</button>' +
+                '<button type="submit">Envoyer</button>' +
+                '</form>';
+
+  let codeAConserver = $('#tr'+id);
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='8'>" + updateForm + "</td></tr>");
+
+  // On frise tous les autres boutons "Modifier"
+  $('.updatePlanque').prop('disabled',true);
+
+
+  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
+  $( "#annuler" ).click(function() {
+    $('#tr'+id).replaceWith(codeAConserver);
+    $('.updatePlanque').prop('disabled',false);
+  });
+}
+
+// Confirme suppression d'une planque
+function confirmeSuppressionPlanque(id, code, ville){
+  
+  let lien = "index.php?page=planques&action=delete&id=" + id + "&code="+ code + "&ville="+ ville;
+
+  if(confirm("Supprimer " + code + " de la ville " + ville + " ?")){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
+
+
+
+
+
+
+
+function alertSelect() {
+  console.log("SELECT : " + $('#pays').value);
 }

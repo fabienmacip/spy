@@ -149,29 +149,49 @@ class Controleur {
         $planques = $planques->lister();
         require_once('vues/liste-planques.php');
     }
+
+    public function createPlanque($code, $adresse, $ville, $pays)
+    {
+        $planques = new Planques();
+        $planqueToCreate = $planques->create($code, $adresse, $ville, $pays);
+        $planques = $planques->lister();
+        require_once('vues/liste-planques.php');
+    }
+
+    public function updatePlanque($id,$code, $adresse, $ville, $pays)
+    {
+        $planques = new Planques();
+        $planqueToUpdate = $planques->update($id,$code, $adresse, $ville, $pays);
+        $planques = $planques->lister();
+        require_once('vues/liste-planques.php');
+    }
+
+    public function deletePlanque($id,$code,$ville)
+    {
+        $planques = new Planques();
+        $planqueToDelete = $planques->delete($id, $code, $ville);
+        $planques = $planques->lister();
+        require_once('vues/liste-planques.php');
+    }
+
+
+// PERSONNES - CRUD
+
     public function listerPersonnes()
     {
         $personnes = new Personnes();
         $personnes = $personnes->lister();
         require_once('vues/liste-personnes.php');
     }
+
+// MISSIONS - CRUD
+
     public function listerMissions()
     {
         $missions = new Missions();
         $missions = $missions->lister();
         require_once('vues/liste-missions.php');
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

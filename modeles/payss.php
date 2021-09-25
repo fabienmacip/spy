@@ -18,6 +18,37 @@ class Payss
         return $payss;
     }
 
+    // READ pour listes déroulantes
+    public function listerPaysJson()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM pays ORDER BY nom');
+        }
+        
+        while ($pays = $stmt->fetchObject('Pays')) {
+            $payss[] = [$pays->getId(), $pays->getNom()];
+        }
+
+/*         $json = '{';
+        foreach ($payss as $pays):
+            $json .= "{\"id\" : \"".$pays[0]."\",\"nom\" : \"".$pays[1]."\"},";
+        endforeach;
+        $json = substr($json,0,-1);
+        $json .= '}'; */
+        
+        /* $json = '[';
+            foreach ($payss as $pays):
+                $json .= '['.$pays[0].',"'.$pays[1].'"],';
+            endforeach;
+            $json = substr($json,0,-1);
+            $json .= ']'; */
+            
+        //$payssForJson = (object) json_decode(json_encode($payss));
+
+        return $payss;
+    }
+
+
     // CREATE
     public function createPays($nom) {
         if (!is_null($this->pdo)) {
@@ -76,5 +107,7 @@ class Payss
         
         return $tupleDeleted;
     }
+
+    // ****************** FIN du CRUD *****************
 
 }
