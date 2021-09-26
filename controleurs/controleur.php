@@ -184,6 +184,31 @@ class Controleur {
         require_once('vues/liste-personnes.php');
     }
 
+    public function createPersonne($nom, $prenom, $dob, $secret_code, $nationalite, $type)
+    {
+        $personnes = new Personnes();
+        $personneToCreate = $personnes->create($nom, $prenom, $dob, $secret_code, $nationalite, $type);
+        $personnes = $personnes->lister();
+        require_once('vues/liste-personnes.php');
+    }
+
+    public function updatePersonne($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type)
+    {
+        $personnes = new Personnes();
+        $personneToUpdate = $personnes->update($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type);
+        $personnes = $personnes->lister();
+        require_once('vues/liste-personnes.php');
+    }
+
+    public function deletePersonne($id,$nom,$prenom)
+    {
+        $personnes = new Personnes();
+        $personneToDelete = $personnes->delete($id, $nom, $prenom);
+        $personnes = $personnes->lister();
+        require_once('vues/liste-personnes.php');
+    }
+
+
 // MISSIONS - CRUD
 
     public function listerMissions()

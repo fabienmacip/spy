@@ -102,40 +102,25 @@ $controleur->deletePlanque($_GET['id'],$_GET['code'],$_GET['ville']);
 } elseif (isset($_GET['page']) && 'planques' === $_GET['page']) {
     $controleur->listerPlanques();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // PERSONNES - CRUD
+// PERSONNES - CREATE
+} elseif (isset($_POST['page']) && 'personnes' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] 
+&& isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dob']) && isset($_POST['secret_code']) && isset($_POST['pays']) && isset($_POST['type'])) {
+$controleur->createPersonne($_POST['nom'], $_POST['prenom'], $_POST['dob'], $_POST['secret_code'], $_POST['pays'], $_POST['type']);
+// PERSONNES - UPDATE
+} elseif (isset($_POST['page']) && 'personnes' === $_POST['page'] && isset($_POST['action']) && 'update' === $_POST['action'] && isset($_POST['idPersonneToUpdate'])
+&& isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dob']) && isset($_POST['secret_code']) && isset($_POST['nationalite']) && isset($_POST['type'])) {
+$controleur->updatePersonne($_POST['idPersonneToUpdate'],$_POST['nom'], $_POST['prenom'], $_POST['dob'], $_POST['secret_code'], $_POST['nationalite'], $_POST['type']);
+// PERSONNES - DELETE
+} elseif (isset($_GET['page']) && 'personnes' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] 
+&& isset($_GET['id']) && isset($_GET['nom']) && isset($_GET['prenom'])) {
+$controleur->deletePersonne($_GET['id'],$_GET['nom'],$_GET['prenom']);
+// PERSONNES - READ
 } elseif (isset($_GET['page']) && 'personnes' === $_GET['page']) {
     $controleur->listerPersonnes();
+    
+   
+// MISSIONS - CRUD
 //} elseif (isset($_GET['page']) && 'missions' === $_GET['page']) {
 //    $controleur->listerMissions();
 } else {

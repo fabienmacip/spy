@@ -55,7 +55,7 @@ ob_start();
 
         <div class="form-group">
             <label class="my-1 mx-2" for="pays">Pays</label>
-              <select class="custom-select my-1 mr-sm-2" id="pays" name="pays" onclick=alertSelect()>
+              <select class="custom-select my-1 mr-sm-2" id="pays" name="pays">
               <?php
               foreach ($listePays->listerPaysJson() as $pays): 
                 echo "<option value=\"".$pays[0]."\">".$pays[1]."</option>";
@@ -69,7 +69,7 @@ ob_start();
 
         <div class="form-group">
             <button type="reset" class="btn btn-primary">Reset</button>
-            <button type="submit"class="btn btn-primary" onclick=alertSelect()>Envoyer</button>
+            <button type="submit"class="btn btn-primary">Envoyer</button>
         </div>
     </form>
 

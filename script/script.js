@@ -184,12 +184,17 @@ function confirmeSuppressionAdministrateur(id, nom, prenom){
 // Affiche le formulaire de modification d'une planque
 function displayUpdatePlanque(id, code, adresse, ville, pays){
 
+  let selectPays = $('#pays').prop('outerHTML');;
+  // On place le sélecteur de la liste déroulante sur le bon pays
+  selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
+  
   let updateForm = '<form method="post" action="index.php">' + 
                 '<div class="form-group">' +
                 '<label for="code"></label><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '">' +
                 '<label for="adresse"></label><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control"></div>' +
                 '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
                 '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
+                selectPays +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="planques">' +
                 '<button type="reset">Reset</button>' +
@@ -199,7 +204,7 @@ function displayUpdatePlanque(id, code, adresse, ville, pays){
 
   let codeAConserver = $('#tr'+id);
   $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='8'>" + updateForm + "</td></tr>");
-
+  
   // On frise tous les autres boutons "Modifier"
   $('.updatePlanque').prop('disabled',true);
 
@@ -215,7 +220,7 @@ function displayUpdatePlanque(id, code, adresse, ville, pays){
 function confirmeSuppressionPlanque(id, code, ville){
   
   let lien = "index.php?page=planques&action=delete&id=" + id + "&code="+ code + "&ville="+ ville;
-
+  
   if(confirm("Supprimer " + code + " de la ville " + ville + " ?")){
     // Supprimer la ligne dans la BDD
     window.location.href = lien;
@@ -223,11 +228,58 @@ function confirmeSuppressionPlanque(id, code, ville){
 }
 
 
-
-
-
-
-
-function alertSelect() {
-  console.log("SELECT : " + $('#pays').value);
+function alertMe() {
+  alert("Cliqué ! ");
 }
+// ####################  PERSONNE ####################
+
+// Affiche le formulaire de modification d'une personne
+// Ici, la variable pays = nationalite
+function displayUpdatePersonne(id, nom, prenom, dob, pays, secret_code, type){
+
+  let selectPays = $('#pays').prop('outerHTML');;
+  // On place le sélecteur de la liste déroulante sur le bon pays
+  selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
+  
+  let updateForm = '<form method="post" action="index.php">' + 
+                '<div class="form-group">' +
+                '<label for="code"></label><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '">' +
+                '<label for="adresse"></label><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control"></div>' +
+                '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
+                '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
+                selectPays +
+                '<input type="hidden" name="action" id="action" value="update">' +
+                '<input type="hidden" name="page" id="page" value="planques">' +
+                '<button type="reset">Reset</button>' +
+                '<button type="button" id="annuler">Annuler</button>' +
+                '<button type="submit">Envoyer</button>' +
+                '</form>';
+
+  let codeAConserver = $('#tr'+id);
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='8'>" + updateForm + "</td></tr>");
+  
+  // On frise tous les autres boutons "Modifier"
+  $('.updatePersonne').prop('disabled',true);
+
+
+  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
+  $( "#annuler" ).click(function() {
+    $('#tr'+id).replaceWith(codeAConserver);
+    $('.updatePersonne').prop('disabled',false);
+  });
+}
+
+
+// Confirme suppression d'une personne
+function confirmeSuppressionPersonne(id, nom, prenom){
+  
+  let lien = "index.php?page=personnes&action=delete&id=" + id + "&nom="+ nom + "&prenom="+ prenom;
+
+  if(confirm("Supprimer " + nom.toUpperCase() + "  " + prenom + " ?")){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
+
+
+
