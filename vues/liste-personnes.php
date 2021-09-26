@@ -50,7 +50,7 @@ ob_start();
 
         <div class="form-group">
             <label for="dob">Date de naissance</label>
-            <input type="text" name="dob" maxlength="50" id="dob" placeholder="Date de naissance" class="form-control">
+            <input type="date" name="dob" id="dob" placeholder="Date de naissance" min="1920-01-01" max="2040-12-31" class="form-control">
             <label for="secret_code">Code secret</label>
             <input type="text" name="secret_code" maxlength="20" id="secret_code" placeholder="Code secret" class="form-control">
         </div>
@@ -65,24 +65,25 @@ ob_start();
               ?>  
             </select>
         </div>
-
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="agent" value="agent">
-            <label class="form-check-label" for="agent">
-                Agent
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="cible" value="cible" checked>
-            <label class="form-check-label" for="cible">
-                Cible
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="type" id="contact" value="contact">
-            <label class="form-check-label" for="contact">
-                Contact
-            </label>
+        <div id="typeDePersonne">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="agent" value="agent">
+                <label class="form-check-label" for="agent">
+                    Agent
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="cible" value="cible" checked>
+                <label class="form-check-label" for="cible">
+                    Cible
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="type" id="contact" value="contact">
+                <label class="form-check-label" for="contact">
+                    Contact
+                </label>
+            </div>
         </div>
 
         <input type="hidden" name="action" id="action" value="create">
@@ -148,7 +149,7 @@ ob_start();
                       </td>                                                            
                       <td>
                           <button type="button" id="updatePersonne<?= $personne->getId() ?>" class="updatePersonne btn-primary" 
-                                  onclick=displayUpdatePersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".str_replace(" ","&nbsp;",$personne->getPrenom())."','".$personne->getDob()."','".str_replace(" ","&nbsp;",$personne->getNationalite())."','".$personne->getNationalite()."','".str_replace(" ","&nbsp;",$personne->getType())."'" ?>)
+                                  onclick=displayUpdatePersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".str_replace(" ","&nbsp;",$personne->getPrenom())."','".$personne->getDob()."','".str_replace(" ","&nbsp;",$personne->getSecretCode())."','".$personne->getNationalite()."','".str_replace(" ","&nbsp;",$personne->getType())."'" ?>)
                           >
                           Modifier
                           </button>

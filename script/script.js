@@ -235,28 +235,40 @@ function alertMe() {
 
 // Affiche le formulaire de modification d'une personne
 // Ici, la variable pays = nationalite
-function displayUpdatePersonne(id, nom, prenom, dob, pays, secret_code, type){
+function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type){
 
+  // PAYS
   let selectPays = $('#pays').prop('outerHTML');;
   // On place le sélecteur de la liste déroulante sur le bon pays
   selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
   
+  // TYPE
+  let selectType = $('#typeDePersonne').prop('outerHTML');;
+  // On enlève la case sélectionnée car on ne sait pas laquelle est déjà sélectionnée
+  selectType = selectType.replace("checked","");
+  // Puis on sélectionne le bon bouton radio
+  selectType = selectType.replace("value=\""+type.toString()+"\"","value=\""+type.toString()+"\" checked");
+
+
+
   let updateForm = '<form method="post" action="index.php">' + 
                 '<div class="form-group">' +
-                '<label for="code"></label><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '">' +
-                '<label for="adresse"></label><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control"></div>' +
-                '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
-                '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
+                '<label for="nom"></label><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
+                '<label for="prenom"></label><input type="text" maxlength="30" name="prenom" value="'+ prenom + '" id="prenom" placeholder="'+ prenom + '">' +
+                '<label for="dob"></label><input type="date" name="dob" value="'+ dob + '" id="dob" placeholder="' + dob + '" min="1920-01-01" max="2040-12-31" class="form-control"></div>' +
                 selectPays +
+                '<label for="secret_code"></label><input type="text" name="secret_code" value="' + secret_code + '" maxlength="20" id="secret_code" placeholder="' + secret_code + '" class="form-control"></div>' +               
+                selectType +
+                '<input type="hidden" name="idPersonneToUpdate" id="idPersonneToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
-                '<input type="hidden" name="page" id="page" value="planques">' +
+                '<input type="hidden" name="page" id="page" value="personnes">' +
                 '<button type="reset">Reset</button>' +
                 '<button type="button" id="annuler">Annuler</button>' +
                 '<button type="submit">Envoyer</button>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
-  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='8'>" + updateForm + "</td></tr>");
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='9'>" + updateForm + "</td></tr>");
   
   // On frise tous les autres boutons "Modifier"
   $('.updatePersonne').prop('disabled',true);
