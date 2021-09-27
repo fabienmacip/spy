@@ -1,6 +1,7 @@
 <?php
 $titre = 'Liste des personnes';
 $listePays = new Payss();
+$listeSpecialites = new Specialites();
 ob_start();
 ?>
 <div class="container">
@@ -33,7 +34,7 @@ ob_start();
 
 <!-- ######################## DEBUT FORM AJOUT PERSONNE #################### -->
 
-    <form method="post" action="index.php" class="mt-3 bg-info">
+    <form method="post" action="index.php" id="form-create-personne" class="mt-3 bg-info">
         <h4>Ajouter une personne</h4>    
         <div class="form-group">
             <label for="code">Nom</label>
@@ -65,15 +66,16 @@ ob_start();
               ?>  
             </select>
         </div>
-        <div id="typeDePersonne">
+        <div id="typeDePersonne" onclick=afficheSpecialites()>
+            <label>Type</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="agent" value="agent">
+                <input class="form-check-input" type="radio" name="type" id="agent" value="agent" checked>
                 <label class="form-check-label" for="agent">
                     Agent
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="type" id="cible" value="cible" checked>
+                <input class="form-check-input" type="radio" name="type" id="cible" value="cible">
                 <label class="form-check-label" for="cible">
                     Cible
                 </label>
@@ -86,12 +88,24 @@ ob_start();
             </div>
         </div>
 
+        <div id="listeSpecialites">
+        <label>Sp&eacute;cialit&eacute;s</label><br/>
+        <?php foreach ((array) $listeSpecialites->lister() as $uneSpecialite) : ?>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="specialite[]" value="<?= $uneSpecialite->getId() ?>" id="spe<?= $uneSpecialite->getId() ?>" onclick=verifUneSpecialite()>
+                    <label class="form-check-label" for="spe<?php echo $uneSpecialite->getId(); ?>">
+                        <?php echo $uneSpecialite->getIntitule(); ?>
+                    </label>
+                </div>
+        <?php endforeach; ?>
+        </div>
+
         <input type="hidden" name="action" id="action" value="create">
         <input type="hidden" name="page" id="page" value="personnes" >
 
         <div class="form-group">
             <button type="reset" class="btn btn-primary">Reset</button>
-            <button type="submit"class="btn btn-primary">Envoyer</button>
+            <button type="submit" id="btn-create-personne" class="btn btn-primary" disabled="true">Envoyer</button>
         </div>
     </form>
 
@@ -116,6 +130,8 @@ ob_start();
           <tbody>
               <?php 
                 $dernierType = '';
+                $rowSpan = '';
+                $ligneSpecialites = '';
                 foreach ($personnes as $personne): 
                   // Changer de type de personne : agent, cible ou contact. => on inclus une ligne de sous-titre.
                   if($personne->getType() !== $dernierType) { ?>
@@ -124,7 +140,22 @@ ob_start();
                             <?= ucwords($personne->getType())."s" ?>
                         </td>
                     </tr>
-                  <?php } ?>
+                  <?php }
+                  // Affichage d'une ligne supplémentaire pour les spécialités
+                  if($personne->getType() === 'agent') { 
+                    foreach ($personne->listerSpecialites() as $specialites) :
+                        $ligneSpecialites .= $specialites[1].", ";
+                    endforeach;
+                    if($ligneSpecialites !== "") {
+                        $ligneSpecialites = substr($ligneSpecialites,0,-2).".";
+                    }
+                    $rowSpan = ' rowspan="2"';
+                    $ligneSpecialites = '<tr><td colspan="7" class="text-start"><b>Sp&eacute;cialit&eacute;s :</b> '.$ligneSpecialites.'</td></td>';
+                   } else { 
+                    $rowSpan = ''; 
+                    $ligneSpecialites = '';
+                    }
+                  ?>
                   <tr id="tr<?= $personne->getId() ?>">
                       <td>
                           <?= $personne->getId() ?>
@@ -147,21 +178,23 @@ ob_start();
                       <td>
                           <?= $personne->getType() ?>
                       </td>                                                            
-                      <td>
+                      <td <?= $rowSpan ?>>
                           <button type="button" id="updatePersonne<?= $personne->getId() ?>" class="updatePersonne btn-primary" 
                                   onclick=displayUpdatePersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".str_replace(" ","&nbsp;",$personne->getPrenom())."','".$personne->getDob()."','".str_replace(" ","&nbsp;",$personne->getSecretCode())."','".$personne->getNationalite()."','".str_replace(" ","&nbsp;",$personne->getType())."'" ?>)
                           >
                           Modifier
                           </button>
                       </td>
-                      <td>
+                      <td <?= $rowSpan ?>>
                           <button type="button" class="btn-primary" 
                           onclick=confirmeSuppressionPersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".str_replace(" ","&nbsp;",$personne->getPrenom())."'" ?>)>
                           Supprimer
                         </button>
-                       </td>                      
+                       </td>                 
                     </tr>
-              <?php $dernierType = $personne->getType();
+                    <?= $ligneSpecialites ?>     
+              <?php $ligneSpecialites = '';
+                    $dernierType = $personne->getType();
                     endforeach; ?>
     
           </tbody>

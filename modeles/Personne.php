@@ -87,7 +87,21 @@ class Personne
 
     public function getSpecialites()
     {
-        return $this->specialites;
+/*        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT id, intitule
+                    FROM specialite s, agent_specialite a
+                    WHERE a.id_agent = '.$this->id.' AND a.id_specialite = s.id');
+        }
+     
+        $specialites = [];
+        while ($specialite = $stmt->fetch()) {
+            $specialites[] = $specialite;
+        }
+
+        
+        $specialites = $stmt->fetch()[0];
+        
+        return $this->specialites;*/
     }
 
     public function getPaysNom()

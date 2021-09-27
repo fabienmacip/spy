@@ -293,5 +293,40 @@ function confirmeSuppressionPersonne(id, nom, prenom){
   }
 }
 
+// Vérifier s'il y a au moins une spécialité
+function verifUneSpecialite() {
+  $envoyer = false;
+  $('#listeSpecialites input[type=checkbox]').each(function () {
+    if($(this).prop("checked") == true) {
+      $envoyer = true;      
+    } 
+  });
+  
+  if($envoyer) {
+    $('#btn-create-personne').prop('disabled',false);
+    /* $('#form-create-personne').submit(function( event ) {
+      event.preventDefault();
+    }); */
+  } else {
+    $('#btn-create-personne').prop('disabled',true);
+  }
+}
 
+// Affichage de la liste des spécialités si c'est un agent
+function afficheSpecialites() {
+  if($('#typeDePersonne #agent').prop("checked") == true) {
+    $('#listeSpecialites').show();
+  }
+  else {
+    $('#listeSpecialites').hide();
+  }
+
+  // Autoriser l'envoi du formulaire si ce n'est pas un agent -> Pas besoin de cocher au moins une spécialité.
+  if($('#typeDePersonne #agent').prop("checked") == false) {
+    $('#btn-create-personne').prop('disabled',false);
+  } else {
+    verifUneSpecialite();
+  }
+
+}
 

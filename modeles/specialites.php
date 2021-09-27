@@ -8,7 +8,7 @@ class Specialites
     public function lister()
     {
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT * FROM specialite');
+            $stmt = $this->pdo->query('SELECT * FROM specialite ORDER BY intitule');
         }
         $liste = [];
         while ($element = $stmt->fetchObject('Specialite')) {

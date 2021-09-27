@@ -184,10 +184,10 @@ class Controleur {
         require_once('vues/liste-personnes.php');
     }
 
-    public function createPersonne($nom, $prenom, $dob, $secret_code, $nationalite, $type)
+    public function createPersonne($nom, $prenom, $dob, $secret_code, $nationalite, $type, $specialites = [])
     {
         $personnes = new Personnes();
-        $personneToCreate = $personnes->create($nom, $prenom, $dob, $secret_code, $nationalite, $type);
+        $personneToCreate = $personnes->create($nom, $prenom, $dob, $secret_code, $nationalite, $type, $specialites);
         $personnes = $personnes->lister();
         require_once('vues/liste-personnes.php');
     }

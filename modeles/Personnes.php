@@ -43,7 +43,10 @@ class Personnes
     }
 
     // CREATE
-    public function create($nom, $prenom, $dob, $secret_code, $nationalite, $letype) {
+    public function create($nom, $prenom, $dob, $secret_code, $nationalite, $letype, $specialites = []) {
+       
+        //var_dump($specialites);
+        //var_dump($_POST);
         if (!is_null($this->pdo)) {
             try {
                 // Requête mysql pour insérer des données
@@ -57,6 +60,35 @@ class Personnes
             }
             catch(Exception $e) {
                 $tupleCreated = "La personne <b><u>".$nom."</u> ".$prenom."</b> n'a pas pu être ajoutée.<br/><br/>".$e;
+            }
+
+            // Ajout des spécialités si c'est un agent.
+            if($letype === 'agent'){
+                
+                // On commence par récupérer l'identifiant de la personne.
+                try {
+                    $stmt = $this->pdo->query('SELECT id FROM personne ORDER BY id DESC LIMIT 1');
+                    $id_agent = $stmt->fetch()[0];
+                }
+                catch(Exception $e) {
+                    $tupleCreated .= "Erreur lors de la récupération de l'identifiant de la nouvelle Personne.";
+                }
+                
+                foreach($specialites as $spe):
+                try {
+                    
+                    // Requête mysql pour insérer des données
+                    $sql = "INSERT INTO agent_specialite (id_agent, id_specialite) VALUES (:id_agent, :id_specialite)";
+                    $res = $this->pdo->prepare($sql);
+                    $exec = $res->execute(array(":id_agent"=>$id_agent, ":id_specialite"=>$spe[0]));
+                    if($exec){
+                        //$tupleCreated .= "<br/>La spécialité ".$spe[0]." a bien été ajoutée.";
+                    }
+                }
+                catch(Exception $e) {
+                    $tupleCreated .= "La spécialité ".$spe[0]."n'a pas pu être ajoutée.<br/><br/>".$e;
+                }
+                endforeach;
             }
         }
         
