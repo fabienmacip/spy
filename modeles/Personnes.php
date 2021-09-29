@@ -120,7 +120,25 @@ class Personnes
     //Supprime 1 personne de la BDD.
     public function delete($id, $nom, $prenom)
     {
+
+        // D'abord, suppression des tuples de la table agent_specialite
         if (!is_null($this->pdo)) {
+                try {
+                    // Requête mysql pour supprimer les données
+                    $this->pdo->query('DELETE FROM agent_specialite WHERE id_agent = '.$id.'');
+                    //$sql = "DELETE FROM agent_specialite WHERE id_agent = ".$id;
+                    //var_dump($sql);
+                    //$res = $this->pdo->prepare($sql);
+                    //$exec = $res->execute(array(":id_agent"=>$id));
+                    //if($exec){
+                    //
+                    //}
+                }
+                catch(Exception $e) {
+                    //$tupleCreated .= "La spécialité ".$spe[0]."n'a pas pu être ajoutée.<br/><br/>".$e;
+                }
+            
+            // Puis Suppression de la Personne
             try{
                 $this->pdo->query('DELETE FROM personne WHERE id = '.$id.'');
                 $tupleDeleted = "La personne <b><u>".$nom."</u> ".$prenom."</b> a bien été supprimée.";

@@ -231,67 +231,6 @@ function confirmeSuppressionPlanque(id, code, ville){
 function alertMe() {
   alert("Cliqué ! ");
 }
-// ####################  PERSONNE ####################
-
-// Affiche le formulaire de modification d'une personne
-// Ici, la variable pays = nationalite
-function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type){
-
-  // PAYS
-  let selectPays = $('#pays').prop('outerHTML');;
-  // On place le sélecteur de la liste déroulante sur le bon pays
-  selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
-  
-  // TYPE
-  let selectType = $('#typeDePersonne').prop('outerHTML');;
-  // On enlève la case sélectionnée car on ne sait pas laquelle est déjà sélectionnée
-  selectType = selectType.replace("checked","");
-  // Puis on sélectionne le bon bouton radio
-  selectType = selectType.replace("value=\""+type.toString()+"\"","value=\""+type.toString()+"\" checked");
-
-
-
-  let updateForm = '<form method="post" action="index.php">' + 
-                '<div class="form-group">' +
-                '<label for="nom"></label><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
-                '<label for="prenom"></label><input type="text" maxlength="30" name="prenom" value="'+ prenom + '" id="prenom" placeholder="'+ prenom + '">' +
-                '<label for="dob"></label><input type="date" name="dob" value="'+ dob + '" id="dob" placeholder="' + dob + '" min="1920-01-01" max="2040-12-31" class="form-control"></div>' +
-                selectPays +
-                '<label for="secret_code"></label><input type="text" name="secret_code" value="' + secret_code + '" maxlength="20" id="secret_code" placeholder="' + secret_code + '" class="form-control"></div>' +               
-                selectType +
-                '<input type="hidden" name="idPersonneToUpdate" id="idPersonneToUpdate" value="' + id + '">' +
-                '<input type="hidden" name="action" id="action" value="update">' +
-                '<input type="hidden" name="page" id="page" value="personnes">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
-                '</form>';
-
-  let codeAConserver = $('#tr'+id);
-  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='9'>" + updateForm + "</td></tr>");
-  
-  // On frise tous les autres boutons "Modifier"
-  $('.updatePersonne').prop('disabled',true);
-
-
-  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
-  $( "#annuler" ).click(function() {
-    $('#tr'+id).replaceWith(codeAConserver);
-    $('.updatePersonne').prop('disabled',false);
-  });
-}
-
-
-// Confirme suppression d'une personne
-function confirmeSuppressionPersonne(id, nom, prenom){
-  
-  let lien = "index.php?page=personnes&action=delete&id=" + id + "&nom="+ nom + "&prenom="+ prenom;
-
-  if(confirm("Supprimer " + nom.toUpperCase() + "  " + prenom + " ?")){
-    // Supprimer la ligne dans la BDD
-    window.location.href = lien;
-  }
-}
 
 // Vérifier s'il y a au moins une spécialité
 function verifUneSpecialite() {
@@ -313,20 +252,117 @@ function verifUneSpecialite() {
 }
 
 // Affichage de la liste des spécialités si c'est un agent
-function afficheSpecialites() {
-  if($('#typeDePersonne #agent').prop("checked") == true) {
-    $('#listeSpecialites').show();
+function afficheSpecialites(numDiv = 1) {
+  //if($('#typeDePersonne #agent').prop("checked") == true) {
+
+    if($("#typeDePersonne"+numDiv+' #agent').prop("checked") == true) {
+    $('#listeSpecialites'+numDiv).show();
   }
   else {
-    $('#listeSpecialites').hide();
+    $('#listeSpecialites'+numDiv).hide();
   }
 
   // Autoriser l'envoi du formulaire si ce n'est pas un agent -> Pas besoin de cocher au moins une spécialité.
-  if($('#typeDePersonne #agent').prop("checked") == false) {
+  if($('#typeDePersonne'+numDiv+' #agent').prop("checked") == false) {
     $('#btn-create-personne').prop('disabled',false);
   } else {
     verifUneSpecialite();
   }
-
 }
+// ####################  PERSONNE ####################
+
+// Affiche le formulaire de modification d'une personne
+// Ici, la variable pays = nationalite
+function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type, specialites = ""){
+
+  // PAYS
+  let selectPays = $('#pays').prop('outerHTML');
+  // On place le sélecteur de la liste déroulante sur le bon pays
+  selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
+  
+  // TYPE
+  let selectType = $('#typeDePersonne1').prop('outerHTML');
+  // On enlève la case sélectionnée car on ne sait pas laquelle est déjà sélectionnée
+  selectType = selectType.replace("checked","");
+  // Puis on sélectionne le bon bouton radio
+  selectType = selectType.replace("value=\""+type.toString()+"\"","value=\""+type.toString()+"\" checked");
+
+  // SPECIALITES
+  let selectSpecialites = "";
+  // Seulement si la personne est un agent
+  if(type === 'agent') {
+    selectSpecialites = $('#listeSpecialites1').prop('outerHTML');
+    // On enlève les cases sélectionnées car on ne sait pas lesquelles sont déjà sélectionnées
+    selectSpecialites = selectSpecialites.replace("checked","");
+    selectSpecialites = selectSpecialites.replace('id="listeSpecialites1"','id="listeSpecialites2"');
+    // Puis on sélectionne les bonnes spécialités
+    if(specialites !== "") {
+      tableauDesSpecialites = specialites.split(",");
+      tableauDesSpecialites.forEach(element => {
+        selectSpecialites = selectSpecialites.replace("value=\""+element.toString()+"\"","value=\""+element.toString()+"\" checked");
+      });
+    }
+
+    // Si AGENT, il faut aussi modifier l'id du sélecteur de TYPE
+    selectType = selectType.replace('id="typeDePersonne1"','id="typeDePersonne2"');
+    selectType = selectType.replace('afficheSpecialites(1)','afficheSpecialites(2)');
+
+  } // FIN du IF type === agent
+
+
+  // FORMULAIRE de MODIFICATION d'une PERSONNE
+// let updateForm = selectSpecialites;
+   let updateForm = '<form method="post" action="index.php" class="text-start">' + 
+                '<div class="form-group">' +
+                '<label for="nom"></label><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
+                '<label for="prenom"></label><input type="text" maxlength="30" name="prenom" value="'+ prenom + '" id="prenom" placeholder="'+ prenom + '">' +
+                '<label for="dob"></label><input type="date" name="dob" value="'+ dob + '" id="dob" placeholder="' + dob + '" min="1920-01-01" max="2040-12-31" class="form-control"></div>' +
+                selectPays +
+                '<label for="secret_code"></label><input type="text" name="secret_code" value="' + secret_code + '" maxlength="20" id="secret_code" placeholder="' + secret_code + '" class="form-control"></div>' +               
+                selectType +
+                selectSpecialites +
+                '<input type="hidden" name="idPersonneToUpdate" id="idPersonneToUpdate" value="' + id + '">' +
+                '<input type="hidden" name="action" id="action" value="update">' +
+                '<input type="hidden" name="page" id="page" value="personnes">' +
+                '<button type="reset">Reset</button>' +
+                '<button type="button" id="annuler">Annuler</button>' +
+                '<button type="submit">Envoyer</button>' +
+                '</form>';
+
+  let codeAConserver = $('#tr'+id);
+  // <tr><td colspan='9'>"+selectSpecialites+"</td></tr>
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='9'>" + updateForm + "</td></tr>");
+  
+  if (type === 'agent') {
+    $('#trs'+id).hide();
+  }
+
+
+  // On frise tous les autres boutons "Modifier"
+  $('.updatePersonne').prop('disabled',true);
+
+
+  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
+  $( "#annuler" ).click(function() {
+    $('#tr'+id).replaceWith(codeAConserver);
+    $('.updatePersonne').prop('disabled',false);
+    if (type === 'agent') {
+      $('#trs'+id).show();
+    }
+  
+  });
+}
+
+
+// Confirme suppression d'une personne
+function confirmeSuppressionPersonne(id, nom, prenom){
+  
+  let lien = "index.php?page=personnes&action=delete&id=" + id + "&nom="+ nom + "&prenom="+ prenom;
+
+  if(confirm("Supprimer " + nom.toUpperCase() + "  " + prenom + " ?")){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
+
 

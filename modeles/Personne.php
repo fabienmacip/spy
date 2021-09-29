@@ -14,8 +14,8 @@ class Personne
     private $secret_code;
     private $nationalite;
     private $type;
-    private $specialites = [];
-
+    //private $specialites;
+    
     // $typeDePersonne = cible, contact ou agent.
     public function afficherPersonne($id, $typeDePersonne)
     {
@@ -87,21 +87,21 @@ class Personne
 
     public function getSpecialites()
     {
-/*        if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT id, intitule
-                    FROM specialite s, agent_specialite a
-                    WHERE a.id_agent = '.$this->id.' AND a.id_specialite = s.id');
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT id_specialite
+                    FROM agent_specialite
+                    WHERE id_agent = '.$this->id.'');
         }
-     
         $specialites = [];
-        while ($specialite = $stmt->fetch()) {
-            $specialites[] = $specialite;
+        
+        while ($spe = $stmt->fetch()) {
+            $specialites[] = $spe[0];
+            
         }
+        //var_dump($specialites);        
+        return $specialites;
 
-        
-        $specialites = $stmt->fetch()[0];
-        
-        return $this->specialites;*/
+
     }
 
     public function getPaysNom()

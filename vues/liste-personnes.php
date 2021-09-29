@@ -66,7 +66,7 @@ ob_start();
               ?>  
             </select>
         </div>
-        <div id="typeDePersonne" onclick=afficheSpecialites()>
+        <div id="typeDePersonne1" onclick=afficheSpecialites(1)>
             <label>Type</label>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="type" id="agent" value="agent" checked>
@@ -88,7 +88,7 @@ ob_start();
             </div>
         </div>
 
-        <div id="listeSpecialites">
+        <div id="listeSpecialites1">
         <label>Sp&eacute;cialit&eacute;s</label><br/>
         <?php foreach ((array) $listeSpecialites->lister() as $uneSpecialite) : ?>
                 <div class="form-check form-check-inline">
@@ -150,7 +150,7 @@ ob_start();
                         $ligneSpecialites = substr($ligneSpecialites,0,-2).".";
                     }
                     $rowSpan = ' rowspan="2"';
-                    $ligneSpecialites = '<tr><td colspan="7" class="text-start"><b>Sp&eacute;cialit&eacute;s :</b> '.$ligneSpecialites.'</td></td>';
+                    $ligneSpecialites = '<tr id="trs'.$personne->getId().'"><td colspan="7" class="text-start"><b>Sp&eacute;cialit&eacute;s :</b> '.$ligneSpecialites.'</td></td>';
                    } else { 
                     $rowSpan = ''; 
                     $ligneSpecialites = '';
@@ -180,7 +180,10 @@ ob_start();
                       </td>                                                            
                       <td <?= $rowSpan ?>>
                           <button type="button" id="updatePersonne<?= $personne->getId() ?>" class="updatePersonne btn-primary" 
-                                  onclick=displayUpdatePersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".str_replace(" ","&nbsp;",$personne->getPrenom())."','".$personne->getDob()."','".str_replace(" ","&nbsp;",$personne->getSecretCode())."','".$personne->getNationalite()."','".str_replace(" ","&nbsp;",$personne->getType())."'" ?>)
+                                  onclick=displayUpdatePersonne(<?php echo $personne->getId().",'".str_replace(" ","&nbsp;",$personne->getNom())."','".
+                                  str_replace(" ","&nbsp;",$personne->getPrenom())."','".$personne->getDob()."','".
+                                  str_replace(" ","&nbsp;",$personne->getSecretCode())."','".$personne->getNationalite()."','".
+                                  str_replace(" ","&nbsp;",$personne->getType())."','".implode(",",$personne->getSpecialites())."'"?>)
                           >
                           Modifier
                           </button>
