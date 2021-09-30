@@ -131,8 +131,32 @@ $controleur->deletePersonne($_GET['id'],$_GET['nom'],$_GET['prenom']);
     
    
 // MISSIONS - CRUD
-//} elseif (isset($_GET['page']) && 'missions' === $_GET['page']) {
-//    $controleur->listerMissions();
+// MISSIONS - CREATE
+} elseif (isset($_POST['page']) && 'missions' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] 
+&& isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['nom_de_code']) && isset($_POST['pays']) && isset($_POST['specialite']) 
+&& isset($_POST['type_de_mission']) && isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['statut']) 
+&& isset($_POST['planques']) && isset($_POST['personnes'])) {
+
+        $controleur->createMission($_POST['titre'], $_POST['description'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
+        $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut'], $_POST['planques'], $_POST['personnes']);
+
+// MISSIONS - UPDATE
+} elseif (isset($_POST['page']) && 'missions' === $_POST['page'] && isset($_POST['action']) && 'update' === $_POST['action'] && isset($_POST['idMissionToUpdate'])
+&& isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['nom_de_code']) && isset($_POST['pays']) && isset($_POST['specialite']) 
+&& isset($_POST['type_de_mission']) && isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['statut']) 
+&& isset($_POST['planques']) && isset($_POST['personnes'])) {
+
+
+        $controleur->updateMission($_POST['idMissionToUpdate'], $_POST['titre'], $_POST['description'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
+        $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut'], $_POST['planques'], $_POST['personnes']);
+
+// MISSIONS - DELETE
+} elseif (isset($_GET['page']) && 'missions' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] 
+&& isset($_GET['id']) && isset($_GET['titre']) && isset($_GET['nom_de_code'])) {
+$controleur->deleteMission($_GET['id'],$_GET['titre'],$_GET['nom_de_code']);
+
+// MISSIONS - READ
 } else {
     $controleur->afficherMissions();
 }
+

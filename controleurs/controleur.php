@@ -4,7 +4,7 @@ class Controleur {
     public function afficherMissions()
     {
         $missions = new Missions();
-        $missions = $missions->listerMissions();
+        $missions = $missions->lister();
         require_once('vues/liste-missions.php');
     }
 
@@ -210,7 +210,7 @@ class Controleur {
 
 
 // MISSIONS - CRUD
-
+    
     public function listerMissions()
     {
         $missions = new Missions();
@@ -218,35 +218,28 @@ class Controleur {
         require_once('vues/liste-missions.php');
     }
 
-
-
-
-
-
-    // METHODES EXEMPLES
-
-    public function afficherPhoto()
+    public function createMission($titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques = [], $personnes = [])
     {
-        $photo = new Photo();
-        $serie = new Serie();
-        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-            $photo = $photo->afficherPhoto($_GET['id']);
-        }
-        if (isset($photo) && !is_null($photo->getSerieid())) {
-            $serie = $serie->afficherSerie($photo->getSerieid());
-        }
-        require_once('vues/affiche-photo.php');
+        $missions = new Missions();
+        $missionToCreate = $missions->create($titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques, $personnes);
+        $missions = $missions->lister();
+        require_once('vues/liste-missions.php');
     }
 
-    public function afficherMentions()
+    public function updateMission($id, $titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques = [], $personnes = [])
     {
-        require_once('vues/affiche-mentions.php');
+        $missions = new Missions();
+        $missionToUpdate = $missions->update($id, $titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques, $personnes);
+        $missions = $missions->lister();
+        require_once('vues/liste-missions.php');
     }
 
-    public function listerSeries()
+    public function deleteMission($id,$nom,$prenom)
     {
-        $series = new Series();
-        $series = $series->listerSeries();
-        require_once('vues/liste-series.php');
+        $missions = new Missions();
+        $missionToDelete = $missions->delete($id, $nom, $prenom);
+        $missions = $missions->lister();
+        require_once('vues/liste-missions.php');
     }
+
 }
