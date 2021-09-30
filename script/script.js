@@ -233,9 +233,9 @@ function alertMe() {
 }
 
 // Vérifier s'il y a au moins une spécialité
-function verifUneSpecialite() {
+function verifUneSpecialite(numDiv = 1) {
   $envoyer = false;
-  $('#listeSpecialites input[type=checkbox]').each(function () {
+  $('#listeSpecialites'+numDiv+' input[type=checkbox]').each(function () {
     if($(this).prop("checked") == true) {
       $envoyer = true;      
     } 
@@ -266,7 +266,7 @@ function afficheSpecialites(numDiv = 1) {
   if($('#typeDePersonne'+numDiv+' #agent').prop("checked") == false) {
     $('#btn-create-personne').prop('disabled',false);
   } else {
-    verifUneSpecialite();
+    verifUneSpecialite(numDiv);
   }
 }
 // ####################  PERSONNE ####################
@@ -289,28 +289,25 @@ function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type, sp
 
   // SPECIALITES
   let selectSpecialites = "";
-  // Seulement si la personne est un agent
-  if(type === 'agent') {
-    selectSpecialites = $('#listeSpecialites1').prop('outerHTML');
-    // On enlève les cases sélectionnées car on ne sait pas lesquelles sont déjà sélectionnées
-    selectSpecialites = selectSpecialites.replace("checked","");
-    selectSpecialites = selectSpecialites.replace('id="listeSpecialites1"','id="listeSpecialites2"');
-    // Puis on sélectionne les bonnes spécialités
-    if(specialites !== "") {
-      tableauDesSpecialites = specialites.split(",");
-      tableauDesSpecialites.forEach(element => {
-        selectSpecialites = selectSpecialites.replace("value=\""+element.toString()+"\"","value=\""+element.toString()+"\" checked");
-      });
-    }
-
-    // Si AGENT, il faut aussi modifier l'id du sélecteur de TYPE
-    selectType = selectType.replace('id="typeDePersonne1"','id="typeDePersonne2"');
-    selectType = selectType.replace('afficheSpecialites(1)','afficheSpecialites(2)');
-
-  } // FIN du IF type === agent
-
-
-  // FORMULAIRE de MODIFICATION d'une PERSONNE
+  selectSpecialites = $('#listeSpecialites1').prop('outerHTML');
+  // On enlève les cases sélectionnées car on ne sait pas lesquelles sont déjà sélectionnées
+  selectSpecialites = selectSpecialites.replace("checked","");
+  selectSpecialites = selectSpecialites.replace('id="listeSpecialites1"','id="listeSpecialites2"');
+  // Puis on sélectionne les bonnes spécialités
+  if(specialites !== "") {
+    tableauDesSpecialites = specialites.split(",");
+    tableauDesSpecialites.forEach(element => {
+      selectSpecialites = selectSpecialites.replace("value=\""+element.toString()+"\"","value=\""+element.toString()+"\" checked");
+    });
+  }
+  selectSpecialites = selectSpecialites.replaceAll("verifUneSpecialite(1)","verifUneSpecialite(2)");
+  
+  // Si AGENT, il faut aussi modifier l'id du sélecteur de TYPE
+  selectType = selectType.replace('id="typeDePersonne1"','id="typeDePersonne2"');
+  selectType = selectType.replace('afficheSpecialites(1)','afficheSpecialites(2)');
+  
+  
+// FORMULAIRE de MODIFICATION d'une PERSONNE
 // let updateForm = selectSpecialites;
    let updateForm = '<form method="post" action="index.php" class="text-start">' + 
                 '<div class="form-group">' +
@@ -335,6 +332,9 @@ function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type, sp
   
   if (type === 'agent') {
     $('#trs'+id).hide();
+    $('#listeSpecialites2').show();
+  } else {
+    $('#listeSpecialites2').hide();
   }
 
 

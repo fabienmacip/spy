@@ -115,7 +115,12 @@ $controleur->deletePlanque($_GET['id'],$_GET['code'],$_GET['ville']);
 // PERSONNES - UPDATE
 } elseif (isset($_POST['page']) && 'personnes' === $_POST['page'] && isset($_POST['action']) && 'update' === $_POST['action'] && isset($_POST['idPersonneToUpdate'])
 && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['dob']) && isset($_POST['secret_code']) && isset($_POST['pays']) && isset($_POST['type'])) {
-$controleur->updatePersonne($_POST['idPersonneToUpdate'],$_POST['nom'], $_POST['prenom'], $_POST['dob'], $_POST['secret_code'], $_POST['pays'], $_POST['type']);
+    if(isset($_POST['specialite'])) {
+        $controleur->updatePersonne($_POST['idPersonneToUpdate'],$_POST['nom'], $_POST['prenom'], $_POST['dob'], $_POST['secret_code'], $_POST['pays'], $_POST['type'], $_POST['specialite']);
+    }
+    else {
+        $controleur->updatePersonne($_POST['idPersonneToUpdate'],$_POST['nom'], $_POST['prenom'], $_POST['dob'], $_POST['secret_code'], $_POST['pays'], $_POST['type']);
+    }    
 // PERSONNES - DELETE
 } elseif (isset($_GET['page']) && 'personnes' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] 
 && isset($_GET['id']) && isset($_GET['nom']) && isset($_GET['prenom'])) {

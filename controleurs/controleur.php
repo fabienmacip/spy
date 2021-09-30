@@ -192,10 +192,10 @@ class Controleur {
         require_once('vues/liste-personnes.php');
     }
 
-    public function updatePersonne($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type)
+    public function updatePersonne($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type, $specialites = [])
     {
         $personnes = new Personnes();
-        $personneToUpdate = $personnes->update($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type);
+        $personneToUpdate = $personnes->update($id,$nom, $prenom, $dob, $secret_code, $nationalite, $type, $specialites);
         $personnes = $personnes->lister();
         require_once('vues/liste-personnes.php');
     }

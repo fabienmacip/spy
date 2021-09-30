@@ -92,7 +92,7 @@ ob_start();
         <label>Sp&eacute;cialit&eacute;s</label><br/>
         <?php foreach ((array) $listeSpecialites->lister() as $uneSpecialite) : ?>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="specialite[]" value="<?= $uneSpecialite->getId() ?>" id="spe<?= $uneSpecialite->getId() ?>" onclick=verifUneSpecialite()>
+                    <input class="form-check-input" type="checkbox" name="specialite[]" value="<?= $uneSpecialite->getId() ?>" id="spe<?= $uneSpecialite->getId() ?>" onclick=verifUneSpecialite(1)>
                     <label class="form-check-label" for="spe<?php echo $uneSpecialite->getId(); ?>">
                         <?php echo $uneSpecialite->getIntitule(); ?>
                     </label>

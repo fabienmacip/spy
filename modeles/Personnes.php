@@ -80,13 +80,13 @@ class Personnes
                     // Requête mysql pour insérer des données
                     $sql = "INSERT INTO agent_specialite (id_agent, id_specialite) VALUES (:id_agent, :id_specialite)";
                     $res = $this->pdo->prepare($sql);
-                    $exec = $res->execute(array(":id_agent"=>$id_agent, ":id_specialite"=>$spe[0]));
+                    $exec = $res->execute(array(":id_agent"=>$id_agent, ":id_specialite"=>$spe));
                     if($exec){
                         //$tupleCreated .= "<br/>La spécialité ".$spe[0]." a bien été ajoutée.";
                     }
                 }
                 catch(Exception $e) {
-                    $tupleCreated .= "La spécialité ".$spe[0]."n'a pas pu être ajoutée.<br/><br/>".$e;
+                    $tupleCreated .= "La spécialité ".$spe."n'a pas pu être ajoutée.<br/><br/>".$e;
                 }
                 endforeach;
             }
@@ -96,7 +96,8 @@ class Personnes
     }
 
     // UPDATE
-    public function update($id, $nom, $prenom, $dob, $secret_code, $nationalite, $type) {
+    public function update($id, $nom, $prenom, $dob, $secret_code, $nationalite, $type, $specialites = []) {
+
         if (!is_null($this->pdo)) {
             try {
                 // Requête mysql pour insérer des données
@@ -110,7 +111,36 @@ class Personnes
             catch(Exception $e) {
                 $tupleUpdated = "La personne <b><u>".$nom."</u> ".$prenom."</b> n'a pas pu être modifiée.<br/><br/>".$e;
             }
+            // Gestion des spécialités si c'est un agent.
+            if($type === 'agent'){
+                
+                // D'abord, on supprime toutes les spécialités de cet agent
+                try {
+                    $this->pdo->query('DELETE FROM agent_specialite WHERE id_agent = '.$id.'');
+                }
+                catch(Exception $e) {
+
+                }
+
+                foreach($specialites as $spe):
+                try {
+                    
+                    // Requête mysql pour insérer des données
+                    $sql = "INSERT INTO agent_specialite (id_agent, id_specialite) VALUES (:id_agent, :id_specialite)";
+                    $res = $this->pdo->prepare($sql);
+                    $exec = $res->execute(array(":id_agent"=>$id, ":id_specialite"=>$spe));
+                    if($exec){
+                        //$tupleCreated .= "<br/>La spécialité ".$spe[0]." a bien été ajoutée.";
+                    }
+                }
+                catch(Exception $e) {
+                    $tupleUpdated .= "La spécialité ".$spe[0]."n'a pas pu être ajoutée.<br/><br/>".$e;
+                }
+                endforeach;
+            }
         }
+        
+
         
         return $tupleUpdated;
     }
