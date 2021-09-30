@@ -88,6 +88,7 @@ ob_start();
             </div>
         </div>
 
+        <!-- Cases à cocher SPECIALITES -->
         <div id="listeSpecialites1">
         <label>Sp&eacute;cialit&eacute;s</label><br/>
         <?php foreach ((array) $listeSpecialites->lister() as $uneSpecialite) : ?>
@@ -99,6 +100,7 @@ ob_start();
                 </div>
         <?php endforeach; ?>
         </div>
+        <!-- FIN Cases à cocher -->
 
         <input type="hidden" name="action" id="action" value="create">
         <input type="hidden" name="page" id="page" value="personnes" >

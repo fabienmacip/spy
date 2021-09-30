@@ -1,11 +1,123 @@
+//  ##############  MISSION - 1 ###################
+
+// Mise à jour des cases à cocher pour le choix des planques, qui
+// soient dans le même pays que la mission.
+function majListePlanquesContacts(pays, listePlanques = [], listeContacts = []) {
+  // Pour chaque checkbox, on vérifie s'il faut l'afficher ou pas.
+
+  listePlanques.forEach(function(item){
+    // Si le pays est différent de sonPays
+    // Alors on n'affiche pas la div et on désactive la checkbox
+    if($('#sonPays'+item).val() != pays) {
+        $('#pl'+item).prop('disabled',true);
+        $('#unePlanque'+item).hide();
+      } else {
+        $('#pl'+item).prop('disabled',false);
+        $('#unePlanque'+item).show();
+      }
+    });
+
+    listeContacts.forEach(function(item){
+      // Si le pays est différent de paysContact
+      // Alors on n'affiche pas la div et on désactive la checkbox
+      if($('#paysContact'+item).val() != pays) {
+          $('#contact'+item).prop('disabled',true);
+          $('#unContact'+item).hide();
+        } else {
+          $('#contact'+item).prop('disabled',false);
+          $('#unContact'+item).show();
+        }
+      });
+}
+
+function majListeAgents(listeCibles = [], listeAgents = []) {
+      // Quand on clique sur une cible, on met à jour la liste d'agents possibles,
+      // qui ne doivent pas être de la même nationalité que les cibles.
+      
+      // 1. Remplir un tableau des pays des cibles, en évitant les doublons.
+      let lesPaysDesCibles = [];
+      listeCibles.forEach(function(item){
+        if($('#cible'+item).is(':checked')  && lesPaysDesCibles.indexOf($('#paysCible'+item).val()) < 0) {
+          // On ajoute le pays
+          lesPaysDesCibles.push($('#paysCible'+item).val());
+          console.log("111");
+        }
+      })// FIN For Each listeCibles
+      // 2. Afficher/activer ou masquer/désactiver les AGENTS
+      listeAgents.forEach(function(item) {
+        // SI le pays de l'agent ne fait pas partie des pays des cibles, ALORS on affiche/active l'agent.
+        if(lesPaysDesCibles.indexOf($('#paysAgent'+item).val()) < 0) {
+          $('#unAgent'+item).show();
+          $('#agent'+item).prop('disabled',false);
+          console.log("SHOW");
+        } else {
+          $('#unAgent'+item).hide();
+          $('#agent'+item).prop('disabled',true);
+          console.log("HIDE");
+        }
+      }) // FIN du forEach listeAgents
+}
+
+// ##################################################################################
+
 // Fin du chargement de la page.
 $(document).ready(() => {
-  // Notre code utilisant jQuery
-//  alert('page chargée, jQuery ok');
-/* console.log("coucou");
-let listePays = document.getElementById(listePays);
-console.log(listePays.value); */
-})
+let pageMission ='';
+  if (pageMission = document.getElementById('form-create-mission'))  {
+      // ########### PLANQUES ##############
+      // On affecte la liste des planques dans une variable en JS
+      let listePlanques = [];
+      $('#listePlanques div input[type=checkbox]').each(function(){
+        listePlanques.push(this.value);
+      });
+
+      // ########### AGENTS #############
+
+      // On affecte la liste des agents dans une variable en JS
+      let listeAgents = [];
+      $('#listeAgents div input[type=checkbox]').each(function(){
+        listeAgents.push([this.value,$('#paysAgent'+this.value).val()]);
+      });
+      
+
+      // ########### CIBLES ##############
+      // On affecte la liste des cibles dans une variable en JS
+      let listeCibles = [];
+      $('#listeCibles div input[type=checkbox]').each(function(){
+        listeCibles.push(this.value);
+      });  
+
+      // ########### CONTACTS ##############
+      // On affecte la liste des cibles dans une variable en JS
+      let listeContacts = [];
+      $('#listeContacts div input[type=checkbox]').each(function(){
+        listeContacts.push(this.value);
+      });  
+
+      // ####### PLANQUES et CONTACTS ##########
+      // Masquer toutes les planques et tous les contacts qui ne sont pas du pays.
+      majListePlanquesContacts($('#form-create-mission div #pays').val(), listePlanques, listeContacts);
+
+      // A chaque changement de sélection du pays, masquer toutes les "planques et contacts" qui ne sont pas du pays.
+      $('#form-create-mission div #pays').on('change', function() {
+        majListePlanquesContacts(this.value, listePlanques, listeContacts);
+      });
+
+      // La liste d'agents contient des tableaux : id_agent et id_pays_de_l_agent
+      $('#form-create-mission #listeCibles div input[type=checkbox]').on('click', function() {
+        //majListeAgents($('#cible'+this.value).val(),$('#paysCible'+this.value).val(), listeAgents);
+        majListeAgents(listeCibles, listeAgents);
+      });
+
+
+
+    } // FIN du IF pageMission
+  
+  
+}) // FIN DU document.READY
+
+//  ##############  MISSION - 2  ###################
+
 
 // ##############  PAYS  ###################
 

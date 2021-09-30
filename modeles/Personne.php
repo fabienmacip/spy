@@ -50,6 +50,26 @@ class Personne
         return $specialites;
     }
 
+    public function listerSpecialitesUneSeuleChaine() {
+        
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT s.id AS id, s.intitule AS specialite
+            FROM personne p, agent_specialite ags, specialite s
+            WHERE p.id = '. $this->id .' AND p.type= "agent" AND p.id = ags.id_agent AND s.id = ags.id_specialite');
+        }
+        $specialites = "";
+        while ($specialite = $stmt->fetch()) {
+            $specialites = $specialites.$specialite[1].", ";
+        }
+        if($specialites !== "") {
+            $specialites = substr($specialites,0,-2).".";
+        }
+
+        //var_dump($specialites);
+        return $specialites;
+    }
+
+
     public function getId()
     {
         return $this->id;

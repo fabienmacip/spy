@@ -5,6 +5,20 @@ $listeSpecialites = new Specialites();
 $listeTypeMissions = new TypeMissions();
 $listePlanques = new Planques();
 $listePersonnes = new Personnes();
+$listeAgents = [];
+$listeCibles = [];
+$listeContacts = [];
+
+// Création de 3 tableaux : AGENTS, CIBLES, CONTACTS
+foreach ((array) $listePersonnes->lister() as $unePersonne) :
+    if($unePersonne->getType() === 'agent') {
+        $listeAgents[] = $unePersonne;
+    } elseif($unePersonne->getType() === 'cible') {
+        $listeCibles[] = $unePersonne;
+    } else {
+        $listeContacts[] = $unePersonne;
+    }
+endforeach;
 
 ob_start();
 ?>
@@ -74,8 +88,28 @@ ob_start();
         </div>
 
         <!-- Liste déroulante SPECIALITE -->
+        <div class="form-group">
+            <label class="my-1 mx-2" for="specialite">Sp&eacute;cialit&eacute;</label>
+              <select class="custom-select my-1 mr-sm-2" id="specialite" name="specialite">
+              <?php
+              foreach ($listeSpecialites->listerSpecialitesJson() as $specialite): 
+                echo "<option value=\"".$specialite[0]."\">".$specialite[1]."</option>";
+              endforeach;              
+              ?>  
+            </select>
+        </div>
 
         <!-- Liste déroulante TYPE DE MISSION -->
+        <div class="form-group">
+            <label class="my-1 mx-2" for="pays">Type de mission</label>
+              <select class="custom-select my-1 mr-sm-2" id="type_de_mission" name="type_de_mission">
+              <?php
+              foreach ($listeTypeMissions->listerTypeMissionsJson() as $typeMissions): 
+                echo "<option value=\"".$typeMissions[0]."\">".$typeMissions[1]."</option>";
+              endforeach;              
+              ?>  
+            </select>
+        </div>
 
         <!-- Boutons radio STATUT -->
         <div id="statut">
@@ -111,7 +145,8 @@ ob_start();
         <div id="listePlanques">
         <label>Planques</label><br/>
         <?php foreach ((array) $listePlanques->lister() as $unePlanque) : ?>
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check-inline unePlanque" id="unePlanque<?= $unePlanque->getId() ?>">
+                    <input type="hidden" name="sonPays" class="sonPays" id="sonPays<?= $unePlanque->getId() ?>" value="<?= $unePlanque->getPays() ?>">
                     <input class="form-check-input" type="checkbox" name="planques[]" value="<?= $unePlanque->getId() ?>" id="pl<?= $unePlanque->getId() ?>">
                     <label class="form-check-label" for="pl<?php echo $unePlanque->getId(); ?>">
                         <?php echo $unePlanque->getCode()." (". $unePlanque->getVille().")"; ?>
@@ -121,14 +156,50 @@ ob_start();
         </div>
 
         <!-- Cases à cocher PERSONNES -->
-            <!-- AGENTS -->
-            <!-- Au moins 1 agent de la spécialité de la mission -->
-
             <!-- CIBLES -->
             <!-- Pas la même nationalité que les agents -->
-            
+            <div id="listeCibles">
+                <label>Cibles</label><br/>
+                <?php foreach ((array) $listeCibles as $uneCible) : ?>
+                        <div class="form-check" id="uneCible<?= $uneCible->getId() ?>">
+                        <input type="hidden" name="paysCible" class="paysCible" id="paysCible<?= $uneCible->getId() ?>" value="<?= $uneCible->getNationalite() ?>">
+                            <input class="form-check-input" type="checkbox" name="personnes[]" value="<?= $uneCible->getId() ?>" id="cible<?= $uneCible->getId() ?>">
+                            <label class="form-check-label" for="cible<?php echo $uneCible->getId(); ?>">
+                                <?php echo $uneCible->getNom()." ".$uneCible->getPrenom()." - ".$uneCible->getSecretCode()." NAT. : ".$uneCible->getPaysNom() ?>
+                            </label>
+                        </div>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- AGENTS -->
+            <!-- Au moins 1 agent de la spécialité de la mission -->
+            <div id="listeAgents">
+                <label>Agents</label><br/>
+                <?php foreach ((array) $listeAgents as $unAgent) : ?>
+                        <div class="form-check" id="unAgent<?= $unAgent->getId() ?>">
+                        <input type="hidden" name="paysAgent" class="paysAgent" id="paysAgent<?= $unAgent->getId() ?>" value="<?= $unAgent->getNationalite() ?>">
+                            <input class="form-check-input" type="checkbox" name="personnes[]" value="<?= $unAgent->getId() ?>" id="agent<?= $unAgent->getId() ?>">
+                            <label class="form-check-label" for="agent<?php echo $unAgent->getId(); ?>">
+                                <?php echo $unAgent->getNom()." ".$unAgent->getPrenom()." - ".$unAgent->getSecretCode()." NAT. : ".$unAgent->getPaysNom()." SPE. : ".$unAgent->listerSpecialitesUneSeuleChaine() ?>
+                            </label>
+                        </div>
+                <?php endforeach; ?>
+            </div>
+
             <!-- CONTACTS -->
             <!-- Nationalité du pays de la mission -->
+            <div id="listeContacts">
+                <label>Contacts</label><br/>
+                <?php foreach ((array) $listeContacts as $unContact) : ?>
+                        <div class="form-check" id="unContact<?= $unContact->getId() ?>">
+                        <input type="hidden" name="paysContact" class="paysContact" id="paysContact<?= $unContact->getId() ?>" value="<?= $unContact->getNationalite() ?>">
+                            <input class="form-check-input" type="checkbox" name="personnes[]" value="<?= $unContact->getId() ?>" id="contact<?= $unContact->getId() ?>">
+                            <label class="form-check-label" for="contact<?php echo $unContact->getId(); ?>">
+                                <?php echo $unContact->getNom()." ".$unContact->getPrenom()." - ".$unContact->getSecretCode()." NAT. : ".$unContact->getPaysNom() ?>
+                            </label>
+                        </div>
+                <?php endforeach; ?>
+            </div>
 
 
         <!-- Valeurs cachées -->

@@ -18,6 +18,21 @@ class Specialites
         return $liste;
     }
 
+    // READ pour listes déroulantes
+    public function listerSpecialitesJson()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM specialite ORDER BY intitule');
+        }
+        
+        while ($specialite = $stmt->fetchObject('Specialite')) {
+            $specialites[] = [$specialite->getId(), $specialite->getIntitule()];
+        }
+
+        return $specialites;
+    }
+
+
     // CREATE
     public function createSpecialite($nom) {
         if (!is_null($this->pdo)) {

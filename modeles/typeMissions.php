@@ -18,6 +18,21 @@ class TypeMissions
         return $liste;
     }
 
+    // READ pour listes déroulantes
+    public function listerTypeMissionsJson()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM type_de_mission ORDER BY intitule');
+        }
+        
+        while ($typeMission = $stmt->fetchObject('TypeMission')) {
+            $typeMissions[] = [$typeMission->getId(), $typeMission->getIntitule()];
+        }
+
+        return $typeMissions;
+    }
+
+
     // CREATE
     public function create($nom) {
         if (!is_null($this->pdo)) {
