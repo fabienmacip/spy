@@ -25,10 +25,13 @@ $LISTE_PERSONNES = "index.php?page=personnes";
 $LISTE_MISSIONS = "index.php?page=missions";
 $LISTE_ADMINISTRATEURS = "index.php?page=administrateurs"; */
 
+
 $controleur = new Controleur();
 // Par défaut, index.php affiche la liste des missions (voir le ELSE)
-if (isset($_GET['page']) && 'missions' === $_GET['page']) {
+if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action']) &&!isset($_POST['action'])) {
     $controleur->afficherMissions();
+
+    
 // PAYS - CRUD
 // PAYS - CREATE
 } elseif (isset($_POST['page']) && 'payss' === $_POST['page'] && isset($_POST['action']) && 'createPays' === $_POST['action'] && isset($_POST['nom'])) {
@@ -135,8 +138,10 @@ $controleur->deletePersonne($_GET['id'],$_GET['nom'],$_GET['prenom']);
 } elseif (isset($_POST['page']) && 'missions' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] 
 && isset($_POST['titre']) && isset($_POST['description']) && isset($_POST['nom_de_code']) && isset($_POST['pays']) && isset($_POST['specialite']) 
 && isset($_POST['type_de_mission']) && isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['statut']) 
-&& isset($_POST['planques']) && isset($_POST['personnes'])) {
-
+&& isset($_POST['personnes'])) {
+        if(!isset($_POST['planques'])) { $_POST['planques'] = []; }
+        $_POST['description'] = str_replace('\r\n','<br/>',$_POST['description']);
+        var_dump("PASSE");
         $controleur->createMission($_POST['titre'], $_POST['description'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
         $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut'], $_POST['planques'], $_POST['personnes']);
 

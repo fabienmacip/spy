@@ -11,6 +11,13 @@ else:
     <h5 class="card-title">
       MISSION : <?= $mission->getTitre() ?>
     </h5>
+    <div class="text-end">
+      <button type="button" 
+              class="btn-primary" 
+              onclick=confirmeSuppressionMission(<?php echo $mission->getId().",'".str_replace(" ","&nbsp;",$mission->getTitre())."','".str_replace(" ","&nbsp;",$mission->getNomDeCode())."'" ?>)>
+        Supprimer
+      </button>  
+    </div>
     <p class="card-text text-start">
       Description<br/><i><?= $mission->getDescription() ?></i>
     </p>

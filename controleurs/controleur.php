@@ -234,10 +234,10 @@ class Controleur {
         require_once('vues/liste-missions.php');
     }
 
-    public function deleteMission($id,$nom,$prenom)
+    public function deleteMission($id,$titre,$nom_de_code)
     {
         $missions = new Missions();
-        $missionToDelete = $missions->delete($id, $nom, $prenom);
+        $missionToDelete = $missions->delete($id, $titre, $nom_de_code);
         $missions = $missions->lister();
         require_once('vues/liste-missions.php');
     }

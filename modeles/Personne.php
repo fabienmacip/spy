@@ -50,16 +50,17 @@ class Personne
         return $specialites;
     }
 
+    // Retourne la liste des intitulés
     public function listerSpecialitesUneSeuleChaine() {
         
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT s.id AS id, s.intitule AS specialite
+            $stmt = $this->pdo->query('SELECT s.intitule
             FROM personne p, agent_specialite ags, specialite s
             WHERE p.id = '. $this->id .' AND p.type= "agent" AND p.id = ags.id_agent AND s.id = ags.id_specialite');
         }
         $specialites = "";
         while ($specialite = $stmt->fetch()) {
-            $specialites = $specialites.$specialite[1].", ";
+            $specialites = $specialites.$specialite[0].", ";
         }
         if($specialites !== "") {
             $specialites = substr($specialites,0,-2).".";
@@ -68,6 +69,27 @@ class Personne
         //var_dump($specialites);
         return $specialites;
     }
+
+    // Retourne la liste des identfiants des spécialités
+    public function listerSpecialitesUneSeuleChaineId() {
+        
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT s.id
+            FROM personne p, agent_specialite ags, specialite s
+            WHERE p.id = '. $this->id .' AND p.type= "agent" AND p.id = ags.id_agent AND s.id = ags.id_specialite');
+        }
+        $specialites = "";
+        while ($specialite = $stmt->fetch()) {
+            $specialites = $specialites.$specialite[0].",";
+        }
+        if($specialites !== "") {
+            $specialites = substr($specialites,0,-1);
+        }
+
+        //var_dump($specialites);
+        return $specialites;
+    }
+
 
 
     public function getId()

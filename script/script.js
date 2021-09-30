@@ -40,7 +40,7 @@ function majListeAgents(listeCibles = [], listeAgents = []) {
         if($('#cible'+item).is(':checked')  && lesPaysDesCibles.indexOf($('#paysCible'+item).val()) < 0) {
           // On ajoute le pays
           lesPaysDesCibles.push($('#paysCible'+item).val());
-          console.log("111");
+          
         }
       })// FIN For Each listeCibles
       // 2. Afficher/activer ou masquer/désactiver les AGENTS
@@ -49,16 +49,52 @@ function majListeAgents(listeCibles = [], listeAgents = []) {
         if(lesPaysDesCibles.indexOf($('#paysAgent'+item).val()) < 0) {
           $('#unAgent'+item).show();
           $('#agent'+item).prop('disabled',false);
-          console.log("SHOW");
         } else {
           $('#unAgent'+item).hide();
           $('#agent'+item).prop('disabled',true);
-          console.log("HIDE");
         }
       }) // FIN du forEach listeAgents
 }
 
-// ##################################################################################
+function majSpecialiteMission(specialite,listeSpecialitesDesAgents = []) {
+  // On ajoute la classe aumoinsun aux agents dont la spécialité correspond à la mission
+  // On met ces agents en premier dans la liste des agents
+  listeAgents1 = '';
+  listeAgents2 = '';
+  listeSpecialitesDesAgents.forEach(function(item) {
+    $('#unAgent'+item[0]).removeClass("aumoinsun");
+    if(item[1].indexOf(specialite) < 0){
+      listeAgents2 += $('#unAgent'+item[0]).prop('outerHTML');
+    } else {
+      $('#unAgent'+item[0]).addClass("aumoinsun");
+      listeAgents1 += $('#unAgent'+item[0]).prop('outerHTML');
+    }
+  });
+
+  $('#listeAgents').replaceWith("<div id=\"listeAgents\"><label>Agents</label><br/>" + listeAgents1 + listeAgents2 + "</div>");
+  $('#form-create-mission #listeAgents div input[type=checkbox]').on('click', function() {
+    verifAuMoinsUnAgentSpe();
+  });
+}
+
+
+// Si au moins un agent de la bonne spécialité est sélectionné, on active le bouton d'envoi
+// du formulaire.
+function verifAuMoinsUnAgentSpe() {
+  let ok = false;
+  $('#form-create-mission #listeAgents .aumoinsun input[type=checkbox]').each(function() {
+    
+    if($(this).is(':checked')) {
+      ok = true;
+    } 
+  });
+
+  $('#btn-create-mission').prop('disabled',!ok);
+
+}
+
+
+// ########################            CHARGEMENT PAGE OK              #############################
 
 // Fin du chargement de la page.
 $(document).ready(() => {
@@ -75,10 +111,23 @@ let pageMission ='';
 
       // On affecte la liste des agents dans une variable en JS
       let listeAgents = [];
+      // On les trie selon la spécialité, afin d'obliger à choisir au moins un agent de la même
+      // spécialité que la mission
+      let listeSpecialitesDesAgents = [];
       $('#listeAgents div input[type=checkbox]').each(function(){
+        // Génération de la liste des agents
         listeAgents.push([this.value,$('#paysAgent'+this.value).val()]);
+        // Génération de liste des spécialités de chaque agent
+        listeSpecialitesDesAgents.push([this.value,$('#specialitesAgent'+this.value).val()]);
       });
-      
+
+      majSpecialiteMission($('#form-create-mission div #specialite').val(),listeSpecialitesDesAgents);
+
+      // ############# SPECIALITES #############
+      $('#form-create-mission div #specialite').on('change', function() {
+        majSpecialiteMission(this.value, listeSpecialitesDesAgents);
+      });
+
 
       // ########### CIBLES ##############
       // On affecte la liste des cibles dans une variable en JS
@@ -109,8 +158,13 @@ let pageMission ='';
         majListeAgents(listeCibles, listeAgents);
       });
 
-
-
+      // Activer le bouton de validation du formulaire de création d'agent quand on a choisi au moins
+      // un agent de la bonne spécialité
+      $('#form-create-mission #listeAgents div input[type=checkbox]').on('click', function() {
+        verifAuMoinsUnAgentSpe();
+      });
+      
+      
     } // FIN du IF pageMission
   
   
@@ -477,4 +531,16 @@ function confirmeSuppressionPersonne(id, nom, prenom){
   }
 }
 
+
+// ###################### MISSION #############################
+// Confirme suppression d'une mission
+function confirmeSuppressionMission(id, titre, nom_de_code){
+  
+  let lien = "index.php?page=missions&action=delete&id=" + id + "&titre="+ titre + "&nom_de_code="+ nom_de_code;
+
+  if(confirm("Supprimer la mission " + titre.toUpperCase() + ", nom de code << " + nom_de_code + " >> ?" + lien)){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
 

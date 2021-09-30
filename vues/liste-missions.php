@@ -68,6 +68,14 @@ ob_start();
         </div>
 
         <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" id="description" name="description" maxlength="800" placeholder="Détails de la mission" rows="6" aria-describedby="descriptionHelpBlock"></textarea>
+            <small id="descriptionHelpBlock" class="form-text text-muted">
+                Maximum 800 caract&egrave;res.
+            </small>
+        </div>
+
+        <div class="form-group">
             <label for="date_debut">Date d&eacute;but</label>
             <input type="date" name="date_debut" id="date_debut" placeholder="Date début" min="2021-09-29" max="2050-12-31" class="form-control">
             <label for="date_fin">Date fin</label>
@@ -178,6 +186,7 @@ ob_start();
                 <?php foreach ((array) $listeAgents as $unAgent) : ?>
                         <div class="form-check" id="unAgent<?= $unAgent->getId() ?>">
                         <input type="hidden" name="paysAgent" class="paysAgent" id="paysAgent<?= $unAgent->getId() ?>" value="<?= $unAgent->getNationalite() ?>">
+                        <input type="hidden" name="specialitesAgent" class="specialitesAgent" id="specialitesAgent<?= $unAgent->getId() ?>" value="<?= $unAgent->listerSpecialitesUneSeuleChaineId() ?>">
                             <input class="form-check-input" type="checkbox" name="personnes[]" value="<?= $unAgent->getId() ?>" id="agent<?= $unAgent->getId() ?>">
                             <label class="form-check-label" for="agent<?php echo $unAgent->getId(); ?>">
                                 <?php echo $unAgent->getNom()." ".$unAgent->getPrenom()." - ".$unAgent->getSecretCode()." NAT. : ".$unAgent->getPaysNom()." SPE. : ".$unAgent->listerSpecialitesUneSeuleChaine() ?>
@@ -208,7 +217,7 @@ ob_start();
 
         <div class="form-group">
             <button type="reset" class="btn btn-primary">Reset</button>
-            <button type="submit" id="btn-create-personne" class="btn btn-primary" disabled="true">Envoyer</button>
+            <button type="submit" id="btn-create-mission" class="btn btn-primary" disabled="true">Envoyer</button>
         </div>
     </form>
 
