@@ -94,11 +94,31 @@ class Missions
 
 
     // UPDATE
-    public function update($id, $titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques = [], $personnes = []) {
-        return null;
+    public function update($id, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut) {
+        if (!is_null($this->pdo)) {
+            try {
+                // Requête mysql pour insérer des données
+                $sql = "UPDATE mission SET nom_de_code = (:nom_de_code), pays = (:pays), specialite = (:specialite), type_de_mission = (:type_de_mission), date_debut = (:date_debut), date_fin = (:date_fin), statut = (:statut)  WHERE id = (:id)";
+                $res = $this->pdo->prepare($sql);
+                $exec = $res->execute(array(":nom_de_code"=>$nom_de_code, ":pays"=>$pays, ":specialite"=>$specialite, ":type_de_mission"=>$type_de_mission, ":date_debut"=>$date_debut, ":date_fin"=>$date_fin, ":statut"=>$statut, ":id"=>$id));
+                if($exec){
+                    $tupleUpdated = "Mission modifiée.";
+                }
+            }
+            catch(Exception $e) {
+                $tupleUpdated = "La mission n'a pas pu être modifiée.<br/><br/>".$e;
+            }
+        }
+
+        return $tupleUpdated;
+
     }
 
-
+    // UPDATE
+/*     public function update($id, $titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques = [], $personnes = []) {
+        return null;
+    }
+ */
     // DELETE
     //Supprime 1 mission de la BDD.
     public function delete($id, $titre, $nom_de_code)

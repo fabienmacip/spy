@@ -98,8 +98,16 @@ function verifAuMoinsUnAgentSpe() {
 
 // Fin du chargement de la page.
 $(document).ready(() => {
-let pageMission ='';
-  if (pageMission = document.getElementById('form-create-mission'))  {
+
+$('#form-update-mission').hide();
+
+
+
+
+// CI-APRES, code à supprimer si inutile
+
+  let pageMission ='';
+  if (pageMission === 'toto')  {
       // ########### PLANQUES ##############
       // On affecte la liste des planques dans une variable en JS
       let listePlanques = [];
@@ -171,6 +179,65 @@ let pageMission ='';
 }) // FIN DU document.READY
 
 //  ##############  MISSION - 2  ###################
+
+// Confirme suppression d'une mission
+function confirmeSuppressionMission(id, titre, nom_de_code){
+  
+  let lien = "index.php?page=missions&action=delete&id=" + id + "&titre="+ titre + "&nom_de_code="+ nom_de_code;
+
+  if(confirm("Supprimer la mission " + titre.toUpperCase() + ", nom de code << " + nom_de_code + " >> ?" + lien)){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
+
+// Modifier les données générales
+function displayUpdateMission() {
+
+  // On masque la carte et on affiche le formulaire de modification
+  $('#carte-mission').hide();
+  $('#form-update-mission').show();
+
+  // On frise tous les autres boutons "Modifier", "Ajouter", "Supprimer"
+  $('.lesboutons').prop('disabled',true);
+
+
+  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
+  $( "#annuler" ).click(function() {
+    $('#form-update-mission').hide();
+    $('#carte-mission').show();
+    $('.lesboutons').prop('disabled',false);
+  });
+
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ##############  PAYS  ###################
@@ -533,18 +600,3 @@ function confirmeSuppressionPersonne(id, nom, prenom){
 
 
 // ###################### MISSION #############################
-// Confirme suppression d'une mission
-function confirmeSuppressionMission(id, titre, nom_de_code){
-  
-  let lien = "index.php?page=missions&action=delete&id=" + id + "&titre="+ titre + "&nom_de_code="+ nom_de_code;
-
-  if(confirm("Supprimer la mission " + titre.toUpperCase() + ", nom de code << " + nom_de_code + " >> ?" + lien)){
-    // Supprimer la ligne dans la BDD
-    window.location.href = lien;
-  }
-}
-
-// Modifier les données générales
-function displayUpdateMission() {
-  let lien = "index.php?page=missions&action=update&module=mission";
-}

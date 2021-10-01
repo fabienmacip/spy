@@ -42,13 +42,6 @@ ob_start();
         }
     ?>
 
-    <?php
-        if(isset($missionToUpdate)) {?>
-        <div class="mission-updated"><?= $missionToUpdate ?></div>
-        <?php
-        }
-    ?>
-
 
 <!-- ######################## DEBUT FORM AJOUT MISSION #################### -->
 

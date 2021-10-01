@@ -1,9 +1,27 @@
 <?php
+$listePays = new Payss();
+$listeSpecialites = new Specialites();
+$listeTypeMissions = new TypeMissions();
+$listePlanques = new Planques();
+$listePersonnes = new Personnes();
+$listeAgents = [];
+$listeCibles = [];
+$listeContacts = [];
+
+$scriptMission = "<script src=\"./script/script-mission.js\"></script>";
+
 $titre = 'Une mission';
 if (is_null($mission)):
     $contenu = "Cette mission n'existe pas.";
 else:
     ob_start();
+?>
+
+<?php
+  if(isset($missionToUpdate)) {?>
+  <div class="mission-updated"><?= $missionToUpdate ?></div>
+  <?php
+  }
 ?>
 
 <div class="card w-75 mx-auto text-center border-0">
@@ -30,6 +48,7 @@ else:
     <div class="col-3">
         <?php
             // DETAILS de la MISSION
+            require_once('form-update-mission.php');
             require_once('carte-de-la-mission.php');
         ?>
     </div>

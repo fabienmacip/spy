@@ -11,9 +11,12 @@ class Mission
     private $titre;
     private $description;
 	private $nom_de_code;
-	private $pays;
+    private $id_pays;
+    private $pays;
 	private $specialite;
+    private $id_specialite;
 	private $type_de_mission;
+    private $id_type_de_mission;
 	private $date_debut;
 	private $date_fin;
 	private $statut;
@@ -29,7 +32,8 @@ class Mission
         if (!is_null($this->pdo)) {
             //$stmt = $this->pdo->prepare('SELECT * FROM mission WHERE id = ?');
             $stmt = $this->pdo->prepare('SELECT m.id AS id, m.titre AS titre, m.description AS description, 
-            m.nom_de_code AS nom_de_code, p.nom AS pays, s.intitule AS specialite, t.intitule AS type_de_mission, 
+            m.nom_de_code AS nom_de_code, p.id AS id_pays, p.nom AS pays, s.id AS id_specialite, 
+            s.intitule AS specialite, t.id AS id_type_de_mission, t.intitule AS type_de_mission, 
             m.date_debut AS date_debut, m.date_fin AS date_fin, m.statut AS statut
             FROM mission AS m, type_de_mission AS t, pays AS p, specialite AS s
             WHERE m.pays = p.id AND m.type_de_mission = t.id AND m.specialite = s.id AND m.id = ?');
@@ -65,16 +69,31 @@ class Mission
         return $this->nom_de_code;
     }
 	
-	public function getPays()
+	public function getIdPays()
+    {
+        return $this->id_pays;
+    }
+
+    public function getPays()
     {
         return $this->pays;
     }
 	
+	public function getIdSpecialite()
+    {
+        return $this->id_specialite;
+    }
+    
 	public function getSpecialite()
     {
         return $this->specialite;
     }
 	
+	public function getIdTypeDeMission()
+    {
+        return $this->id_type_de_mission;
+    }
+
 	public function getTypeDeMission()
     {
         return $this->type_de_mission;
@@ -94,5 +113,7 @@ class Mission
     {
         return $this->statut;
     }
-	
+
+
+
 }

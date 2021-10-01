@@ -141,7 +141,7 @@ $controleur->deletePersonne($_GET['id'],$_GET['nom'],$_GET['prenom']);
 && isset($_POST['personnes'])) {
         if(!isset($_POST['planques'])) { $_POST['planques'] = []; }
         $_POST['description'] = str_replace('\r\n','<br/>',$_POST['description']);
-        var_dump("PASSE");
+        //var_dump("PASSE");
         $controleur->createMission($_POST['titre'], $_POST['description'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
         $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut'], $_POST['planques'], $_POST['personnes']);
 

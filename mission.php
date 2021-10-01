@@ -6,17 +6,45 @@ $mission = null;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $missions = $missions->listerMission($_GET['id']);
 } */
-require_once('modeles/modele.php');
-require_once('modeles/mission.php');
-require_once('modeles/planque.php');
-require_once('modeles/planques.php');
-require_once('modeles/personne.php');
-require_once('modeles/personnes.php');
+require_once('controleurs/ControleurMission.php');
+require_once('modeles/Modele.php');
+require_once('modeles/Mission.php');
+require_once('modeles/Missions.php');
+require_once('modeles/Pays.php');
+require_once('modeles/Payss.php');
+require_once('modeles/Specialite.php');
+require_once('modeles/Specialites.php');
+require_once('modeles/TypeMission.php');
+require_once('modeles/TypeMissions.php');
+require_once('modeles/Administrateur.php');
+require_once('modeles/Administrateurs.php');
+require_once('modeles/Planque.php');
+require_once('modeles/Planques.php');
+require_once('modeles/Personne.php');
+require_once('modeles/Personnes.php');
 
+$controleurMission = new ControleurMission();
 $mission = new Mission();
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+
+// Par défaut, mission.php affiche la mission sans formulaire
+if (isset($_POST['page']) && 'missions' === $_POST['page'] &&  isset($_POST['action']) && 'update' === $_POST['action']) {
+    // UPDATE MISSION - Données générales
+    if(isset($_POST['module']) && 'mission' === $_POST['module']) {
+        
+        $controleurMission->updateMission($_POST['id'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
+        $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut']);
+        $mission = $mission->afficherMission($_POST['id']);
+    }
+    //var_dump($mission);
+} else if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $mission = $mission->afficherMission($_GET['id']);
+} else {
+    echo "<div>Cette page ne comporte pas d'identifiant de mission</div>";
 }
+
+// FIN du CONTROLEUR MISSION
+
+
 
 // Pour le moment, affiche 1 planque dont $_GET['id'] est l'ID d'une mission.
 //$planque = new Planque();
@@ -28,23 +56,33 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 $planques = new Planques();
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $planques = $planques->listerPlanquesDUneMission($_GET['id']);
+} else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $planques = $planques->listerPlanquesDUneMission($_POST['id']);
 }
 
 
 $cibles = new Personnes();
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $cibles = $cibles->listerPersonnesDUneMission($_GET['id'], "cible");
+} else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $cibles = $cibles->listerPersonnesDUneMission($_POST['id'], "cible");
 }
+
 
 $contacts = new Personnes();
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $contacts = $contacts->listerPersonnesDUneMission($_GET['id'], "contact");
+} else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $contacts = $contacts->listerPersonnesDUneMission($_POST['id'], "contact");
 }
 
 $agents = new Personnes();
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $agents = $agents->listerPersonnesDUneMission($_GET['id'], "agent");
+} else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
+    $agents = $agents->listerPersonnesDUneMission($_POST['id'], "agent");
 }
+
 
 require_once('vues/affiche-mission.php');
 ?>
