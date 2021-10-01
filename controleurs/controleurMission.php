@@ -20,7 +20,18 @@ public function updateMission($id, $nom_de_code, $pays, $specialite, $type_de_mi
     require_once('vues/affiche-mission.php'); */
 }
 
+// MISSION - DELETE une PERSONNE
+public function deletePersonneMission($id_personne, $id_mission) {
+    $missions = new Missions();
+    $missionToDelete = $missions->deletePersonneMission($id_personne, $id_mission);
 
+    //var_dump("PERS : ".$id_personne. "   MISSION : ".$id_mission);
+}
+
+public function updateMissionCible($id_personne, $id_mission) {
+    $mission = new Mission();
+    $missionToUpdate = $mission->updateMissionCible($id_personne,$id_mission);
+}
 
 /*     public function listerMissions()
     {

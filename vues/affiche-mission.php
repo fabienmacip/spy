@@ -6,6 +6,7 @@ $listePlanques = new Planques();
 $listePersonnes = new Personnes();
 $listeAgents = [];
 $listeCibles = [];
+$listeCibles = $mission->listerCibles($mission->getId());
 $listeContacts = [];
 
 $scriptMission = "<script src=\"./script/script-mission.js\"></script>";

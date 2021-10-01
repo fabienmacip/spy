@@ -25,17 +25,30 @@ require_once('modeles/Personnes.php');
 
 $controleurMission = new ControleurMission();
 $mission = new Mission();
-
+//var_dump(json_encode($_GET));
 // Par défaut, mission.php affiche la mission sans formulaire
 if (isset($_POST['page']) && 'missions' === $_POST['page'] &&  isset($_POST['action']) && 'update' === $_POST['action']) {
-    // UPDATE MISSION - Données générales
-    if(isset($_POST['module']) && 'mission' === $_POST['module']) {
+    // UPDATE MISSION - Cibles
+    if(isset($_POST['module']) && 'cible' === $_POST['module']) {
         
+        $controleurMission->updateMissionCible($_POST['nouvelleCible'], $_POST['id']);
+        $mission = $mission->afficherMission($_POST['id']);
+    } else if(isset($_POST['module']) && 'mission' === $_POST['module']) {
+        // UPDATE MISSION - Données générales
         $controleurMission->updateMission($_POST['id'], $_POST['nom_de_code'], $_POST['pays'], $_POST['specialite'], 
         $_POST['type_de_mission'], $_POST['date_debut'], $_POST['date_fin'], $_POST['statut']);
         $mission = $mission->afficherMission($_POST['id']);
     }
+
+
     //var_dump($mission);
+} // Supprimer une personne de la mission
+else if(isset($_GET['page']) && 'mission' === $_GET['page'] && 'delete' === $_GET['action'] && 'personne' === $_GET['module'] && isset($_GET['id_personne']) && isset($_GET['id'])) {
+    $controleurMission->deletePersonneMission($_GET['id_personne'], $_GET['id']);
+    $mission = $mission->afficherMission($_GET['id']);
+  
+
+
 } else if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $mission = $mission->afficherMission($_GET['id']);
 } else {

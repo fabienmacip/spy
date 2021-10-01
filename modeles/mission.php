@@ -49,6 +49,55 @@ class Mission
         return $mission;
     }
 
+    public function listerCibles() {
+// REQUETE
+/* 
+ SELECT p.id, p.nom
+FROM personne AS p
+LEFT JOIN mission_personne AS mp
+ON p.id = mp.id_personne AND mp.id_mission = 1
+WHERE mp.id_personne IS NULL AND p.type = 'cible'
+*/
+
+        $cibles = [];
+          if (!is_null($this->pdo)) {
+            //$stmt = $this->pdo->query('SELECT * FROM mission');
+            $stmt = $this->pdo->query('SELECT p.id, p.nom
+            FROM personne AS p
+            LEFT JOIN mission_personne AS mp 
+            ON p.id = mp.id_personne AND mp.id_mission = '.$this->getId().'
+            WHERE mp.id_personne IS NULL AND p.type = \'cible\'');
+        }
+        $cibles = [];
+        while ($cible = $stmt->fetch()) {
+            $cibles[] = [$cible[0],$cible[1]];
+        }  
+/*         $cibles[] = [0,"Marcel"];
+        $cibles[] = [2,"Antoine"];
+        $cibles[] = [15,"José"]; */
+        return $cibles;
+    }
+
+    public function updateMissionCible($id_personne,$id_mission){
+        if (!is_null($this->pdo)) {
+            try {
+                // Requête mysql pour insérer des données
+                $sql = "INSERT INTO mission_personne (id_mission, id_personne) VALUES (:id_mission, :id_personne)";
+                $res = $this->pdo->prepare($sql);
+                $exec = $res->execute(array(":id_mission"=>$id_mission, ":id_personne"=>$id_personne));
+                if($exec){
+                    $tupleUpdated = "Cible ajoutée.";
+                }
+            }
+            catch(Exception $e) {
+                $tupleUpdated = "La cible n'a pas pu être ajoutée.<br/><br/>".$e;
+            }
+        }
+
+        return $tupleUpdated;
+
+    }
+
     public function getId()
     {
         return $this->id;

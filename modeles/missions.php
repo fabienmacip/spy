@@ -150,4 +150,17 @@ class Missions
         return $tupleDeleted;
     }
 
+    // DELETE 1 Personne d'une mission
+    public function deletePersonneMission($id_personne, $id_mission) {
+        // Suppression du tuple de la table mission_personne
+        if (!is_null($this->pdo)) {
+            try {
+                // Requête mysql pour supprimer les données dans MISSION_PERSONNE
+                $this->pdo->query('DELETE FROM mission_personne WHERE id_mission = '.$id_mission.' AND id_personne = '.$id_personne.'');
+            }
+            catch(Exception $e) {  }
+        }
+        return null;
+    }
+
 }

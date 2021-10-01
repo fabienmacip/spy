@@ -94,13 +94,109 @@ function verifAuMoinsUnAgentSpe() {
 }
 
 
+// MODIFICATIONS DES CARTES DE LA MISSION
+
+function confirmeDeletePlanque() {
+  console.log("confirmeDeletePlanque");
+}
+
+function confirmeDeleteAgent() {
+  console.log("confirmeDeleteAgent");
+}
+
+function confirmeDeleteCible(id_cible, nom_cible, id_mission, okPourDelete) {
+
+  // On vérifie si la cible peut être supprimée : il faut au moins 1 cible pour la mission
+/*   console.log(listeCibles);
+  if(listeCibles.length < 1) {
+    console.log("trop petit");
+  } else {
+    console.log("C'est ok");
+  }
+ */
+if(okPourDelete == 0) {
+  alert("Impossible de supprimer la cible. Ajouter au moins une cible avant de pouvoir supprimer celle-ci.");
+} else {
+  let lien = "mission.php?page=mission&action=delete&module=personne&id_personne=" + id_cible + "&id=" + id_mission ;
+
+  if(!confirm("Supprimer " + nom_cible + " ?")){
+      //e.target.preventDefault();
+      console.log("pas confirmé");
+  } else {
+    // Supprimer la ligne
+    window.location.href = lien;
+  }
+
+}
+
+} // FIN confirme Delete Cible d'une mission
+
+
+
+function confirmeDeleteContact() {
+  console.log("confirmeDeleteContact");
+}
+
+
+
+function displayAddPlanque() {
+  console.log("Add Planque");
+}
+
+function displayAddAgent() {
+  console.log("Add Agent");
+}
+
+function displayAddCible() {
+  // Récupérer et affiche la liste des cibles
+}
+
+function displayAddContact() {
+  console.log("Add Contact");
+}
+
+
+
+
+
+
 // ########################            CHARGEMENT PAGE OK              #############################
 
 // Fin du chargement de la page.
 $(document).ready(() => {
 
-$('#form-update-mission').hide();
+    $('#form-update-mission').hide();
 
+    // ########### CIBLES ##############
+    // On affecte la liste des cibles dans une variable en JS
+/*     let listeCibles = [];
+    $('#lesCibles div .toto').each(function(){
+      listeCibles.push(this.value);
+    });  
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
 
@@ -137,12 +233,6 @@ $('#form-update-mission').hide();
       });
 
 
-      // ########### CIBLES ##############
-      // On affecte la liste des cibles dans une variable en JS
-      let listeCibles = [];
-      $('#listeCibles div input[type=checkbox]').each(function(){
-        listeCibles.push(this.value);
-      });  
 
       // ########### CONTACTS ##############
       // On affecte la liste des cibles dans une variable en JS
@@ -211,6 +301,7 @@ function displayUpdateMission() {
 
   
 }
+// FIN DU CHARGEMENT $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
 
@@ -272,11 +363,11 @@ function displayUpdatePays(id, nom){
 
 // Confirme suppression d'un Pays
 function confirmeSuppressionPays(id,nom){
-  console.log(id,nom);
+//  console.log(id,nom);
 
   let lien = "index.php?page=payss&action=delete&id=" + id + "&nom="+ nom;
 
-  console.log(lien);
+//  console.log(lien);
 
   if(!confirm("Supprimer " + nom + " ?")){
       //e.target.preventDefault();
