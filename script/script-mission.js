@@ -30,6 +30,7 @@ function majListePlanquesContacts(pays, listePlanques = [], listeContacts = []) 
       });
 }
 
+
 function majListeAgents(listeCibles = [], listeAgents = []) {
       // Quand on clique sur une cible, on met à jour la liste d'agents possibles,
       // qui ne doivent pas être de la même nationalité que les cibles.

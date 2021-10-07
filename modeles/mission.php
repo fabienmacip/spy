@@ -59,6 +59,21 @@ ON p.id = mp.id_personne AND mp.id_mission = 1
 WHERE mp.id_personne IS NULL AND p.type = 'cible'
 */
 
+/* 
+SELECT p.id, p.nom
+FROM personne AS p
+LEFT JOIN mission_personne AS mp
+ON p.id = mp.id_personne AND mp.id_mission = 1
+WHERE mp.id_personne IS NULL AND p.type = 'cible' AND p.id NOT IN (
+SELECT cible.id
+FROM personne AS cible, personne AS agent, mission_personne AS mp2
+WHERE mp2.id_mission = 1 AND cible.type = 'cible' AND agent.type = 'agent' AND (mp2.id_personne = cible.id OR mp2.id_personne = agent.id) AND cible.nationalite = agent.nationalite
+)
+ */
+
+
+
+
         $cibles = [];
           if (!is_null($this->pdo)) {
             //$stmt = $this->pdo->query('SELECT * FROM mission');
@@ -66,7 +81,11 @@ WHERE mp.id_personne IS NULL AND p.type = 'cible'
             FROM personne AS p
             LEFT JOIN mission_personne AS mp 
             ON p.id = mp.id_personne AND mp.id_mission = '.$this->getId().'
-            WHERE mp.id_personne IS NULL AND p.type = \'cible\'');
+            WHERE mp.id_personne IS NULL AND p.type = \'cible\' AND p.id NOT IN (
+                SELECT cible.id
+                FROM personne AS cible, personne AS agent, mission_personne AS mp2
+                WHERE mp2.id_mission = '.$this->getId().' AND cible.type = \'cible\' AND agent.type = \'agent\' AND (mp2.id_personne = cible.id OR mp2.id_personne = agent.id) AND cible.nationalite = agent.nationalite
+                )');
         }
         $cibles = [];
         while ($cible = $stmt->fetch()) {
