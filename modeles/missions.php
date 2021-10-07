@@ -163,4 +163,18 @@ class Missions
         return null;
     }
 
+    // DELETE 1 Planque d'une mission
+    public function deletePlanqueMission($id_planque, $id_mission) {
+        // Suppression du tuple de la table mission_planque
+        if (!is_null($this->pdo)) {
+            try {
+                // Requête mysql pour supprimer les données dans MISSION_PLANQUE
+                $this->pdo->query('DELETE FROM mission_planque WHERE id_mission = '.$id_mission.' AND id_planque = '.$id_planque.'');
+            }
+            catch(Exception $e) {  }
+        }
+        return null;
+    }
+
+
 }

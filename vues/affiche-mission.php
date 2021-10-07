@@ -2,12 +2,16 @@
 $listePays = new Payss();
 $listeSpecialites = new Specialites();
 $listeTypeMissions = new TypeMissions();
-$listePlanques = new Planques();
+//$listePlanques = new Planques();
 $listePersonnes = new Personnes();
 $listeAgents = [];
+$listeAgents = $mission->listerAgents($mission->getId());
 $listeCibles = [];
 $listeCibles = $mission->listerCibles($mission->getId());
 $listeContacts = [];
+$listeContacts = $mission->listerContacts($mission->getId());
+$listePlanques = [];
+$listePlanques = $mission->listerPlanques($mission->getId());
 
 $scriptMission = "<script src=\"./script/script-mission.js\"></script>";
 

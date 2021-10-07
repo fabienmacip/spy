@@ -28,10 +28,35 @@ public function deletePersonneMission($id_personne, $id_mission) {
     //var_dump("PERS : ".$id_personne. "   MISSION : ".$id_mission);
 }
 
+// MISSION - DELETE une PLANQUE
+public function deletePlanqueMission($id_planque, $id_mission) {
+    $missions = new Missions();
+    $missionToDelete = $missions->deletePlanqueMission($id_planque, $id_mission);
+
+    //var_dump("PERS : ".$id_personne. "   MISSION : ".$id_mission);
+}
+
+
 public function updateMissionCible($id_personne, $id_mission) {
     $mission = new Mission();
     $missionToUpdate = $mission->updateMissionCible($id_personne,$id_mission);
 }
+
+public function updateMissionContact($id_personne, $id_mission) {
+    $mission = new Mission();
+    $missionToUpdate = $mission->updateMissionContact($id_personne,$id_mission);
+}
+
+public function updateMissionAgent($id_personne, $id_mission) {
+    $mission = new Mission();
+    $missionToUpdate = $mission->updateMissionAgent($id_personne,$id_mission);
+}
+
+public function updateMissionPlanque($id_planque, $id_mission) {
+    $mission = new Mission();
+    $missionToUpdate = $mission->updateMissionPlanque($id_planque,$id_mission);
+}
+
 
 /*     public function listerMissions()
     {

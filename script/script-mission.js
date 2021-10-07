@@ -97,12 +97,18 @@ function verifAuMoinsUnAgentSpe() {
 
 // MODIFICATIONS DES CARTES DE LA MISSION
 
-function confirmeDeletePlanque() {
-  console.log("confirmeDeletePlanque");
-}
+function confirmeDeletePlanque(id_planque, code_planque, id_mission, okPourDelete) {
 
-function confirmeDeleteAgent() {
-  console.log("confirmeDeleteAgent");
+      let lien = "mission.php?page=mission&action=delete&module=planque&id_planque=" + id_planque + "&id=" + id_mission ;
+    
+      if(!confirm("Supprimer " + code_planque + " ?")){
+          //e.target.preventDefault();
+          console.log("pas confirmé");
+      } else {
+        // Supprimer la ligne
+        window.location.href = lien;
+      }
+  
 }
 
 function confirmeDeleteCible(id_cible, nom_cible, id_mission, okPourDelete) {
@@ -134,10 +140,41 @@ if(okPourDelete == 0) {
 
 
 
-function confirmeDeleteContact() {
-  console.log("confirmeDeleteContact");
+function confirmeDeleteContact(id_contact, nom_contact, id_mission, okPourDelete) {
+  if(okPourDelete == 0) {
+    alert("Impossible de supprimer le contact. Ajouter au moins un contact avant de pouvoir supprimer celui-ci.");
+  } else {
+    let lien = "mission.php?page=mission&action=delete&module=personne&id_personne=" + id_contact + "&id=" + id_mission ;
+  
+    if(!confirm("Supprimer " + nom_contact + " ?")){
+        //e.target.preventDefault();
+        console.log("pas confirmé");
+    } else {
+      // Supprimer la ligne
+      window.location.href = lien;
+    }
+  
+  }
+  
 }
 
+function confirmeDeleteAgent(id_agent, nom_agent, id_mission, okPourDelete) {
+  if(okPourDelete == 0) {
+    alert("Impossible de supprimer l'agent. Ajouter au moins un agent avant de pouvoir supprimer celui-ci.");
+  } else {
+    let lien = "mission.php?page=mission&action=delete&module=personne&id_personne=" + id_agent + "&id=" + id_mission ;
+  
+    if(!confirm("Supprimer " + nom_agent + " ?")){
+        //e.target.preventDefault();
+        console.log("pas confirmé");
+    } else {
+      // Supprimer la ligne
+      window.location.href = lien;
+    }
+  
+  }
+  
+}
 
 
 function displayAddPlanque() {
@@ -145,7 +182,7 @@ function displayAddPlanque() {
 }
 
 function displayAddAgent() {
-  console.log("Add Agent");
+  //console.log("Add Agent"); 
 }
 
 function displayAddCible() {
@@ -153,7 +190,7 @@ function displayAddCible() {
 }
 
 function displayAddContact() {
-  console.log("Add Contact");
+  //console.log("Add Contact");
 }
 
 
@@ -167,6 +204,30 @@ function displayAddContact() {
 $(document).ready(() => {
 
     $('#form-update-mission').hide();
+
+  // Si une des listes pour sélectionner une nouvelle cible, un nouveau contact, un nouvel agent
+  // ou une nouvelle planque est vide, on n'affiche pas la liste.
+    if($('#nouvelleCible option').length === 0) {
+      $('#nouvelleCible').prop('disabled',true);
+      $('#btn-ajout-cible').prop('disabled',true);
+    }
+
+
+
+    if($('#nouveauContact option').length === 0) {
+      $('#nouveauContact').prop('disabled',true);
+      $('#btn-ajout-contact').prop('disabled',true);
+    }
+
+    if($('#nouvelAgent option').length === 0) {
+      $('#nouvelAgent').prop('disabled',true);
+      $('#btn-ajout-agent').prop('disabled',true);
+    }
+
+    if($('#nouvellePlanque option').length === 0) {
+      $('#nouvellePlanque').prop('disabled',true);
+      $('#btn-ajout-planque').prop('disabled',true);
+    }
 
     // ########### CIBLES ##############
     // On affecte la liste des cibles dans une variable en JS
@@ -300,6 +361,12 @@ function displayUpdateMission() {
     $('.lesboutons').prop('disabled',false);
   });
 
+
+  // On met en valeur les agents ayant la spécialité de la mission.
+  // Et s'il ne reste qu'un seul agent ayant la bonne spécialité, on interdit la suppression de cet agent.
+/*   function majSpecialiteMission(specialite,listeSpecialitesDesAgents = []) {
+  }
+ */
   
 }
 // FIN DU CHARGEMENT $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$

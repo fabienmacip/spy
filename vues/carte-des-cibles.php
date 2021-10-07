@@ -53,32 +53,30 @@
                 </div>                
                 <div class="card-footer text-center">
                 
-                <form method="post" action="mission.php" id="form-update-mission" class="mt-3 bg-info">
+                    <form method="post" action="mission.php" id="form-update-mission-cible" class="mt-3 bg-info">
 
-                    <!-- Liste déroulante CIBLES -->
-                    <!-- Pas la même nationalité que les agents -->
-                    <div id="listeCibles" class="form-group">
-                        <select class="custom-select my-1 mr-sm-2" id="nouvelleCible" name="nouvelleCible">
-                            <?php
-                            foreach ($listeCibles as $elem1): 
-                            echo "<option value=\"".$elem1[0]."\">".$elem1[1]."</option>";
-                            endforeach;              
-                            ?>  
-                        </select>
-                    </div>
+                        <!-- Liste déroulante CIBLES -->
+                        <!-- Pas la même nationalité que les agents -->
+                        <div id="listeCibles" class="form-group">
+                            <select class="custom-select my-1 mr-sm-2" id="nouvelleCible" name="nouvelleCible">
+                                <?php
+                                foreach ($listeCibles as $elem1): 
+                                echo "<option value=\"".$elem1[0]."\">".$elem1[1]."</option>";
+                                endforeach;              
+                                ?>  
+                            </select>
+                        </div>
 
-                    <!-- Valeurs cachées -->
-                    <input type="hidden" name="id" id="id" value="<?= $mission->getId() ?>">
-                    <input type="hidden" name="action" id="action" value="update">
-                    <input type="hidden" name="page" id="page" value="missions" >
-                    <input type="hidden" name="module" id="module" value="cible" >
+                        <!-- Valeurs cachées -->
+                        <input type="hidden" name="id" id="id" value="<?= $mission->getId() ?>">
+                        <input type="hidden" name="action" id="action" value="update">
+                        <input type="hidden" name="page" id="page" value="missions" >
+                        <input type="hidden" name="module" id="module" value="cible" >
 
-                    <button type="submit" class="btn rounded lesboutons" onclick=displayAddCible()>
-                        <img src="./img/ajouter.png" class="img-petit img-ajouter" alt="ajouter"/>
-                    </button>
-                </form>
-
-
+                        <button type="submit" class="btn rounded lesboutons" id="btn-ajout-cible" onclick=displayAddCible()>
+                            <img src="./img/ajouter.png" class="img-petit img-ajouter" alt="ajouter"/>
+                        </button>
+                    </form>
 
 
                 </div>
