@@ -203,7 +203,7 @@ function displayAddContact() {
 // Fin du chargement de la page.
 $(document).ready(() => {
 
-    $('#form-update-mission').hide();
+
 
   // Si une des listes pour sélectionner une nouvelle cible, un nouveau contact, un nouvel agent
   // ou une nouvelle planque est vide, on n'affiche pas la liste.
@@ -235,42 +235,42 @@ $(document).ready(() => {
     } 
 
 
-    // ########### CIBLES ##############
-    // On affecte la liste des cibles dans une variable en JS
-/*     let listeCibles = [];
-    $('#lesCibles div .toto').each(function(){
-      listeCibles.push(this.value);
-    });  
- */
+    // Si on n'est pas ADMIN connecté, alors on n'accède pas aux formulaires de CRUD.
+    if($('#isAdmin').val() != 1) {
+      $('form').hide(); 
+      $('button').hide();
+      $('button ').prop('disabled',true);
+      /* $('button').addClass('inactif'); */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    } else {
+      $('form').show();
+      /* $('button').show(); */
+      $('button').prop('disabled',false);
+    }
+    
+    // Par défaut, le formulaire de modification des données générales d'une mission
+    // est masqué.
+    $('#form-update-mission').hide();
 
 
 // mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 // CI-APRES, code à supprimer si inutile
 
-  let pageMission ='';
+/*   let pageMission ='';
   if (pageMission === 'toto')  {
       // ########### PLANQUES ##############
       // On affecte la liste des planques dans une variable en JS
@@ -332,7 +332,7 @@ $(document).ready(() => {
       
       
     } // FIN du IF pageMission
-  
+ */  
   
 }) // FIN DU document.READY
 
@@ -343,7 +343,7 @@ function confirmeSuppressionMission(id, titre, nom_de_code){
   
   let lien = "index.php?page=missions&action=delete&id=" + id + "&titre="+ titre + "&nom_de_code="+ nom_de_code;
 
-  if(confirm("Supprimer la mission " + titre.toUpperCase() + ", nom de code << " + nom_de_code + " >> ?" + lien)){
+  if(confirm("Supprimer la mission " + titre.toUpperCase() + ", nom de code << " + nom_de_code + " >> ?")){
     // Supprimer la ligne dans la BDD
     window.location.href = lien;
   }

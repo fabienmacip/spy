@@ -77,5 +77,17 @@ class Administrateurs
         
         return $tupleDeleted;
     }
+
+    // Vérifier si un login et un mot de passe matchent avec un administrateur
+    public function verifConnexion($mail,$password) 
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\' AND mot_de_passe = \''.$password.'\'');
+        }
+        $reponse = $stmt->fetchObject('Administrateur');
+
+        return $reponse;
+
+    }
      
 }

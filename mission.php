@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /* require_once('modeles/Missions.php');
 $missions = new Missions();
 $mission = null;
@@ -124,6 +124,6 @@ require_once('vues/affiche-mission.php');
 ?>
 
 <!-- Bouton RETOUR à la liste des MISSIONS -->
-<div class="text-center">
+<div class="text-center mb-5">
         <a href="index.php?page=missions" class="btn btn-primary mt-3">Retour à la liste des missions</a>
 </div>

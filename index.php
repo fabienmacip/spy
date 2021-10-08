@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once('controleurs/Controleur.php');
 require_once('modeles/Modele.php');
 require_once('modeles/Mission.php');
@@ -27,13 +27,35 @@ $LISTE_PERSONNES = "index.php?page=personnes";
 $LISTE_MISSIONS = "index.php?page=missions";
 $LISTE_ADMINISTRATEURS = "index.php?page=administrateurs"; */
 
-
 $controleur = new Controleur();
-// Par défaut, index.php affiche la liste des missions (voir le ELSE)
-if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action']) &&!isset($_POST['action'])) {
+
+if(isset($_POST['action']) && 'connexion' === $_POST['action']) {
+    $controleur->verifConnexion($_POST['mail'], $_POST['password']);
+}
+
+
+
+/* if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1) {
+    $connecte = true;
+} else {
+    $connecte = false;
+} */
+
+
+
+
+
+// Par défaut, index.php affiche la liste des missions (voir le dernier ELSE)
+// Connexion / Déconnexion des admins
+if(isset($_GET['page']) && 'connexion' === $_GET['page']) {
+    $controleur->connexion();
+} else if (isset($_GET['page']) && 'deconnexion' === $_GET['page']) {
+    $controleur->deconnexion();
+
+// Affichage de la liste des missions, autrement dit la page d'accueil.
+} else if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action']) && !isset($_POST['action'])) {
     $controleur->afficherMissions();
 
-    
 // PAYS - CRUD
 // PAYS - CREATE
 } elseif (isset($_POST['page']) && 'payss' === $_POST['page'] && isset($_POST['action']) && 'createPays' === $_POST['action'] && isset($_POST['nom'])) {

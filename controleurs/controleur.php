@@ -8,6 +8,31 @@ class Controleur {
         require_once('vues/liste-missions.php');
     }
 
+    public function connexion() {
+        require_once('vues/page-connexion.php');
+    }
+
+    public function deconnexion() {
+        // Procédure de deconnexion
+        $_SESSION['admin'] = 0;
+        session_destroy();
+        
+        $this->afficherMissions();
+    }
+
+    public function verifConnexion($mail,$password) {
+        $admin = new Administrateurs();
+        $messageConnexion = "";
+        if($admin->verifConnexion($mail,$password)) {
+            $_SESSION['admin'] = 1;
+            $this->afficherMissions();
+        } else {
+            $_SESSION['admin'] = 0;
+            $messageConnexion = "Identifiant ou mot de passe erroné(s).";
+            require_once('vues/page-connexion.php');
+        }
+    }
+
     // PAYS - CRUD
 
     public function listerPays()

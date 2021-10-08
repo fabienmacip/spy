@@ -166,7 +166,24 @@ let pageMission ='';
       
       
     } // FIN du IF pageMission
-  
+
+    // Si on n'est pas ADMIN connecté, alors on n'accède pas aux formulaires de CRUD.
+    if($('#isAdmin').val() != 1) {
+      $('form').hide(); 
+      /* $('button').hide(); */
+      $('button ').prop('disabled',true);
+      $('button').addClass('inactif');
+      $('#form-connexion').show();
+      /* $('.btn-connexion').show(); */
+      $('.btn-connexion').prop('disabled',false);
+      $('.btn-connexion').removeClass('inactif');
+      /* $('#navbarDropdown').prop('disabled',false); */
+    } else {
+      $('form').show();
+      /* $('button').show(); */
+      $('button').prop('disabled',false);
+    }
+    
   
 }) // FIN DU document.READY
 

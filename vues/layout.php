@@ -23,23 +23,44 @@
 
 </head>
 <body>
+
+<?php
+    if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1) {
+        $isAdmin = 1;
+    } else {
+        $isAdmin = 0;
+    }
+?>
+<input type="hidden" id=isAdmin value="<?= $isAdmin ?>">
+
 <header>
     <h1>Spy Manager</h1>
 </header>
 <section>
-    <nav>
-        <ul>
-            <!--<li><a href="index.php">Accueil</a></li>-->
-            <li><a href="index.php?page=missions">Accueil</a></li>
-			<li><a href="index.php?page=payss">Liste des pays</a></li>
-            <li><a href="index.php?page=specialites">Liste des sp&eacute;cialit&eacute;s</a></li>
-            <li><a href="index.php?page=typemissions">Liste des types de missions</a></li>
-            <li><a href="index.php?page=typeplanques">Liste des types de planques</a></li>
-            <li><a href="index.php?page=planques">Liste des planques</a></li>
-            <li><a href="index.php?page=personnes">Liste des personnes</a></li>
-            <li><a href="index.php?page=missions">Liste des missions</a></li>
-            <li><a href="index.php?page=administrateurs">Liste des administrateurs</a></li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="index.php?page=personnes" class="nav-link">Personnes</a></li>
+            <li class="nav-item"><a href="index.php?page=specialites" class="nav-link">Sp&eacute;cialit&eacute;s</a></li>
+			<li class="nav-item"><a href="index.php?page=payss" class="nav-link">Pays</a></li>
+            <li class="nav-item"><a href="index.php?page=typemissions" class="nav-link">Types de missions</a></li>
+            <li class="nav-item"><a href="index.php?page=planques" class="nav-link">Planques</a></li>
+            <li class="nav-item"><a href="index.php?page=typeplanques" class="nav-link">Types de planques</a></li>
+            <!-- <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Missions</a></li> -->
+            
+            <?php 
+            if(!isset($_SESSION['admin']) || $_SESSION['admin'] !== 1) { ?>
+                <li class="nav-item"><a href="index.php?page=connexion" class="nav-link">Se connecter</a></li>
+            <?php
+            } else { ?>
+                <li class="nav-item"><a href="index.php?page=administrateurs" class="nav-link">Administrateurs</a></li>
+                <li class="nav-item"><a href="index.php?page=deconnexion" class="nav-link">D&eacute;connexion</a></li>
+            <?php
+            }
+            ?>
         </ul>
+      </div>
     </nav>
     <?= $contenu ?>
 </section>
