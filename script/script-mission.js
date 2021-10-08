@@ -212,8 +212,6 @@ $(document).ready(() => {
       $('#btn-ajout-cible').prop('disabled',true);
     }
 
-
-
     if($('#nouveauContact option').length === 0) {
       $('#nouveauContact').prop('disabled',true);
       $('#btn-ajout-contact').prop('disabled',true);
@@ -228,6 +226,14 @@ $(document).ready(() => {
       $('#nouvellePlanque').prop('disabled',true);
       $('#btn-ajout-planque').prop('disabled',true);
     }
+
+    // S'il n'y a qu'un seul agent de la même spécialité que la mission, 
+    // On désactive le bouton supprimer de cet agent.
+    if($('.agent-bonne-specialite').length === 1) {
+      $('.agent-bonne-specialite h6 button').prop('disabled',true);
+      //$('.agent-bonne-specialite h6 button').addClass('');
+    } 
+
 
     // ########### CIBLES ##############
     // On affecte la liste des cibles dans une variable en JS

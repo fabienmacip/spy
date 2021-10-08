@@ -31,9 +31,22 @@
                             $messageDelete = 'Il faut au moins un agent dans une mission';
                         }
                         
+                        $classeAgentBonneSpecialite = "";
                         // Affiche des détails des agents
-                        foreach ($agents as $agent): ?>
-                        <div id="unAgent<?= $agent->getId() ?>" class="sous-carte p-1 my-1 rounded border border-success">
+                        foreach ($agents as $agent): 
+                            $classeAgentBonneSpecialite = "";
+                            // Vérification à priori de la possibilité de supprimer un agent
+                            // Il faut au moins 1 agent par mission de la SPECIALITE de la MISSION
+                            // On disabled le bouton de suppression en JQuery dans $(document).ready().
+                            foreach($agent->listerSpecialites() as $specialite) : {
+                                if($specialite[0] === $mission->getIdSpecialite()) {
+                                    $classeAgentBonneSpecialite = " agent-bonne-specialite";
+                                }
+                            } endforeach;
+
+
+                        ?>
+                        <div id="unAgent<?= $agent->getId() ?>" class="sous-carte p-1 my-1 rounded border border-success <?= $classeAgentBonneSpecialite ?>">
                                 <h6 class="card-subtitle my-1">
                                     <span><?= $agent->getPrenom() ?> <?= strtoupper($agent->getNom()) ?></span>
                                     <button class="btn rounded lesboutons" onclick=confirmeDeleteAgent(<?php echo $agent->getId().",\"".$agent->getNom()."\",".$mission->getId().",".$okPourDelete ?>)>
