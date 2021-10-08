@@ -55,7 +55,11 @@ else:
             // DETAILS de la MISSION
             require_once('form-update-mission.php');
             require_once('carte-de-la-mission.php');
+
+            // PLANQUES
+            require_once('carte-des-planques.php');
         ?>
+
     </div>
     <div class="col-3">
         <?php
@@ -73,14 +77,6 @@ else:
         <?php
             // AGENTS
             require_once('carte-des-agents.php');
-        ?>
-    </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col-3">
-        <?php
-            // PLANQUES
-            require_once('carte-des-planques.php');
         ?>
     </div>
   </div>

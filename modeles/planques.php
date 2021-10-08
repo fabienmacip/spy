@@ -13,9 +13,9 @@ class Planques
         if (!is_null($this->pdo)) {
             //$stmt = $this->pdo->query('SELECT * FROM mission');
             // id, code, adresse, ville, pays
-            $stmt = $this->pdo->query('SELECT p.id AS id, p.code AS code, p.adresse AS adresse, p.ville AS ville, c.nom AS pays
-                    FROM mission_planque AS mp, planque AS p, pays AS c
-                    WHERE mp.id_mission = '.$id.' AND p.id = mp.id_planque AND p.pays = c.id ');
+            $stmt = $this->pdo->query('SELECT p.id AS id, p.code AS code, p.adresse AS adresse, p.ville AS ville, c.nom AS pays, tp.intitule AS type
+                    FROM mission_planque AS mp, planque AS p, pays AS c, type_de_planque AS tp
+                    WHERE mp.id_mission = '.$id.' AND p.id = mp.id_planque AND p.pays = c.id AND p.type = tp.id');
 
         }
         $planques = [];
@@ -44,14 +44,14 @@ class Planques
     }
 
     // CREATE
-    public function create($code, $adresse, $ville, $pays) {
+    public function create($code, $adresse, $ville, $pays, $type) {
         if (!is_null($this->pdo)) {
             try {
                 // Requête mysql pour insérer des données
                                 
-                $sql = "INSERT INTO planque (code, adresse, ville, pays) VALUES (:code, :adresse, :ville, :pays)";
+                $sql = "INSERT INTO planque (code, adresse, ville, pays, type) VALUES (:code, :adresse, :ville, :pays, :type)";
                 $res = $this->pdo->prepare($sql);
-                $exec = $res->execute(array(":code"=>$code, ":adresse"=>$adresse, ":ville"=>$ville, ":pays"=>$pays));
+                $exec = $res->execute(array(":code"=>$code, ":adresse"=>$adresse, ":ville"=>$ville, ":pays"=>$pays, ":type"=>$type));
                 if($exec){
                     $tupleCreated = "La planque <b>".$code." située à ".$ville."</b> a bien été ajoutée.";
                 }
@@ -65,13 +65,13 @@ class Planques
     }
 
     // UPDATE
-    public function update($id,$code, $adresse, $ville, $pays) {
+    public function update($id,$code, $adresse, $ville, $pays, $type) {
         if (!is_null($this->pdo)) {
             try {
                 // Requête mysql pour insérer des données
-                $sql = "UPDATE planque SET code = (:code), adresse = (:adresse), ville = (:ville), pays = (:pays) WHERE id = (:id)";
+                $sql = "UPDATE planque SET code = (:code), adresse = (:adresse), ville = (:ville), pays = (:pays), type = (:type) WHERE id = (:id)";
                 $res = $this->pdo->prepare($sql);
-                $exec = $res->execute(array(":code"=>$code, ":adresse"=>$adresse, ":ville"=>$ville, "pays"=>$pays, ":id"=>$id));
+                $exec = $res->execute(array(":code"=>$code, ":adresse"=>$adresse, ":ville"=>$ville, "pays"=>$pays, "type"=>$type, ":id"=>$id));
                 if($exec){
                     $tupleUpdated = "La planque <b>".$code." située à ".$ville."</b> a bien été modifiée.";
                 }

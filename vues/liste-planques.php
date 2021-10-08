@@ -3,6 +3,7 @@ $titre = 'Liste des planques';
 //htmlentities($_POST['taskOption'], ENT_QUOTES, "UTF-8");
 // Pour liste déroulante des PAYS
 $listePays = new Payss();
+$listeType = new TypePlanques();
 
 ob_start();
 ?>
@@ -64,6 +65,17 @@ ob_start();
             </select>
         </div>
 
+        <div class="form-group">
+            <label class="my-1 mx-2" for="type">Type</label>
+              <select class="custom-select my-1 mr-sm-2" id="type" name="type">
+              <?php
+              foreach ($listeType->listerTypePlanqueJson() as $type): 
+                echo "<option value=\"".$type[0]."\">".$type[1]."</option>";
+              endforeach;              
+              ?>  
+            </select>
+        </div>
+
         <input type="hidden" name="action" id="action" value="create">
         <input type="hidden" name="page" id="page" value="planques" >
 
@@ -83,8 +95,9 @@ ob_start();
                   <th width="5%">Id</th>
                   <th width="10%">Code</th>
                   <th width="25%">Adresse</th>
-                  <th width="15%">Ville</th>
-                  <th width="15%">Pays</th>
+                  <th width="10%">Ville</th>
+                  <th width="10%">Pays</th>
+                  <th width="10%">Type</th>
                   <th width="15%"></th>
                   <th width="15%"></th>
               </tr>
@@ -112,8 +125,11 @@ ob_start();
                           <?= $planque->getPaysNom() ?>
                       </td>
                       <td>
+                          <?= $planque->getTypeNom() ?>
+                      </td>
+                      <td>
                           <button type="button" id="updatePlanque<?= $planque->getId() ?>" class="updatePlanque btn-primary" 
-                                  onclick=displayUpdatePlanque(<?php echo $planque->getId().",'".str_replace(" ","&nbsp;",$planque->getCode())."','".str_replace(" ","&nbsp;",$planque->getAdresse())."','".str_replace(" ","&nbsp;",$planque->getVille())."','".str_replace(" ","&nbsp;",$planque->getPays())."'" ?>)
+                                  onclick=displayUpdatePlanque(<?php echo $planque->getId().",'".str_replace(" ","&nbsp;",$planque->getCode())."','".str_replace(" ","&nbsp;",$planque->getAdresse())."','".str_replace(" ","&nbsp;",$planque->getVille())."','".str_replace(" ","&nbsp;",$planque->getPays())."','".str_replace(" ","&nbsp;",$planque->getType())."'" ?>)
                           >
                             Modifier
                           </button>

@@ -107,6 +107,41 @@ class Controleur {
         require_once('vues/liste-types-missions.php');
     }
 
+// TYPES de PLANQUES - CRUD
+
+public function listerTypesPlanques()
+{
+    $typePlanques = new TypePlanques();
+    $typePlanques = $typePlanques->lister();
+    require_once('vues/liste-types-planques.php');
+}
+
+public function createTypePlanque($nom)
+{
+    $typePlanques = new TypePlanques();
+    $typePlanqueToCreate = $typePlanques->create($nom);
+    $typePlanques = $typePlanques->lister();
+    require_once('vues/liste-types-planques.php');
+}
+
+public function updateTypePlanque($id,$nom)
+{
+    $typePlanques = new TypePlanques();
+    $typePlanqueToUpdate = $typePlanques->update($id,$nom);
+    $typePlanques = $typePlanques->lister();
+    require_once('vues/liste-types-planques.php');
+}
+
+public function deleteTypePlanque($id,$nom)
+{
+    $typePlanques = new TypePlanques();
+    $typePlanqueToDelete = $typePlanques->delete($id, $nom);
+    $typePlanques = $typePlanques->lister();
+    require_once('vues/liste-types-planques.php');
+}
+
+
+
 
 // ADMINISTRATEUR - CRUD
 
@@ -150,18 +185,18 @@ class Controleur {
         require_once('vues/liste-planques.php');
     }
 
-    public function createPlanque($code, $adresse, $ville, $pays)
+    public function createPlanque($code, $adresse, $ville, $pays, $type)
     {
         $planques = new Planques();
-        $planqueToCreate = $planques->create($code, $adresse, $ville, $pays);
+        $planqueToCreate = $planques->create($code, $adresse, $ville, $pays, $type);
         $planques = $planques->lister();
         require_once('vues/liste-planques.php');
     }
 
-    public function updatePlanque($id,$code, $adresse, $ville, $pays)
+    public function updatePlanque($id,$code, $adresse, $ville, $pays, $type)
     {
         $planques = new Planques();
-        $planqueToUpdate = $planques->update($id,$code, $adresse, $ville, $pays);
+        $planqueToUpdate = $planques->update($id,$code, $adresse, $ville, $pays, $type);
         $planques = $planques->lister();
         require_once('vues/liste-planques.php');
     }

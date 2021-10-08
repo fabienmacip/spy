@@ -12,6 +12,7 @@ class Planque
     private $adresse;
     private $ville;
     private $pays;
+    private $type;
 
     public function afficherPlanque($id)
     {
@@ -73,5 +74,28 @@ class Planque
 
         return $paysNom;
     }
-	
+
+	public function getType()
+    {
+        return $this->type;
+    }
+
+    public function getTypeNom()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT intitule
+                    FROM type_de_planque
+                    WHERE id = '.$this->type.'');
+
+            //$stmt = $this->pdo->query('SELECT c.nom AS nom
+            //FROM planque AS p, pays AS c
+            //WHERE c.id = '.$this->pays.' AND p.pays = c.id ');
+        }
+     
+        $typeNom = $stmt->fetch()[0];
+
+        return $typeNom;
+    }
+    
+
 }

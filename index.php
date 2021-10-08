@@ -10,6 +10,8 @@ require_once('modeles/Specialite.php');
 require_once('modeles/Specialites.php');
 require_once('modeles/TypeMission.php');
 require_once('modeles/TypeMissions.php');
+require_once('modeles/TypePlanque.php');
+require_once('modeles/TypePlanques.php');
 require_once('modeles/Administrateur.php');
 require_once('modeles/Administrateurs.php');
 require_once('modeles/Planque.php');
@@ -74,6 +76,21 @@ if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action
 } elseif (isset($_GET['page']) && 'typemissions' === $_GET['page']) {
     $controleur->listerTypesMissions();
 
+// TYPES de PLANQUES - CRUD
+// TYPES de PLANQUES - CREATE
+} elseif (isset($_POST['page']) && 'typeplanques' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] && isset($_POST['intitule'])) {
+    $controleur->createTypePlanque($_POST['intitule']);
+// TYPES de PLANQUES - UPDATE
+} elseif (isset($_POST['page']) && 'typeplanques' === $_POST['page'] && isset($_POST['action']) && 'update' === $_POST['action'] && isset($_POST['intitule'])) {
+    $controleur->updateTypePlanque($_POST['idTypePlanqueToUpdate'],$_POST['intitule']);
+// TYPES de PLANQUES - DELETE
+} elseif (isset($_GET['page']) && 'typeplanques' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] && isset($_GET['id']) && isset($_GET['intitule'])) {
+    $controleur->deleteTypePlanque($_GET['id'],$_GET['intitule']);
+// TYPES de PLANQUES - READ
+} elseif (isset($_GET['page']) && 'typeplanques' === $_GET['page']) {
+    $controleur->listerTypesPlanques();
+
+
 // ADMINISTRATEURS - CRUD    
 // ADMINISTRATEURS - CREATE
 } elseif (isset($_POST['page']) && 'administrateurs' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] 
@@ -92,12 +109,12 @@ if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action
 // PLANQUES - CRUD
 // PLANQUES - CREATE
 } elseif (isset($_POST['page']) && 'planques' === $_POST['page'] && isset($_POST['action']) && 'create' === $_POST['action'] 
-&& isset($_POST['code']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['pays'])) {
-$controleur->createPlanque($_POST['code'],$_POST['adresse'],$_POST['ville'],$_POST['pays']);
+&& isset($_POST['code']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['pays']) && isset($_POST['type'])) {
+$controleur->createPlanque($_POST['code'],$_POST['adresse'],$_POST['ville'],$_POST['pays'],$_POST['type']);
 // PLANQUES - UPDATE
 } elseif (isset($_POST['page']) && 'planques' === $_POST['page'] && isset($_POST['action']) && 'update' === $_POST['action'] 
-          && isset($_POST['code']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['pays'])) {
-$controleur->updatePlanque($_POST['idPlanqueToUpdate'],$_POST['code'],$_POST['adresse'],$_POST['ville'],$_POST['pays']);
+          && isset($_POST['code']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['pays']) && isset($_POST['type'])) {
+$controleur->updatePlanque($_POST['idPlanqueToUpdate'],$_POST['code'],$_POST['adresse'],$_POST['ville'],$_POST['pays'],$_POST['type']);
 // PLANQUES - DELETE
 } elseif (isset($_GET['page']) && 'planques' === $_GET['page'] && isset($_GET['action']) && 'delete' === $_GET['action'] && isset($_GET['id']) && isset($_GET['code']) && isset($_GET['ville'])) {
 $controleur->deletePlanque($_GET['id'],$_GET['code'],$_GET['ville']);

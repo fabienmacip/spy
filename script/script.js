@@ -300,6 +300,48 @@ function confirmeSuppressionTypeMission(id,intitule){
   }
 }
 
+// ##############  TYPE PLANQUE  ###################
+
+// Affiche le formulaire de modification d'un type de planque
+function displayUpdateTypePlanque(id, intitule){
+
+  let updateForm = '<form method="post" action="index.php">' + 
+                '<label for="nom"></label><input type="text" maxlength="40" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '">' +
+                '<input type="hidden" name="idTypePlanqueToUpdate" id="idTypePlanqueToUpdate" value="' + id + '">' +
+                '<input type="hidden" name="action" id="action" value="update">' +
+                '<input type="hidden" name="page" id="page" value="typeplanques">' +
+                '<button type="reset">Reset</button>' +
+                '<button type="button" id="annuler">Annuler</button>' +
+                '<button type="submit">Envoyer</button>' +
+                '</form>';
+
+  let codeAConserver = $('#tr'+id);
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='4'>" + updateForm + "</td></tr>");
+
+  // On frise tous les autres boutons "Modifier"
+  $('.updateTypePlanque').prop('disabled',true);
+
+
+  // Si on clique sur ANNULER, on ré-affiche la ligne normale -> codeAConserver
+  $( "#annuler" ).click(function() {
+    $('#tr'+id).replaceWith(codeAConserver);
+    $('.updateTypePlanque').prop('disabled',false);
+  });
+}
+
+// Confirme suppression d'un type de planque
+function confirmeSuppressionTypePlanque(id,intitule){
+  
+  let lien = "index.php?page=typeplanques&action=delete&id=" + id + "&intitule="+ intitule;
+
+  if(confirm("Supprimer " + intitule + " ?")){
+    // Supprimer la ligne dans la BDD
+    window.location.href = lien;
+  }
+}
+
+
+
 
 // ####################  ADMINISTRATEUR ####################
 
@@ -348,11 +390,16 @@ function confirmeSuppressionAdministrateur(id, nom, prenom){
 // ####################  PLANQUE ####################
 
 // Affiche le formulaire de modification d'une planque
-function displayUpdatePlanque(id, code, adresse, ville, pays){
+function displayUpdatePlanque(id, code, adresse, ville, pays, type){
 
   let selectPays = $('#pays').prop('outerHTML');;
   // On place le sélecteur de la liste déroulante sur le bon pays
   selectPays = selectPays.replace("value=\""+pays.toString()+"\"","value=\""+pays.toString()+"\" selected");
+  
+  let selectType = $('#type').prop('outerHTML');;
+  // On place le sélecteur de la liste déroulante sur le bon type
+  selectType = selectType.replace("value=\""+type.toString()+"\"","value=\""+type.toString()+"\" selected");
+  
   
   let updateForm = '<form method="post" action="index.php">' + 
                 '<div class="form-group">' +
@@ -361,6 +408,7 @@ function displayUpdatePlanque(id, code, adresse, ville, pays){
                 '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
                 '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
                 selectPays +
+                selectType +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="planques">' +
                 '<button type="reset">Reset</button>' +

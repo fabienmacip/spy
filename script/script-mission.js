@@ -97,7 +97,7 @@ function verifAuMoinsUnAgentSpe() {
 
 // MODIFICATIONS DES CARTES DE LA MISSION
 
-function confirmeDeletePlanque(id_planque, code_planque, id_mission, okPourDelete) {
+function confirmeDeletePlanque(id_planque, code_planque, id_mission) {
 
       let lien = "mission.php?page=mission&action=delete&module=planque&id_planque=" + id_planque + "&id=" + id_mission ;
     
