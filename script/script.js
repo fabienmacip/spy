@@ -63,15 +63,17 @@ function majSpecialiteMission(specialite,listeSpecialitesDesAgents = []) {
   listeAgents2 = '';
   listeSpecialitesDesAgents.forEach(function(item) {
     $('#unAgent'+item[0]).removeClass("aumoinsun");
+    $('#unAgent'+item[0]+' label span').removeClass("listeDesSpes");
     if(item[1].indexOf(specialite) < 0){
       listeAgents2 += $('#unAgent'+item[0]).prop('outerHTML');
     } else {
+      $('#unAgent'+item[0]+' label span').addClass("listeDesSpes");
       $('#unAgent'+item[0]).addClass("aumoinsun");
       listeAgents1 += $('#unAgent'+item[0]).prop('outerHTML');
     }
   });
 
-  $('#listeAgents').replaceWith("<div id=\"listeAgents\"><label>Agents</label><br/>" + listeAgents1 + listeAgents2 + "</div>");
+  $('#listeAgents').replaceWith("<div id=\"listeAgents\"><label class=\"mb-2\">Agents</label><br/>" + listeAgents1 + "<br/>" + listeAgents2 + "</div>");
   $('#form-create-mission #listeAgents div input[type=checkbox]').on('click', function() {
     verifAuMoinsUnAgentSpe();
   });
@@ -366,17 +368,17 @@ function confirmeSuppressionTypePlanque(id,intitule){
 function displayUpdateAdministrateur(id, nom, prenom, mail, mot_de_passe){
 
   let updateForm = '<form method="post" action="index.php">' + 
-                '<div class="form-group">' +
-                '<label for="nom"></label><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
-                '<label for="prenom"></label><input type="text" name="prenom" value="'+ prenom + '" maxlength="30" id="prenom" placeholder="' + prenom + '" class="form-control"></div>' +
-                '<label for="mail"></label><input type="mail" name="mail" value="' + mail + '" maxlength="50" id="mail" placeholder="' + mail + '" class="form-control">' +
-                '<label for="mot_de_passe"></label><input type="text" name="mot_de_passe" value="' + mot_de_passe + '" maxlength="40" id="mot_de_passe" placeholder="' + mot_de_passe + '" class="form-control"></div>' +               
-                '<input type="hidden" name="idAdministrateurToUpdate" id="idAdministrateurToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3">' +
+                '<div class="col-7 col-lg-3 form-floating"><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + ' " class="form-control"><label for="nom">Nom</label></div>' +
+                '<div class="col-7 col-lg-3 form-floating"><input type="text" name="prenom" value="'+ prenom + '" maxlength="30" id="prenom" placeholder="' + prenom + '" class="form-control"><label for="prenom">Pr&eacute;nom</label></div>' +
+                '<div class="col-7 col-lg-3 form-floating"><input type="mail" name="mail" value="' + mail + '" maxlength="50" id="mail" placeholder="' + mail + '" class="form-control"><label for="mail">Mail</label></div>' +
+                '<div class="col-7 col-lg-3 form-floating"><input type="text" name="mot_de_passe" value="' + mot_de_passe + '" maxlength="40" id="mot_de_passe" placeholder="' + mot_de_passe + '" class="form-control"><label for="mot_de_passe">Mot de passe</label></div></div>' +               
+                '<div class="row text-center"><div class="col-0 col-lg-3"><input type="hidden" name="idAdministrateurToUpdate" id="idAdministrateurToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
-                '<input type="hidden" name="page" id="page" value="administrateurs">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<input type="hidden" name="page" id="page" value="administrateurs"></div>' +
+                '<div class="col-7 col-lg-6 d-flex justify-content-around"><button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div><div class="col-0 col-lg-3"></div></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
@@ -462,6 +464,10 @@ function confirmeSuppressionPlanque(id, code, ville){
 function alertMe() {
   alert("Cliqué ! ");
 }
+
+
+// ################ SPECIALITES #####################
+
 
 // Vérifier s'il y a au moins une spécialité
 function verifUneSpecialite(numDiv = 1) {

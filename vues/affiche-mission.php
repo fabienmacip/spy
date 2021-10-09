@@ -29,7 +29,7 @@ else:
   }
 ?>
 
-<div class="card w-75 mx-auto text-center border-0">
+<div class="card w-100 w-75 mx-auto px-1 px-lg-4 px-xl-5 text-center border-0">
   <div class="card-body">
     <h5 class="card-title">
       MISSION : <?= $mission->getTitre() ?>
@@ -47,10 +47,12 @@ else:
   </div>
 </div>
 
-
+<?php 
+$classesDesCols = "col-12 col-md-6 col-lg-3 mb-3";
+?>
 <div class="container">
   <div class="row">
-    <div class="col-3">
+    <div class="<?= $classesDesCols ?>">
         <?php
             // DETAILS de la MISSION
             require_once('form-update-mission.php');
@@ -61,19 +63,19 @@ else:
         ?>
 
     </div>
-    <div class="col-3">
+    <div class="<?= $classesDesCols ?>">
         <?php
             // CIBLES
             require_once('carte-des-cibles.php');
         ?>
     </div>
-    <div class="col-3">
+    <div class="<?= $classesDesCols ?>">
         <?php
             // CONTACTS
             require_once('carte-des-contacts.php');
         ?>
     </div>
-    <div class="col-3">
+    <div class="<?= $classesDesCols ?>">
         <?php
             // AGENTS
             require_once('carte-des-agents.php');

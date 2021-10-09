@@ -22,7 +22,7 @@ ob_start();
 
     <div class="mb3 pb-4 col-10 mx-auto">
       <label for="password" class="form-label">Mot de passe</label>
-      <input type="password" name="password" maxlength="40" id="password" placeholder="Saisissez votre mot de passe" class="form-control">
+      <input type="password" name="password" minlength="8" maxlength="40" id="password" placeholder="Saisissez votre mot de passe" class="form-control">
       <span id="passwordHelpInline" class="form-text">Entre 8 et 40 caract&egrave;res.</span>
     </div>
 
