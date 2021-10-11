@@ -1,10 +1,10 @@
 <?php
 class Controleur {
 
-    public function afficherMissions()
+    public function afficherMissions($seek = '')
     {
         $missions = new Missions();
-        $missions = $missions->lister();
+        $missions = $missions->lister($seek);
         require_once('vues/liste-missions.php');
     }
 

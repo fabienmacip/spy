@@ -5,15 +5,22 @@ class Missions
 {
     use Modele;
 
-    public function lister()
+    public function lister($seek = '')
     {
+        // Si le champ de recherche n'était pas vide, on ajoute des conditions à la clause WHERE
+        if($seek !== '') {
+            $seek = ' AND (m.titre LIKE \'%'.$seek.'%\' OR m.nom_de_code LIKE \'%'.$seek.'%\' OR p.nom LIKE \'%'.$seek.'%\' 
+                        OR s.intitule LIKE \'%'.$seek.'%\' OR t.intitule LIKE \'%'.$seek.'%\' 
+                        OR m.date_debut LIKE \'%'.$seek.'%\' OR m.date_fin LIKE \'%'.$seek.'%\' OR m.statut LIKE \'%'.$seek.'%\')';
+        }
+        
         if (!is_null($this->pdo)) {
             //$stmt = $this->pdo->query('SELECT * FROM mission');
             $stmt = $this->pdo->query('SELECT m.id AS id, m.titre AS titre, m.nom_de_code AS nom_de_code, 
                     p.nom AS pays, s.intitule AS specialite, t.intitule AS type_de_mission, 
                     m.date_debut AS date_debut, m.date_fin AS date_fin, m.statut AS statut
                     FROM mission AS m, type_de_mission AS t, pays AS p, specialite AS s
-                    WHERE m.pays = p.id AND m.type_de_mission = t.id AND m.specialite = s.id');
+                    WHERE m.pays = p.id AND m.type_de_mission = t.id AND m.specialite = s.id'.$seek);
 
         }
         $missions = [];

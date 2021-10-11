@@ -33,7 +33,12 @@ if(isset($_POST['action']) && 'connexion' === $_POST['action']) {
     $controleur->verifConnexion($_POST['mail'], $_POST['password']);
 }
 
-
+// Si on a lancé une recherche de mission
+if(isset($_POST['action']) && 'seekmission' === $_POST['action'] && isset($_POST['seekmission']) && trim($_POST['seekmission']) !== '') {
+    $recherche = $_POST['seekmission'];
+} else {
+    $recherche = '';
+}
 
 /* if(isset($_SESSION['admin']) && $_SESSION['admin'] === 1) {
     $connecte = true;
@@ -54,7 +59,8 @@ if(isset($_GET['page']) && 'connexion' === $_GET['page']) {
 
 // Affichage de la liste des missions, autrement dit la page d'accueil.
 } else if (isset($_GET['page']) && 'missions' === $_GET['page'] && !isset($_GET['action']) && !isset($_POST['action'])) {
-    $controleur->afficherMissions();
+    $controleur->afficherMissions($recherche);
+    
 
 // PAYS - CRUD
 // PAYS - CREATE
@@ -201,6 +207,6 @@ $controleur->deleteMission($_GET['id'],$_GET['titre'],$_GET['nom_de_code']);
 
 // MISSIONS - READ
 } else {
-    $controleur->afficherMissions();
+    $controleur->afficherMissions($recherche);
 }
 

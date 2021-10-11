@@ -41,8 +41,18 @@ ob_start();
         <?php
         }
     ?>
-        <div class="mt-2">
-            <a href="#form-create-mission">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
+        <div class="row mt-2">
+            <div class="col-12 col-md-6 mb-2 mb-md-0">
+                <a href="#form-create-mission">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
+            </div>
+            <div class="col-12 col-md-6">
+                <form method="post" action="index.php" class="inline-form"> 
+                    <input type="hidden" name="action" id="action" value="seekmission">
+                    <div class="row align-items-end">
+                        <div class="col-10 input-group"><div class="input-group-text"><img src="./img/search.svg"/></div><input type="text" id="seekmission" name="seekmission" maxlength="40" class="form-control"><button type="submit" class="btn btn-primary">GO !</button> </div>
+                    </div>
+                </form>
+           </div>
         </div>
 
         <div class="table-responsive">

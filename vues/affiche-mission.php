@@ -41,9 +41,15 @@ else:
         Supprimer
       </button>  
     </div>
-    <p class="card-text text-start">
-      Description<br/><i><?= $mission->getDescription() ?></i>
-    </p>
+  <div class="row">
+  <div class="col-0 col-lg-1"></div>
+    <div class="col-12 col-lg-10">
+      <p class="card-text text-start">
+        Description<br/><i><?= $mission->getDescription() ?></i>
+      </p>
+    </div>
+    <div class="col-0 col-lg-1"></div>
+  </div>
   </div>
 </div>
 
