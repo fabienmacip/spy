@@ -30,7 +30,7 @@ ob_start();
     ?>
 
 <div class="mt-2">
-    <a href="#form-create-type-mission">Ajouter un type de mission</a>
+    <a href="#form-create-type-mission">Ajouter un type de mission</a> - <a href="index.php?page=missions"><< Missions</a>
 </div>
 
 

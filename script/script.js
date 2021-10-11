@@ -198,13 +198,13 @@ let pageMission ='';
 function displayUpdatePays(id, nom){
 
   let updateForm = '<form method="post" action="index.php">' + 
-                '<label for="nom"></label><input type="text" maxlength="50" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
-                '<input type="hidden" name="idPaysToUpdate" id="idPaysToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3"><div class="col-12 col-lg-6 mb-3 mb-lg-0 d-flex align-items-start"><label for="nom"></label><input type="text" maxlength="50" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '" class="form-control"></div>' +
+                '<div class="col-12 col-lg-6 d-flex justify-content-around align-items-start"><input type="hidden" name="idPaysToUpdate" id="idPaysToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="updatePays">' +
                 '<input type="hidden" name="page" id="page" value="payss">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div></div>' +
                 '</form>';
 
   //let codeAConserver = $(`#tr${id}`);
@@ -245,13 +245,13 @@ function confirmeSuppressionPays(id,nom){
 function displayUpdateSpecialite(id, intitule){
 
   let updateForm = '<form method="post" action="index.php">' + 
-                '<label for="nom"></label><input type="text" maxlength="50" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '">' +
-                '<input type="hidden" name="idSpecialiteToUpdate" id="idSpecialiteToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3"><div class="col-12 col-lg-6 mb-3 mb-lg-0 d-flex align-items-start"><label for="nom"></label><input type="text" maxlength="50" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '" class="form-control"></div>' +
+                '<div class="col-12 col-lg-6 d-flex justify-content-around align-items-start"><input type="hidden" name="idSpecialiteToUpdate" id="idSpecialiteToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="updateSpecialite">' +
                 '<input type="hidden" name="page" id="page" value="specialites">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
@@ -285,13 +285,13 @@ function confirmeSuppressionSpecialite(id,intitule){
 function displayUpdateTypeMission(id, intitule){
 
   let updateForm = '<form method="post" action="index.php">' + 
-                '<label for="nom"></label><input type="text" maxlength="60" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '">' +
-                '<input type="hidden" name="idTypeMissionToUpdate" id="idTypeMissionToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3"><div class="col-12 col-lg-6 mb-3 mb-lg-0 d-flex align-items-start"><label for="nom"></label><input type="text" maxlength="60" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '" class="form-control"></div>' +
+                '<div class="col-12 col-lg-6 d-flex justify-content-around align-items-start"><input type="hidden" name="idTypeMissionToUpdate" id="idTypeMissionToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="typemissions">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
@@ -325,13 +325,13 @@ function confirmeSuppressionTypeMission(id,intitule){
 function displayUpdateTypePlanque(id, intitule){
 
   let updateForm = '<form method="post" action="index.php">' + 
-                '<label for="nom"></label><input type="text" maxlength="40" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '">' +
-                '<input type="hidden" name="idTypePlanqueToUpdate" id="idTypePlanqueToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3"><div class="col-12 col-lg-6 mb-3 mb-lg-0 d-flex align-items-start"><label for="nom"></label><input type="text" maxlength="40" name="intitule" value="'+ intitule + '" id="intitule" placeholder="'+ intitule + '" class="form-control"></div>' +
+                '<div class="col-12 col-lg-6 d-flex justify-content-around align-items-start"><input type="hidden" name="idTypePlanqueToUpdate" id="idTypePlanqueToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="typeplanques">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
@@ -421,18 +421,18 @@ function displayUpdatePlanque(id, code, adresse, ville, pays, type){
   
   
   let updateForm = '<form method="post" action="index.php">' + 
-                '<div class="form-group">' +
-                '<label for="code"></label><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '">' +
-                '<label for="adresse"></label><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control"></div>' +
-                '<label for="ville"></label><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"></div>' +               
-                '<input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
-                selectPays +
-                selectType +
-                '<input type="hidden" name="action" id="action" value="update">' +
+                '<div class="form-group row my-3">' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-4 form-floating"><input type="text" maxlength="30" name="code" value="'+ code + '" id="code" placeholder="'+ code + '" class="form-control pl-3 mb-3"><label for="code">Code</label></div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-4 form-floating"><input type="text" name="adresse" value="'+ adresse + '" maxlength="50" id="adresse" placeholder="' + adresse + '" class="form-control mb-3"><label for="adresse">Adresse</label></div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-4 form-floating"><input type="text" name="ville" value="' + ville + '" maxlength="40" id="ville" placeholder="' + ville + '" class="form-control"><label for="ville">Ville</label></div><div class="col-3 d-lg-none"></div></div>' +               
+                '<div class="form-group row my-3"><div class="col-3 d-lg-none"></div><div class="col-6 col-lg-6"><input type="hidden" name="idPlanqueToUpdate" id="idPlanqueToUpdate" value="' + id + '">' +
+                '<label for="pays">Pays</label> ' + selectPays + '</div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-6"><label for="type">Type de planque</label> ' + selectType + '</div><div class="col-3 d-lg-none"></div></div>' +
+                '<div class="form-group row my-3"><div class="col-3"></div><div class="col-6 d-flex justify-content-around"><input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="planques">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
@@ -492,15 +492,18 @@ function verifUneSpecialite(numDiv = 1) {
 function afficheSpecialites(numDiv = 1) {
   //if($('#typeDePersonne #agent').prop("checked") == true) {
 
-    if($("#typeDePersonne"+numDiv+' #agent').prop("checked") == true) {
+
+    if($("#typeDePersonne"+numDiv+' #agent').prop("checked") == true || $("#typeDePersonne"+numDiv+' div #agent').prop("checked") == true) {
     $('#listeSpecialites'+numDiv).show();
+    
   }
   else {
+    
     $('#listeSpecialites'+numDiv).hide();
   }
 
   // Autoriser l'envoi du formulaire si ce n'est pas un agent -> Pas besoin de cocher au moins une spécialité.
-  if($('#typeDePersonne'+numDiv+' #agent').prop("checked") == false) {
+  if($('#typeDePersonne'+numDiv+' #agent').prop("checked") == false || $('#typeDePersonne'+numDiv+' div #agent').prop("checked") == false) {
     $('#btn-create-personne').prop('disabled',false);
   } else {
     verifUneSpecialite(numDiv);
@@ -545,22 +548,27 @@ function displayUpdatePersonne(id, nom, prenom, dob, secret_code, pays, type, sp
   
   
 // FORMULAIRE de MODIFICATION d'une PERSONNE
+
+//'<div class="form-group row my-3">' +
+//'<div class="col-7 col-lg-3 form-floating">
+
 // let updateForm = selectSpecialites;
    let updateForm = '<form method="post" action="index.php" class="text-start">' + 
-                '<div class="form-group">' +
-                '<label for="nom"></label><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '">' +
-                '<label for="prenom"></label><input type="text" maxlength="30" name="prenom" value="'+ prenom + '" id="prenom" placeholder="'+ prenom + '">' +
-                '<label for="dob"></label><input type="date" name="dob" value="'+ dob + '" id="dob" placeholder="' + dob + '" min="1920-01-01" max="2040-12-31" class="form-control"></div>' +
-                selectPays +
-                '<label for="secret_code"></label><input type="text" name="secret_code" value="' + secret_code + '" maxlength="20" id="secret_code" placeholder="' + secret_code + '" class="form-control"></div>' +               
-                selectType +
-                selectSpecialites +
-                '<input type="hidden" name="idPersonneToUpdate" id="idPersonneToUpdate" value="' + id + '">' +
+                '<div class="form-group row my-3">' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3 form-floating"><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + '" class="form-control"><label for="nom">Nom</label></div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3 form-floating"><input type="text" maxlength="30" name="prenom" value="'+ prenom + '" id="prenom" placeholder="'+ prenom + '" class="form-control"><label for="prenom">Pr&eacute;nom</label></div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3 form-floating"><input type="date" name="dob" value="'+ dob + '" id="dob" placeholder="' + dob + '" min="1920-01-01" max="2040-12-31" class="form-control"><label for="dob">N&eacute;e le</label></div><div class="col-3 d-lg-none"></div>' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3"><label for="pays">Pays</label>' + selectPays + '</div><div class="col-3 d-lg-none"></div></div>' +
+                '<div class="form-group row my-3">' +
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3 form-floating"><input type="text" name="secret_code" value="' + secret_code + '" maxlength="20" id="secret_code" placeholder="' + secret_code + '" class="form-control"><label for="secret_code">Code secret</label></div><div class="col-3 d-lg-none"></div>' +               
+                '<div class="col-3 d-lg-none"></div><div class="col-6 col-lg-3">' + selectType + '</div><div class="col-3 d-lg-none"></div></div>' +
+                '<div class="form-group row my-3"><div class="col-3 d-lg-none"></div><div class="col-6 col-lg-12">' + selectSpecialites + '</div></div>' +
+                '<div class="row text-center"><div class="col-3"></div><div class="col-6 col-lg-6 d-flex justify-content-around"><input type="hidden" name="idPersonneToUpdate" id="idPersonneToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="personnes">' +
-                '<button type="reset">Reset</button>' +
-                '<button type="button" id="annuler">Annuler</button>' +
-                '<button type="submit">Envoyer</button>' +
+                '<button type="reset" class="btn btn-primary">Reset</button>' +
+                '<button type="button" id="annuler" class="btn btn-primary">Annuler</button>' +
+                '<button type="submit" class="btn btn-primary">Envoyer</button></div></div>' +
                 '</form>';
 
   let codeAConserver = $('#tr'+id);

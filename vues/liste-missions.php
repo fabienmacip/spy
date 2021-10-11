@@ -42,7 +42,7 @@ ob_start();
         }
     ?>
         <div class="mt-2">
-            <a href="#form-create-mission">Ajouter une mission</a>
+            <a href="#form-create-mission">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
         </div>
 
         <div class="table-responsive">

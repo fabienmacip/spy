@@ -53,9 +53,9 @@
                 <li class="nav-item"><a href="index.php?page=personnes" class="nav-link">Personnes</a></li>
                 <li class="nav-item"><a href="index.php?page=specialites" class="nav-link">Sp&eacute;cialit&eacute;s</a></li>
                 <li class="nav-item"><a href="index.php?page=payss" class="nav-link">Pays</a></li>
-                <li class="nav-item"><a href="index.php?page=typemissions" class="nav-link">Types missions</a></li>
+                <!-- <li class="nav-item"><a href="index.php?page=typemissions" class="nav-link">Types missions</a></li> -->
                 <li class="nav-item"><a href="index.php?page=planques" class="nav-link">Planques</a></li>
-                <li class="nav-item"><a href="index.php?page=typeplanques" class="nav-link">Types planques</a></li>
+                <!-- <li class="nav-item"><a href="index.php?page=typeplanques" class="nav-link">Types planques</a></li> -->
                 <!-- <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Missions</a></li> -->
                 
                 <?php 

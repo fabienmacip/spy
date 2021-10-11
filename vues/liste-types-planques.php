@@ -30,7 +30,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-        <a href="#form-create-type-planque">Ajouter un type de planque</a>
+        <a href="#form-create-type-planque">Ajouter un type de planque</a> - <a href="index.php?page=planques"><< Planques</a>
     </div>
 
 
@@ -90,8 +90,8 @@ ob_start();
             <div class="col-12 col-md-4 mt-3 mt-md-0">
                 <input type="hidden" name="action" id="action" value="create">
                 <input type="hidden" name="page" id="page" value="typeplanques">
-                <button type="reset">Reset</button>
-                <button type="submit">Envoyer</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
             </div>
             <div class="col-0 col-md-2"></div>
         </div>
