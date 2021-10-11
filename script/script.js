@@ -186,7 +186,51 @@ let pageMission ='';
       $('button').prop('disabled',false);
     }
     
-  
+    // Gestion de l'affichage du formulaire de création de mission
+
+    $('#form-create-mission').hide();
+
+    $('#show-form-create-mission').click(function(e){
+      $('#pre-form-create-mission').hide();
+      $('#form-create-mission').show();
+    });
+    
+    $('#hide-form-create-mission').click(function(e){
+      $('#form-create-mission').hide();
+      $('#pre-form-create-mission').show();
+    });
+
+    // Gestion de l'affichage du formulaire de création de personne
+
+    $('#form-create-personne').hide();
+
+    $('#show-form-create-personne').click(function(e){
+      $('#pre-form-create-personne').hide();
+      $('#form-create-personne').show();
+    });
+    
+    $('#hide-form-create-personne').click(function(e){
+      $('#form-create-personne').hide();
+      $('#pre-form-create-personne').show();
+    });
+
+    // Gestion de l'affichage du formulaire de création de planque
+
+    $('#form-create-planque').hide();
+
+    $('#show-form-create-planque').click(function(e){
+      $('#pre-form-create-planque').hide();
+      $('#form-create-planque').show();
+    });
+    
+    $('#hide-form-create-planque').click(function(e){
+      $('#form-create-planque').hide();
+      $('#pre-form-create-planque').show();
+    });
+
+
+
+
 }) // FIN DU document.READY
 
 //  ##############  MISSION - 2  ###################
@@ -224,19 +268,13 @@ function displayUpdatePays(id, nom){
 
 // Confirme suppression d'un Pays
 function confirmeSuppressionPays(id,nom){
-  console.log(id,nom);
-
+  
   let lien = "index.php?page=payss&action=delete&id=" + id + "&nom="+ nom;
 
-  console.log(lien);
-
-  if(!confirm("Supprimer " + nom + " ?")){
-      //e.target.preventDefault();
-      console.log("pas confirmé");
-  } else {
-    // Supprimer la ligne
+  if(confirm("Supprimer " + nom + " ?")){
     window.location.href = lien;
-  }
+      
+  } 
 }
 
 // ##############  SPECIALITE  ###################

@@ -32,7 +32,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-            <a href="#form-create-personne">Ajouter une personne</a>
+            <a href="#add">Ajouter une personne</a>
     </div>
 
     
@@ -131,9 +131,22 @@ ob_start();
     </div>    
 
 <!-- ######################## DEBUT FORM AJOUT PERSONNE #################### -->
+<a id="add"></a>
+<div id="pre-form-create-personne" class="row bg-info rounded mx-0 align-items-center pt-1 mt-2">
+    <div class="col-10 col-md-11">
+        <h4 class="py-2 ps-1">Ajouter une personne</h4>
+    </div>
+    <div class="col-2 col-md-1 justify-content-center"><img id="show-form-create-personne" class="plus-minus-circle" src="./img/plus-circle.svg"></div>
+</div>
 
     <form method="post" action="index.php" id="form-create-personne" class="mt-3 rounded py-3 px-1 bg-info">
-        <h4>Ajouter une personne</h4>    
+        <div class="row bg-info rounded mx-0 align-items-center">
+            <div class="col-10 col-md-11">
+                <h4 class="py-2 ps-1">Ajouter une personne</h4>
+            </div>
+            <div class="col-2 col-md-1 justify-content-center"><img id="hide-form-create-personne" class="plus-minus-circle" src="./img/dash-circle.svg"></div>
+        </div>
+
         <div class="form-group mb-2">
             <label for="code">Nom</label>
             <input type="text" name="nom" maxlength="40" id="nom" placeholder="Nom" class="form-control" aria-describedby="nomHelpBlock">

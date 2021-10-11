@@ -65,9 +65,10 @@ ob_start();
                                 </button>
                             </td>
                             <td>
-                                <button type="button" class="btn-primary" onclick=confirmeSuppressionPays(<?php echo $pays->getId().',"'.str_replace(" ","&nbsp;",$pays->getNom()).'"' ?>)>
+                                <button type="submit" class="btn-primary" onclick=confirmeSuppressionPays(<?php echo $pays->getId().',"'.str_replace(" ","&nbsp;",$pays->getNom()).'"' ?>)>
                                     Supprimer
                                 </button>
+                                </form>
                             </td>
                         </tr>
                         <?php endforeach; ?>

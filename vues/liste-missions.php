@@ -43,7 +43,7 @@ ob_start();
     ?>
         <div class="row mt-2">
             <div class="col-12 col-md-6 mb-2 mb-md-0">
-                <a href="#form-create-mission">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
+                <a href="#add">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
             </div>
             <div class="col-12 col-md-6">
                 <form method="post" action="index.php" class="inline-form"> 
@@ -111,9 +111,20 @@ ob_start();
 
 
 <!-- ######################## DEBUT FORM AJOUT MISSION #################### -->
-
+<a id="add"></a>
+<div id="pre-form-create-mission" class="row bg-info rounded mx-0 align-items-center pt-1 mt-2">
+    <div class="col-10 col-md-11">
+        <h4 class="py-2 ps-1">Ajouter une mission</h4>
+    </div>
+    <div class="col-2 col-md-1 justify-content-center"><img id="show-form-create-mission" class="plus-minus-circle" src="./img/plus-circle.svg"></div>
+</div>
 <form method="post" action="index.php" id="form-create-mission" class="mt-3 py-3 px-1 bg-info rounded">
-        <h4>Ajouter une mission</h4>    
+        <div class="row bg-info rounded mx-0 align-items-center">
+            <div class="col-10 col-md-11">
+                <h4 class="py-2 ps-1">Ajouter une mission</h4>
+            </div>
+            <div class="col-2 col-md-1 justify-content-center"><img id="hide-form-create-mission" class="plus-minus-circle" src="./img/dash-circle.svg"></div>
+        </div>
         <div class="form-group mb-2">
             <label for="titre">Titre</label>
             <input type="text" name="titre" maxlength="60" id="titre" placeholder="Titre" class="form-control" aria-describedby="titreHelpBlock">
