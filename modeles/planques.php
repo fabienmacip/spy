@@ -24,7 +24,7 @@ class Planques
         while ($planque = $stmt->fetchObject('Planque')) {
             $planques[] = $planque;
         }
-
+        $stmt->closeCursor();
         return $planques;
     }
 
@@ -39,7 +39,7 @@ class Planques
         while ($element = $stmt->fetchObject('Planque')) {
             $liste[] = $element;
         }
-
+        $stmt->closeCursor();
         return $liste;
     }
 

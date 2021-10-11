@@ -45,7 +45,7 @@ class Mission
                 $mission = null;
             }
         }
-
+        $stmt->closeCursor();
         return $mission;
     }
 
@@ -98,6 +98,7 @@ WHERE mp2.id_mission = 1 AND cible.type = 'cible' AND agent.type = 'agent' AND (
 /*         $cibles[] = [0,"Marcel"];
         $cibles[] = [2,"Antoine"];
         $cibles[] = [15,"José"]; */
+        $stmt->closeCursor();
         return $cibles;
     }
 
@@ -134,7 +135,7 @@ WHERE mp2.id_mission = 1 AND cible.type = 'cible' AND agent.type = 'agent' AND (
                 while ($cible = $stmt->fetch()) {
                     $cibles[] = [$cible[0],$cible[1]];
                 }  
-
+                $stmt->closeCursor();
                 return $cibles;
             }
         
@@ -177,6 +178,7 @@ WHERE mp2.id_mission = 1 AND cible.type = 'cible' AND agent.type = 'agent' AND (
                 while ($cible = $stmt->fetch()) {
                     $cibles[] = [$cible[0],$cible[1]];
                 }  
+                $stmt->closeCursor();
                 return $cibles;
             }
 
@@ -211,7 +213,7 @@ WHERE mp2.id_mission = 1 AND cible.type = 'cible' AND agent.type = 'agent' AND (
                 while ($cible = $stmt->fetch()) {
                     $cibles[] = [$cible[0],$cible[1]];
                 }  
-
+                $stmt->closeCursor();
                 return $cibles;
             }
                     

@@ -19,7 +19,7 @@ class TypePlanque
                 $pays = null;
             }
         }
-
+        $stmt->closeCursor();
         return $pays;
     }
 

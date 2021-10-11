@@ -19,7 +19,7 @@ class Pays
                 $pays = null;
             }
         }
-
+        $stmt->closeCursor();
         return $pays;
     }
 

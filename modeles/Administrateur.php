@@ -23,7 +23,7 @@ class Administrateur
                 $element = null;
             }
         }
-
+        $stmt->closeCursor();
         return $element;
     }
 

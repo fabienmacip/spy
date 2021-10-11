@@ -29,7 +29,7 @@ class Planque
                 $planque = null;
             }
         }
-
+        $stmt->closeCursor();
         return $planque;
     }
 

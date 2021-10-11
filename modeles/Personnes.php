@@ -23,7 +23,7 @@ class Personnes
         while ($cible = $stmt->fetchObject('Personne')) {
             $cibles[] = $cible;
         }
-
+        $stmt->closeCursor();
         return $cibles;
     }
 
@@ -38,7 +38,7 @@ class Personnes
         while ($element = $stmt->fetchObject('Personne')) {
             $liste[] = $element;
         }
-
+        $stmt->closeCursor();
         return $liste;
     }
 

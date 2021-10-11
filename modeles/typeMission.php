@@ -19,7 +19,7 @@ class TypeMission
                 $element = null;
             }
         }
-
+        $stmt->closeCursor();
         return $element;
     }
 

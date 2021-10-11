@@ -14,7 +14,7 @@ class Specialites
         while ($element = $stmt->fetchObject('Specialite')) {
             $liste[] = $element;
         }
-
+        $stmt->closeCursor();
         return $liste;
     }
 
@@ -28,7 +28,7 @@ class Specialites
         while ($specialite = $stmt->fetchObject('Specialite')) {
             $specialites[] = [$specialite->getId(), $specialite->getIntitule()];
         }
-
+        $stmt->closeCursor();
         return $specialites;
     }
 

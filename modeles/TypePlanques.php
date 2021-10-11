@@ -14,7 +14,7 @@ class TypePlanques
         while ($pays = $stmt->fetchObject('TypePlanque')) {
             $payss[] = $pays;
         }
-
+        $stmt->closeCursor();
         return $payss;
     }
 
@@ -28,7 +28,7 @@ class TypePlanques
         while ($pays = $stmt->fetchObject('TypePlanque')) {
             $payss[] = [$pays->getId(), $pays->getIntitule()];
         }
-
+        $stmt->closeCursor();
         return $payss;
     }
 

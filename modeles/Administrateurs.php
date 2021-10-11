@@ -14,7 +14,7 @@ class Administrateurs
         while ($element = $stmt->fetchObject('Administrateur')) {
             $liste[] = $element;
         }
-
+        $stmt->closeCursor();
         return $liste;
     }
 
@@ -36,7 +36,7 @@ class Administrateurs
                 $tupleCreated = "L'administrateur <b>".$nom." ".$prenom."</b> n'a pas pu être ajouté.<br/><br/>".$e;
             }
         }
-        
+        $res->closeCursor();
         return $tupleCreated;
     }
 

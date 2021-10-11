@@ -14,7 +14,7 @@ class Payss
         while ($pays = $stmt->fetchObject('Pays')) {
             $payss[] = $pays;
         }
-
+        $stmt->closeCursor();
         return $payss;
     }
 

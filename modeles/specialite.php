@@ -19,7 +19,7 @@ class Specialite
                 $element = null;
             }
         }
-
+        $stmt->closeCursor();
         return $element;
     }
 

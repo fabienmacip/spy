@@ -27,7 +27,7 @@ class Missions
         while ($mission = $stmt->fetchObject('Mission')) {
             $missions[] = $mission;
         }
-
+        $stmt->closeCursor();
         return $missions;
     }
 

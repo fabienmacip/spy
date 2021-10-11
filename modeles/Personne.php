@@ -31,7 +31,7 @@ class Personne
                 $cible = null;
             }
         }
-
+        $stmt->closeCursor();
         return $cible;
     }
 
@@ -47,6 +47,7 @@ class Personne
             $specialites[] = $specialite;
         }
         //var_dump($specialites);
+        $stmt->closeCursor();
         return $specialites;
     }
 
@@ -65,7 +66,7 @@ class Personne
         if($specialites !== "") {
             $specialites = substr($specialites,0,-2).".";
         }
-
+        $stmt->closeCursor();
         //var_dump($specialites);
         return $specialites;
     }
@@ -85,7 +86,7 @@ class Personne
         if($specialites !== "") {
             $specialites = substr($specialites,0,-1);
         }
-
+        $stmt->closeCursor();
         //var_dump($specialites);
         return $specialites;
     }

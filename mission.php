@@ -6,7 +6,7 @@ $mission = null;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $missions = $missions->listerMission($_GET['id']);
 } */
-require_once('controleurs/ControleurMission.php');
+require_once('controleurs/controleurMission.php');
 require_once('modeles/Modele.php');
 require_once('modeles/Mission.php');
 require_once('modeles/Missions.php');

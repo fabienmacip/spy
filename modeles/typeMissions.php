@@ -14,7 +14,7 @@ class TypeMissions
         while ($element = $stmt->fetchObject('TypeMission')) {
             $liste[] = $element;
         }
-
+        $stmt->closeCursor();
         return $liste;
     }
 
