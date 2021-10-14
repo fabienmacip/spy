@@ -42,7 +42,7 @@ ob_start();
             <thead class="table-dark">
                 <tr>
                     <th width="10%">Id</th>
-                    <th width="50%">Intutul&eacute;</th>
+                    <th width="50%">Intitul&eacute;</th>
                     <th width="20%"></th>
                     <th width="20%"></th>
                 </tr>
