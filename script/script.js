@@ -181,6 +181,8 @@ let pageMission ='';
       $('.btn-connexion').removeClass('inactif');
       /* $('#navbarDropdown').prop('disabled',false); */
 
+      $('.add-link').hide();
+
       // Formulaires de création ayant l'icône PLUS
       $('#pre-form-create-mission').hide();
       $('#pre-form-create-personne').hide();

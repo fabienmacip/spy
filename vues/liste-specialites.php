@@ -30,7 +30,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-        <a href="#form-create-spe">Ajouter une sp&eacute;cialit&eacute;</a>
+        <a href="#form-create-spe" class="add-link">Ajouter une sp&eacute;cialit&eacute;</a>
     </div>
 
 

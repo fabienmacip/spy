@@ -35,7 +35,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-            <a href="#add">Ajouter une planque</a> - <a href="index.php?page=typeplanques">Types de planques</a>
+            <a href="#add" class="add-link">Ajouter une planque</a> - <a href="index.php?page=typeplanques">Types de planques</a>
     </div>
 
 

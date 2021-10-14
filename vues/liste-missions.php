@@ -43,7 +43,7 @@ ob_start();
     ?>
         <div class="row mt-2">
             <div class="col-12 col-md-6 mb-2 mb-md-0">
-                <a href="#add">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
+                <a href="#add" class="add-link">Ajouter une mission</a> - <a href="index.php?page=typemissions">Types de missions</a>
             </div>
             <div class="col-12 col-md-6">
                 <form method="post" action="index.php" class="inline-form"> 

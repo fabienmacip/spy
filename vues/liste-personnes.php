@@ -31,7 +31,7 @@ ob_start();
         }
     ?>
 
-    <div class="mt-2">
+    <div class="mt-2 add-link">
             <a href="#add">Ajouter une personne</a>
     </div>
 

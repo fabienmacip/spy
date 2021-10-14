@@ -30,7 +30,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-        <a href="#form-create-pays">Ajouter un pays</a>
+        <a href="#form-create-pays" class="add-link">Ajouter un pays</a>
     </div>
 
     <div class="table-responsive">

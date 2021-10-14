@@ -30,7 +30,7 @@ ob_start();
     ?>
 
     <div class="mt-2">
-        <a href="#form-create-type-planque">Ajouter un type de planque</a> - <a href="index.php?page=planques"><< Planques</a>
+        <a href="#form-create-type-planque" class="add-link">Ajouter un type de planque</a> - <a href="index.php?page=planques"><< Planques</a>
     </div>
 
 
