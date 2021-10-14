@@ -25,10 +25,12 @@
                             //$styleDelete = '';
                             $messageDelete = '';
                             $okPourDelete = 1;
+                            
                         } else {
                             //$styleDelete = ' disabled';
                             $okPourDelete = 0;
                             $messageDelete = 'Il faut au moins un agent dans une mission';
+                            
                         }
                         
                         $classeAgentBonneSpecialite = "";

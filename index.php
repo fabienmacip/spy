@@ -2,14 +2,16 @@
 session_start();
 
 ////////////////////////////////////////////////////////////////
-$pdo = null;
+/* $pdo = null;
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=spy;charset=utf8', 'root', '');
-    //$this->pdo = new PDO('mysql:host=91.216.107.161;dbname=fatab195806_9ectvj;charset=utf8', 'fatab195806', '!Angular20');
+    //$pdo = new PDO('mysql:host=localhost;dbname=spy;charset=utf8', 'root', '');
+    $pdo = new PDO('mysql:host=91.216.107.161;dbname=fatab195806_9ectvj;charset=utf8', 'fatab195806', '!Angular20');
     } catch (PDOException $e) {
         exit('Erreur : '.$e->getMessage());
-    }
+    } */
+require_once('modeles/ConnectMe.php');
+//use ConnectMe;
 ////////////////////////////////////////////////////////////////
 
 require_once('controleurs/controleur.php');
