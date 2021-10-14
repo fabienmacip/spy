@@ -2,8 +2,8 @@
 $titre = 'Liste des planques';
 //htmlentities($_POST['taskOption'], ENT_QUOTES, "UTF-8");
 // Pour liste déroulante des PAYS
-$listePays = new Payss();
-$listeType = new TypePlanques();
+$listePays = new Payss($pdo);
+$listeType = new TypePlanques($pdo);
 
 ob_start();
 ?>

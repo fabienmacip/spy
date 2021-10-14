@@ -11,7 +11,7 @@ class TypePlanques
             $stmt = $this->pdo->query('SELECT * FROM type_de_planque');
         }
         $payss = [];
-        while ($pays = $stmt->fetchObject('TypePlanque')) {
+        while ($pays = $stmt->fetchObject('TypePlanque',[$this->pdo])) {
             $payss[] = $pays;
         }
         $stmt->closeCursor();
@@ -25,7 +25,7 @@ class TypePlanques
             $stmt = $this->pdo->query('SELECT * FROM type_de_planque ORDER BY intitule');
         }
         
-        while ($pays = $stmt->fetchObject('TypePlanque')) {
+        while ($pays = $stmt->fetchObject('TypePlanque',[$this->pdo])) {
             $payss[] = [$pays->getId(), $pays->getIntitule()];
         }
         $stmt->closeCursor();

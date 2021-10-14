@@ -11,7 +11,7 @@ class TypeMissions
             $stmt = $this->pdo->query('SELECT * FROM type_de_mission');
         }
         $liste = [];
-        while ($element = $stmt->fetchObject('TypeMission')) {
+        while ($element = $stmt->fetchObject('TypeMission',[$this->pdo])) {
             $liste[] = $element;
         }
         $stmt->closeCursor();
@@ -25,7 +25,7 @@ class TypeMissions
             $stmt = $this->pdo->query('SELECT * FROM type_de_mission ORDER BY intitule');
         }
         
-        while ($typeMission = $stmt->fetchObject('TypeMission')) {
+        while ($typeMission = $stmt->fetchObject('TypeMission',[$this->pdo])) {
             $typeMissions[] = [$typeMission->getId(), $typeMission->getIntitule()];
         }
 

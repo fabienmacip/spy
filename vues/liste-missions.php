@@ -1,10 +1,10 @@
 <?php
 $titre = 'Liste des missions';
-$listePays = new Payss();
-$listeSpecialites = new Specialites();
-$listeTypeMissions = new TypeMissions();
-$listePlanques = new Planques();
-$listePersonnes = new Personnes();
+$listePays = new Payss($pdo);
+$listeSpecialites = new Specialites($pdo);
+$listeTypeMissions = new TypeMissions($pdo);
+$listePlanques = new Planques($pdo);
+$listePersonnes = new Personnes($pdo);
 $listeAgents = [];
 $listeCibles = [];
 $listeContacts = [];
@@ -111,6 +111,7 @@ ob_start();
 
 
 <!-- ######################## DEBUT FORM AJOUT MISSION #################### -->
+
 <a id="add"></a>
 <div id="pre-form-create-mission" class="row bg-info rounded mx-0 align-items-center pt-1 mt-2">
     <div class="col-10 col-md-11">
@@ -118,6 +119,8 @@ ob_start();
     </div>
     <div class="col-2 col-md-1 justify-content-center"><img id="show-form-create-mission" class="plus-minus-circle" src="./img/plus-circle.svg"></div>
 </div>
+
+
 <form method="post" action="index.php" id="form-create-mission" class="mt-3 py-3 px-1 bg-info rounded">
         <div class="row bg-info rounded mx-0 align-items-center">
             <div class="col-10 col-md-11">

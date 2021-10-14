@@ -21,7 +21,7 @@ class Planques
         $planques = [];
 
         
-        while ($planque = $stmt->fetchObject('Planque')) {
+        while ($planque = $stmt->fetchObject('Planque',[$this->pdo])) {
             $planques[] = $planque;
         }
         $stmt->closeCursor();
@@ -36,7 +36,7 @@ class Planques
             $stmt = $this->pdo->query('SELECT * FROM planque');
         }
         $liste = [];
-        while ($element = $stmt->fetchObject('Planque')) {
+        while ($element = $stmt->fetchObject('Planque',[$this->pdo])) {
             $liste[] = $element;
         }
         $stmt->closeCursor();

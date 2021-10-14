@@ -11,7 +11,7 @@ class Payss
             $stmt = $this->pdo->query('SELECT * FROM pays');
         }
         $payss = [];
-        while ($pays = $stmt->fetchObject('Pays')) {
+        while ($pays = $stmt->fetchObject('Pays', [$this->pdo])) {
             $payss[] = $pays;
         }
         $stmt->closeCursor();
@@ -25,7 +25,7 @@ class Payss
             $stmt = $this->pdo->query('SELECT * FROM pays ORDER BY nom');
         }
         
-        while ($pays = $stmt->fetchObject('Pays')) {
+        while ($pays = $stmt->fetchObject('Pays', [$this->pdo])) {
             $payss[] = [$pays->getId(), $pays->getNom()];
         }
 

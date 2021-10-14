@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+////////////////////////////////////////////////////////////////
+$pdo = null;
+
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=spy;charset=utf8', 'root', '');
+    //$this->pdo = new PDO('mysql:host=91.216.107.161;dbname=fatab195806_9ectvj;charset=utf8', 'fatab195806', '!Angular20');
+    } catch (PDOException $e) {
+        exit('Erreur : '.$e->getMessage());
+    }
+////////////////////////////////////////////////////////////////
+
 /* require_once('modeles/Missions.php');
 $missions = new Missions();
 $mission = null;
@@ -23,8 +35,8 @@ require_once('modeles/Planques.php');
 require_once('modeles/Personne.php');
 require_once('modeles/Personnes.php');
 
-$controleurMission = new ControleurMission();
-$mission = new Mission();
+$controleurMission = new ControleurMission($pdo);
+$mission = new Mission($pdo);
 //var_dump(json_encode($_GET));
 // Par défaut, mission.php affiche la mission sans formulaire
 if (isset($_POST['page']) && 'missions' === $_POST['page'] &&  isset($_POST['action']) && 'update' === $_POST['action']) {
@@ -89,7 +101,7 @@ else if(isset($_GET['page']) && 'mission' === $_GET['page'] && 'delete' === $_GE
 //}
 
 
-$planques = new Planques();
+$planques = new Planques($pdo);
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $planques = $planques->listerPlanquesDUneMission($_GET['id']);
 } else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
@@ -97,7 +109,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 
-$cibles = new Personnes();
+$cibles = new Personnes($pdo);
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $cibles = $cibles->listerPersonnesDUneMission($_GET['id'], "cible");
 } else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
@@ -105,14 +117,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 
 
-$contacts = new Personnes();
+$contacts = new Personnes($pdo);
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $contacts = $contacts->listerPersonnesDUneMission($_GET['id'], "contact");
 } else if (isset($_POST['id']) && is_numeric($_POST['id'])) {
     $contacts = $contacts->listerPersonnesDUneMission($_POST['id'], "contact");
 }
 
-$agents = new Personnes();
+$agents = new Personnes($pdo);
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $agents = $agents->listerPersonnesDUneMission($_GET['id'], "agent");
 } else if (isset($_POST['id']) && is_numeric($_POST['id'])) {

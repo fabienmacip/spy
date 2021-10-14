@@ -180,6 +180,11 @@ let pageMission ='';
       $('.btn-connexion').prop('disabled',false);
       $('.btn-connexion').removeClass('inactif');
       /* $('#navbarDropdown').prop('disabled',false); */
+
+      // Formulaires de création ayant l'icône PLUS
+      $('#pre-form-create-mission').hide();
+      $('#pre-form-create-personne').hide();
+      $('#pre-form-create-planque').hide();
     } else {
       $('form').show();
       /* $('button').show(); */

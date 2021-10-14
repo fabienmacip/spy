@@ -26,7 +26,7 @@ class Personne
         }
         $cible = null;
         if ($stmt->execute([$id])) {
-            $cible = $stmt->fetchObject('Personne');
+            $cible = $stmt->fetchObject('Personne',[$this->pdo]);
             if(!is_object($cible)) {
                 $cible = null;
             }

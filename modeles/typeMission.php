@@ -14,7 +14,7 @@ class TypeMission
         }
         $element = null;
         if ($stmt->execute([$id])) {
-            $element = $stmt->fetchObject('TypeMission');
+            $element = $stmt->fetchObject('TypeMission',[$this->pdo]);
             if (!is_object($element)) {
                 $element = null;
             }

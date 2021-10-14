@@ -1,5 +1,10 @@
 <?php
+
+require_once('modeles/Modele.php');
+
 class ControleurMission {
+
+    use Modele; 
 
   public function afficherMissions()
   {
@@ -13,7 +18,7 @@ class ControleurMission {
 
 public function updateMission($id, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut = "en cours")
 {
-    $missions = new Missions();
+    $missions = new Missions($this->pdo);
     $missionToUpdate = $missions->update($id, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut);
     /* $mission = new Mission();
     $mission = $mission->afficherMission($id);
@@ -22,7 +27,7 @@ public function updateMission($id, $nom_de_code, $pays, $specialite, $type_de_mi
 
 // MISSION - DELETE une PERSONNE
 public function deletePersonneMission($id_personne, $id_mission) {
-    $missions = new Missions();
+    $missions = new Missions($this->pdo);
     $missionToDelete = $missions->deletePersonneMission($id_personne, $id_mission);
 
     //var_dump("PERS : ".$id_personne. "   MISSION : ".$id_mission);
@@ -30,7 +35,7 @@ public function deletePersonneMission($id_personne, $id_mission) {
 
 // MISSION - DELETE une PLANQUE
 public function deletePlanqueMission($id_planque, $id_mission) {
-    $missions = new Missions();
+    $missions = new Missions($this->pdo);
     $missionToDelete = $missions->deletePlanqueMission($id_planque, $id_mission);
 
     //var_dump("PERS : ".$id_personne. "   MISSION : ".$id_mission);
@@ -38,22 +43,22 @@ public function deletePlanqueMission($id_planque, $id_mission) {
 
 
 public function updateMissionCible($id_personne, $id_mission) {
-    $mission = new Mission();
+    $mission = new Mission($this->pdo);
     $missionToUpdate = $mission->updateMissionCible($id_personne,$id_mission);
 }
 
 public function updateMissionContact($id_personne, $id_mission) {
-    $mission = new Mission();
+    $mission = new Mission($this->pdo);
     $missionToUpdate = $mission->updateMissionContact($id_personne,$id_mission);
 }
 
 public function updateMissionAgent($id_personne, $id_mission) {
-    $mission = new Mission();
+    $mission = new Mission($this->pdo);
     $missionToUpdate = $mission->updateMissionAgent($id_personne,$id_mission);
 }
 
 public function updateMissionPlanque($id_planque, $id_mission) {
-    $mission = new Mission();
+    $mission = new Mission($this->pdo);
     $missionToUpdate = $mission->updateMissionPlanque($id_planque,$id_mission);
 }
 

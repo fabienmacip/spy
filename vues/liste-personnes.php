@@ -1,7 +1,7 @@
 <?php
 $titre = 'Liste des personnes';
-$listePays = new Payss();
-$listeSpecialites = new Specialites();
+$listePays = new Payss($pdo);
+$listeSpecialites = new Specialites($pdo);
 ob_start();
 ?>
 <div class="container">

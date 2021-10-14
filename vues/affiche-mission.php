@@ -1,9 +1,9 @@
 <?php
-$listePays = new Payss();
-$listeSpecialites = new Specialites();
-$listeTypeMissions = new TypeMissions();
+$listePays = new Payss($pdo);
+$listeSpecialites = new Specialites($pdo);
+$listeTypeMissions = new TypeMissions($pdo);
 //$listePlanques = new Planques();
-$listePersonnes = new Personnes();
+$listePersonnes = new Personnes($pdo);
 $listeAgents = [];
 $listeAgents = $mission->listerAgents($mission->getId());
 $listeCibles = [];

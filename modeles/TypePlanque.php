@@ -14,7 +14,7 @@ class TypePlanque
         }
         $pays = null;
         if ($stmt->execute([$id])) {
-            $pays = $stmt->fetchObject('TypePlanque');
+            $pays = $stmt->fetchObject('TypePlanque',[$this->pdo]);
             if (!is_object($pays)) {
                 $pays = null;
             }

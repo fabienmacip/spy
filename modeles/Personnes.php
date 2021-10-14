@@ -20,7 +20,7 @@ class Personnes
         }
         $cibles = [];
 
-        while ($cible = $stmt->fetchObject('Personne')) {
+        while ($cible = $stmt->fetchObject('Personne',[$this->pdo])) {
             $cibles[] = $cible;
         }
         $stmt->closeCursor();
@@ -35,7 +35,7 @@ class Personnes
             $stmt = $this->pdo->query('SELECT * FROM personne ORDER BY type, nom');
         }
         $liste = [];
-        while ($element = $stmt->fetchObject('Personne')) {
+        while ($element = $stmt->fetchObject('Personne',[$this->pdo])) {
             $liste[] = $element;
         }
         $stmt->closeCursor();

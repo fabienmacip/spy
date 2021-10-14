@@ -14,7 +14,7 @@ class Specialite
         }
         $element = null;
         if ($stmt->execute([$id])) {
-            $element = $stmt->fetchObject('Specialite');
+            $element = $stmt->fetchObject('Specialite',[$this->pdo]);
             if (!is_object($element)) {
                 $element = null;
             }

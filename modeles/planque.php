@@ -24,7 +24,7 @@ class Planque
         }
         $planque = null;
         if ($stmt->execute([$id])) {
-            $planque = $stmt->fetchObject('Planque');
+            $planque = $stmt->fetchObject('Planque',[$this->pdo]);
             if(!is_object($planque)) {
                 $planque = null;
             }

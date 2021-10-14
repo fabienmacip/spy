@@ -40,7 +40,7 @@ class Mission
         }
         $mission = null;
         if ($stmt->execute([$id])) {
-            $mission = $stmt->fetchObject('Mission');
+            $mission = $stmt->fetchObject('Mission',[$this->pdo]);
             if(!is_object($mission)) {
                 $mission = null;
             }

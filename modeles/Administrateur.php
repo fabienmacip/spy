@@ -18,7 +18,7 @@ class Administrateur
         }
         $element = null;
         if ($stmt->execute([$id])) {
-            $element = $stmt->fetchObject('Administrateur');
+            $element = $stmt->fetchObject('Administrateur',[$this->pdo]);
             if (!is_object($element)) {
                 $element = null;
             }

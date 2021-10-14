@@ -11,7 +11,7 @@ class Administrateurs
             $stmt = $this->pdo->query('SELECT * FROM administrateur');
         }
         $liste = [];
-        while ($element = $stmt->fetchObject('Administrateur')) {
+        while ($element = $stmt->fetchObject('Administrateur',[$this->pdo])) {
             $liste[] = $element;
         }
         $stmt->closeCursor();
@@ -84,7 +84,7 @@ class Administrateurs
         if (!is_null($this->pdo)) {
             $stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\' AND mot_de_passe = \''.$password.'\'');
         }
-        $reponse = $stmt->fetchObject('Administrateur');
+        $reponse = $stmt->fetchObject('Administrateur',[$this->pdo]);
 
         return $reponse;
 

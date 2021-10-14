@@ -24,7 +24,7 @@ class Missions
 
         }
         $missions = [];
-        while ($mission = $stmt->fetchObject('Mission')) {
+        while ($mission = $stmt->fetchObject('Mission',[$this->pdo])) {
             $missions[] = $mission;
         }
         $stmt->closeCursor();

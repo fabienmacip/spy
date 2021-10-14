@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+////////////////////////////////////////////////////////////////
+$pdo = null;
+
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=spy;charset=utf8', 'root', '');
+    //$this->pdo = new PDO('mysql:host=91.216.107.161;dbname=fatab195806_9ectvj;charset=utf8', 'fatab195806', '!Angular20');
+    } catch (PDOException $e) {
+        exit('Erreur : '.$e->getMessage());
+    }
+////////////////////////////////////////////////////////////////
+
 require_once('controleurs/controleur.php');
 require_once('modeles/Modele.php');
 require_once('modeles/Mission.php');
@@ -27,7 +39,7 @@ $LISTE_PERSONNES = "index.php?page=personnes";
 $LISTE_MISSIONS = "index.php?page=missions";
 $LISTE_ADMINISTRATEURS = "index.php?page=administrateurs"; */
 
-$controleur = new Controleur();
+$controleur = new Controleur($pdo);
 
 if(isset($_POST['action']) && 'connexion' === $_POST['action']) {
     $controleur->verifConnexion($_POST['mail'], $_POST['password']);
@@ -45,9 +57,6 @@ if(isset($_POST['action']) && 'seekmission' === $_POST['action'] && isset($_POST
 } else {
     $connecte = false;
 } */
-
-
-
 
 
 // Par défaut, index.php affiche la liste des missions (voir le dernier ELSE)

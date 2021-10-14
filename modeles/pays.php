@@ -14,7 +14,7 @@ class Pays
         }
         $pays = null;
         if ($stmt->execute([$id])) {
-            $pays = $stmt->fetchObject('Pays');
+            $pays = $stmt->fetchObject('Pays',[$this->pdo]);
             if (!is_object($pays)) {
                 $pays = null;
             }

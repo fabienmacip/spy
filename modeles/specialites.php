@@ -11,7 +11,7 @@ class Specialites
             $stmt = $this->pdo->query('SELECT * FROM specialite ORDER BY intitule');
         }
         $liste = [];
-        while ($element = $stmt->fetchObject('Specialite')) {
+        while ($element = $stmt->fetchObject('Specialite',[$this->pdo])) {
             $liste[] = $element;
         }
         $stmt->closeCursor();
@@ -25,7 +25,7 @@ class Specialites
             $stmt = $this->pdo->query('SELECT * FROM specialite ORDER BY intitule');
         }
         
-        while ($specialite = $stmt->fetchObject('Specialite')) {
+        while ($specialite = $stmt->fetchObject('Specialite',[$this->pdo])) {
             $specialites[] = [$specialite->getId(), $specialite->getIntitule()];
         }
         $stmt->closeCursor();
