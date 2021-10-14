@@ -291,6 +291,7 @@ public function deleteTypePlanque($id,$nom)
     {
         $missions = new Missions($this->pdo);
         $missions = $missions->lister();
+        $pdo = $this->pdo;
         require_once('vues/liste-missions.php');
     }
 
@@ -299,6 +300,7 @@ public function deleteTypePlanque($id,$nom)
         $missions = new Missions($this->pdo);
         $missionToCreate = $missions->create($titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques, $personnes);
         $missions = $missions->lister();
+        $pdo = $this->pdo;
         require_once('vues/liste-missions.php');
     }
 
@@ -307,6 +309,7 @@ public function deleteTypePlanque($id,$nom)
         $missions = new Missions($this->pdo);
         $missionToUpdate = $missions->update($id, $titre, $description, $nom_de_code, $pays, $specialite, $type_de_mission, $date_debut, $date_fin, $statut, $planques, $personnes);
         $missions = $missions->lister();
+        $pdo = $this->pdo;
         require_once('vues/liste-missions.php');
     }
 
@@ -315,6 +318,7 @@ public function deleteTypePlanque($id,$nom)
         $missions = new Missions($this->pdo);
         $missionToDelete = $missions->delete($id, $titre, $nom_de_code);
         $missions = $missions->lister();
+        $pdo = $this->pdo;
         require_once('vues/liste-missions.php');
     }
 
