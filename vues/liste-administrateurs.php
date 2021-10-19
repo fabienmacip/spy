@@ -50,7 +50,7 @@ ob_start();
                     </tr>
                 </thead>
                 
-                <tbody>
+                <tbody id="les-admins">
           
                     <?php foreach ($administrateurs as $administrateur): ?>
                       <tr id="tr<?= $administrateur->getId() ?>">

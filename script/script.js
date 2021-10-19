@@ -191,7 +191,7 @@ let pageMission ='';
       $('form').show();
       /* $('button').show(); */
       $('button').prop('disabled',false);
-      $('#tr1 [type=button]').prop('disabled',true).css('background-color','grey').css('border-color','grey');
+      $('#les-admins #tr1 [type=button]').prop('disabled',true).css('background-color','grey').css('border-color','grey');
     }
     
     // Gestion de l'affichage du formulaire de création de mission

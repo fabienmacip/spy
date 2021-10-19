@@ -1,6 +1,25 @@
 <?php
 
- 
+require_once('modeles/Modele.php');
+
+class Specialites 
+{
+    use Modele; 
+
+    public function lister()
+    {
+        if (!is_null($this->pdo)) {
+            $stmt = $this->pdo->query('SELECT * FROM specialite');
+        }
+        $liste = [];
+        while ($element = $stmt->fetchObject('Specialite',[$this->pdo])) {
+            $liste[] = $element;
+        }
+        $stmt->closeCursor();
+        return $liste;
+    }
+
+
     // READ pour listes déroulantes
     public function listerSpecialitesJson()
     {

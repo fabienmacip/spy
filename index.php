@@ -43,6 +43,14 @@ $LISTE_ADMINISTRATEURS = "index.php?page=administrateurs"; */
 
 $controleur = new Controleur($pdo);
 
+/* var_dump($_POST);
+foreach($_POST as $key => $value) {
+        $_POST[$key] = htmlspecialchars($value);
+    echo "La clé ".$key." est ".$_POST[$key].PHP_EOL;
+}
+var_dump('AFTER');
+var_dump($_POST); */
+
 if(isset($_POST['action']) && 'connexion' === $_POST['action']) {
     $controleur->verifConnexion($_POST['mail'], $_POST['password']);
 }
