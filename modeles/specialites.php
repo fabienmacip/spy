@@ -1,23 +1,6 @@
 <?php
 
-class Specialites
-{
-    use Modele;
-
-    // READ
-    public function lister()
-    {
-        if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT * FROM specialite ORDER BY intitule');
-        }
-        $liste = [];
-        while ($element = $stmt->fetchObject('Specialite',[$this->pdo])) {
-            $liste[] = $element;
-        }
-        $stmt->closeCursor();
-        return $liste;
-    }
-
+ 
     // READ pour listes déroulantes
     public function listerSpecialitesJson()
     {

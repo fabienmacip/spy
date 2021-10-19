@@ -40,11 +40,11 @@ ob_start();
                 <thead class="table-dark">
                     <tr>
                         <th width="6%">Id</th>
-                        <th width="15%">Nom</th>
-                        <th width="15%">Pr&eacute;nom</th>
-                        <th width="15%">Mail</th>
+                        <th width="20%">Nom</th>
+                        <th width="20%">Pr&eacute;nom</th>
+                        <th width="20%">Mail</th>
                         <th width="10%">Cr&eacute;&eacute; le</th>
-                        <th width="15%">Mot de passe</th>
+                        <!-- <th width="15%">Mot de passe</th> -->
                         <th width="12%"></th>
                         <th width="12%"></th>
                     </tr>
@@ -69,12 +69,12 @@ ob_start();
                             <td>
                                 <?= $administrateur->getDateCreation() ?>
                             </td>
-                            <td>
-                                <?= $administrateur->getMotDePasse() ?>
-                            </td>                                                                                        
+                            <!-- <td> -->
+                                <?php //$administrateur->getMotDePasse() ?>
+                            <!-- </td> -->
                             <td>
                                 <button type="button" id="updateAdministrateur<?= $administrateur->getId() ?>" class="updateAdministrateur btn-primary" 
-                                onclick=displayUpdateAdministrateur(<?php echo $administrateur->getId().",'".str_replace(" ","&nbsp;",$administrateur->getNom())."','".str_replace(" ","&nbsp;",$administrateur->getPrenom())."','".str_replace(" ","&nbsp;",$administrateur->getMail())."','".str_replace(" ","&nbsp;",$administrateur->getMotDePasse())."'" ?>)
+                                onclick=displayUpdateAdministrateur(<?php echo $administrateur->getId().",'".str_replace(" ","&nbsp;",$administrateur->getNom())."','".str_replace(" ","&nbsp;",$administrateur->getPrenom())."','".str_replace(" ","&nbsp;",$administrateur->getMail())."'" ?>)
                                 >
                                   Modifier
                                 </button>
@@ -107,7 +107,7 @@ ob_start();
             <label for="mail">Adresse mail</label>
             <input type="mail" name="mail" maxlength="50" id="mail" placeholder="Mail" class="form-control">
             <label for="mot_de_passe">Mot de passe</label>
-            <input type="text" name="mot_de_passe" maxlength="40" id="mot_de_passe" placeholder="Mot de passe" class="form-control">        
+            <input type="text" name="mot_de_passe" minlength="8" maxlength="40" id="mot_de_passe" placeholder="Mot de passe" class="form-control">        
         </div>
 
         <input type="hidden" name="action" id="action" value="create">

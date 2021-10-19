@@ -191,6 +191,7 @@ let pageMission ='';
       $('form').show();
       /* $('button').show(); */
       $('button').prop('disabled',false);
+      $('#tr1 [type=button]').prop('disabled',true).css('background-color','grey').css('border-color','grey');
     }
     
     // Gestion de l'affichage du formulaire de création de mission
@@ -410,14 +411,14 @@ function confirmeSuppressionTypePlanque(id,intitule){
 // ####################  ADMINISTRATEUR ####################
 
 // Affiche le formulaire de modification d'un administrateur
-function displayUpdateAdministrateur(id, nom, prenom, mail, mot_de_passe){
+function displayUpdateAdministrateur(id, nom, prenom, mail){
 
   let updateForm = '<form method="post" action="index.php">' + 
                 '<div class="form-group row my-3">' +
                 '<div class="col-7 col-lg-3 form-floating"><input type="text" maxlength="40" name="nom" value="'+ nom + '" id="nom" placeholder="'+ nom + ' " class="form-control"><label for="nom">Nom</label></div>' +
                 '<div class="col-7 col-lg-3 form-floating"><input type="text" name="prenom" value="'+ prenom + '" maxlength="30" id="prenom" placeholder="' + prenom + '" class="form-control"><label for="prenom">Pr&eacute;nom</label></div>' +
                 '<div class="col-7 col-lg-3 form-floating"><input type="mail" name="mail" value="' + mail + '" maxlength="50" id="mail" placeholder="' + mail + '" class="form-control"><label for="mail">Mail</label></div>' +
-                '<div class="col-7 col-lg-3 form-floating"><input type="text" name="mot_de_passe" value="' + mot_de_passe + '" maxlength="40" id="mot_de_passe" placeholder="' + mot_de_passe + '" class="form-control"><label for="mot_de_passe">Mot de passe</label></div></div>' +               
+                '<div class="col-7 col-lg-3 form-floating"><input type="text" name="mot_de_passe" value="" minlength="8" maxlength="40" id="mot_de_passe" placeholder="" class="form-control"><label for="mot_de_passe">Mot de passe</label><span style="font-size: 0.7rem;">(laisser vide si vous ne souhaitez pas modifier)</span></div></div>' +               
                 '<div class="row text-center"><div class="col-0 col-lg-3"><input type="hidden" name="idAdministrateurToUpdate" id="idAdministrateurToUpdate" value="' + id + '">' +
                 '<input type="hidden" name="action" id="action" value="update">' +
                 '<input type="hidden" name="page" id="page" value="administrateurs"></div>' +
@@ -427,7 +428,7 @@ function displayUpdateAdministrateur(id, nom, prenom, mail, mot_de_passe){
                 '</form>';
 
   let codeAConserver = $('#tr'+id);
-  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='8'>" + updateForm + "</td></tr>");
+  $('#tr'+id).replaceWith("<tr id='tr"+id+"'><td colspan='7'>" + updateForm + "</td></tr>");
 
   // On frise tous les autres boutons "Modifier"
   $('.updateAdministrateur').prop('disabled',true);

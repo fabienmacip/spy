@@ -24,10 +24,11 @@ class Administrateurs
             try {
                 // Requête mysql pour insérer des données
                 $today = date("Y-m-d");
-                
+                $pass = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+
                 $sql = "INSERT INTO administrateur (nom, prenom, mail, date_creation, mot_de_passe) VALUES (:nom, :prenom, :mail, :date_creation, :mot_de_passe)";
                 $res = $this->pdo->prepare($sql);
-                $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":mail"=>$mail, ":date_creation"=>$today, "mot_de_passe"=>$mot_de_passe));
+                $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":mail"=>$mail, ":date_creation"=>$today, "mot_de_passe"=>$pass));
                 if($exec){
                     $tupleCreated = "L'administrateur <b>".$nom." ".$prenom."</b> a bien été ajouté.";
                 }
@@ -44,10 +45,18 @@ class Administrateurs
     public function update($id,$nom, $prenom, $mail, $mot_de_passe) {
         if (!is_null($this->pdo)) {
             try {
-                // Requête mysql pour insérer des données
-                $sql = "UPDATE administrateur SET nom = (:nom), prenom = (:prenom), mail = (:mail), mot_de_passe = (:mot_de_passe) WHERE id = (:id)";
-                $res = $this->pdo->prepare($sql);
-                $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":mail"=>$mail, "mot_de_passe"=>$mot_de_passe, ":id"=>$id));
+                // Si le mot de passe a été modifié (donc non vide)
+                if($mot_de_passe != '') {
+                    $pass = password_hash($mot_de_passe, PASSWORD_DEFAULT);
+                    // Requête mysql pour insérer des données
+                    $sql = "UPDATE administrateur SET nom = (:nom), prenom = (:prenom), mail = (:mail), mot_de_passe = (:mot_de_passe) WHERE id = (:id)";
+                    $res = $this->pdo->prepare($sql);
+                    $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":mail"=>$mail, "mot_de_passe"=>$pass, ":id"=>$id));
+                } else { // Sinon, on met tout à jour sauf le mot de passe
+                    $sql = "UPDATE administrateur SET nom = (:nom), prenom = (:prenom), mail = (:mail) WHERE id = (:id)";
+                    $res = $this->pdo->prepare($sql);
+                    $exec = $res->execute(array(":nom"=>$nom, ":prenom"=>$prenom, ":mail"=>$mail, ":id"=>$id));
+                }
                 if($exec){
                     $tupleUpdated = "L'administrateur <b>".$nom." ".$prenom."</b> a bien été modifié.";
                 }
@@ -82,11 +91,11 @@ class Administrateurs
     public function verifConnexion($mail,$password) 
     {
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\' AND mot_de_passe = \''.$password.'\'');
+            $stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\'');
         }
         $reponse = $stmt->fetchObject('Administrateur',[$this->pdo]);
-
-        return $reponse;
+        
+        return ($reponse && password_verify($password, $reponse->getMotDePasse()));
 
     }
      
