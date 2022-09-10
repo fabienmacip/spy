@@ -40,23 +40,15 @@
     <h1 class="text-center my-2">Spy Manager</h1>
 </header>
 <section>
-    
     <nav class="navbar navbar-light bg-light navbar-expand-lg" style="--bs-scroll-height: 10rem;">
 
       <div class="container-fluid">
-        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo01"> -->
             <ul class="navbar-nav navbar-nav-scroll">
                 <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Accueil</a></li>
                 <li class="nav-item"><a href="index.php?page=personnes" class="nav-link">Personnes</a></li>
                 <li class="nav-item"><a href="index.php?page=specialites" class="nav-link">Sp&eacute;cialit&eacute;s</a></li>
                 <li class="nav-item"><a href="index.php?page=payss" class="nav-link">Pays</a></li>
-                <!-- <li class="nav-item"><a href="index.php?page=typemissions" class="nav-link">Types missions</a></li> -->
                 <li class="nav-item"><a href="index.php?page=planques" class="nav-link">Planques</a></li>
-                <!-- <li class="nav-item"><a href="index.php?page=typeplanques" class="nav-link">Types planques</a></li> -->
-                <!-- <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Missions</a></li> -->
                 
                 <?php 
                 if(!isset($_SESSION['admin']) || $_SESSION['admin'] !== 1) { ?>
@@ -68,8 +60,8 @@
                 <?php
                 }
                 ?>
+
             </ul>
-        <!-- </div> -->
       </div>
     </nav>
     <?= $contenu ?>

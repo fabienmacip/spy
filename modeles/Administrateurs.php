@@ -76,7 +76,10 @@ class Administrateurs
     {
         if (!is_null($this->pdo)) {
             try{
-                $this->pdo->query('DELETE FROM administrateur WHERE id = '.$id.'');
+                $sql = 'DELETE FROM administrateur WHERE id = :id';
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute(['id' => $id]);
+                //$this->pdo->query('DELETE FROM administrateur WHERE id = '.$id.'');
                 $tupleDeleted = "L'administrateur <b>".$nom." ".$prenom."</b> a bien été supprimé.";
             }
             catch(Exception $e) {
@@ -91,12 +94,17 @@ class Administrateurs
     public function verifConnexion($mail,$password) 
     {
         if (!is_null($this->pdo)) {
-            $stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\'');
+            $sql = 'SELECT * FROM administrateur WHERE mail = :mail';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(['mail' => $mail]);
         }
         $reponse = $stmt->fetchObject('Administrateur',[$this->pdo]);
         
         return ($reponse && password_verify($password, $reponse->getMotDePasse()));
-
+        
     }
-     
 }
+
+
+// Anciennement dans VerifConnexion
+//$stmt = $this->pdo->query('SELECT * FROM administrateur WHERE mail = \''.$mail.'\'');
