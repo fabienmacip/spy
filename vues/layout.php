@@ -41,9 +41,20 @@
 </header>
 <section>
     <nav class="navbar navbar-light bg-light navbar-expand-lg" style="--bs-scroll-height: 10rem;">
-
       <div class="container-fluid">
-            <ul class="navbar-nav navbar-nav-scroll">
+      
+      <!-- ADDED -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- FIN ADDED -->
+
+            <!-- <ul class="navbar-nav navbar-nav-scroll"> -->
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+
                 <li class="nav-item"><a href="index.php?page=missions" class="nav-link">Accueil</a></li>
                 <li class="nav-item"><a href="index.php?page=personnes" class="nav-link">Personnes</a></li>
                 <li class="nav-item"><a href="index.php?page=specialites" class="nav-link">Sp&eacute;cialit&eacute;s</a></li>
@@ -62,6 +73,9 @@
                 ?>
 
             </ul>
+            <!-- ADDED -->
+            </div>
+            <!-- FIN ADDED -->
       </div>
     </nav>
     <?= $contenu ?>
@@ -70,5 +84,11 @@
 <footer class="fw-light fst-italic fs-6 text-center mt-4">
     <p>Spy - Tous droits réservés</p>
 </footer>
+
+<!-- ADDED -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<!-- FIN ADDED -->
+
 </body>
 </html>
